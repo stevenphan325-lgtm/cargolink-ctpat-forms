@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargolink C-TPAT & NV Apparel | Trung Tâm Khảo Sát & Dịch Vụ Trực Tuyến</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --primary-light: #0B3C5D;
+      --accent: #D4441E;
+      --accent-hover: #b83815;
+      --bg: #F1F5F9;
+      --card-bg: #FFFFFF;
+      --border: #CBD5E1;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --success: #059669;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 24px 16px; min-height: 100vh; }
+    .container { max-width: 960px; margin: 0 auto; }
+    
+    .hero-banner { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; border-radius: 16px; padding: 36px 28px; text-align: center; margin-bottom: 28px; box-shadow: 0 10px 25px -5px rgba(7, 26, 54, 0.2); position: relative; overflow: hidden; }
+    .hero-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; }
+    .hero-banner h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .hero-banner p { font-size: 14px; opacity: 0.9; max-width: 680px; margin: 0 auto; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 28px; }
+    .card { background: var(--card-bg); border-radius: 14px; border: 1.5px solid var(--border); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); position: relative; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 20px -5px rgba(0,0,0,0.08); border-color: var(--primary-light); }
+    
+    .card-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .card h3 { font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 6px; line-height: 1.3; }
+    .card-en { font-size: 12px; color: var(--text-muted); font-style: italic; margin-bottom: 14px; }
+    .card-desc { font-size: 13px; color: #334155; margin-bottom: 20px; line-height: 1.4; flex-grow: 1; }
+
+    .qr-preview { text-align: center; margin-bottom: 20px; background: #F8FAFC; padding: 14px; border-radius: 10px; border: 1px dashed var(--border); }
+    .qr-preview img { width: 140px; height: 140px; border-radius: 6px; display: inline-block; }
+    .qr-caption { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-weight: 600; }
+
+    .btn-action { display: block; text-align: center; background: var(--primary); color: white; text-decoration: none; padding: 12px 18px; border-radius: 8px; font-weight: 700; font-size: 13.5px; transition: background 0.15s; }
+    .btn-action:hover { background: var(--primary-light); }
+    .card:nth-child(2) .btn-action { background: var(--accent); }
+    .card:nth-child(2) .btn-action:hover { background: var(--accent-hover); }
+
+    .stats-bar { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px 24px; display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+    .stat-item { text-align: center; }
+    .stat-val { font-size: 22px; font-weight: 800; color: var(--primary); }
+    .stat-lbl { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+
+    .footer { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="hero-banner">
+    <span class="hero-badge">C-TPAT & ISO 9001:2015 PORTAL HUB</span>
+    <h1>HỆ THỐNG BIỂU MẪU KHẢO SÁT & TIẾP NHẬN PHẢN HỒI AN NINH</h1>
+    <p>CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM & KHÁCH HÀNG CÔNG TY TNHH NV APPAREL</p>
+    <div style="font-size: 12px; opacity: 0.75; margin-top: 10px;">
+      Quét mã QR từ điện thoại di động hoặc nhấp trực tiếp vào nút biểu mẫu bên dưới để làm khảo sát và gửi phản ánh.
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-val" id="countSat">1</div>
+      <div class="stat-lbl">Phiếu Hài Lòng (CSAT)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val" id="countKno">1</div>
+      <div class="stat-lbl">Khảo Sát Kiến Thức (Score: 100%)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val" id="countCom">0</div>
+      <div class="stat-lbl">Khiếu Nại & Góp Ý (Đã xử lý: 100%)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val" style="color: var(--success);">100%</div>
+      <div class="stat-lbl">Tuân Thủ Tiêu Chuẩn C-TPAT</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Card 1 -->
+    <div class="card">
+      <div>
+        <div class="card-tag">⭐ YÊU CẦU 1 / REQUEST 1</div>
+        <h3>Phiếu Đánh Giá Mức Độ Hài Lòng Dịch Vụ CGL</h3>
+        <div class="card-en">C-TPAT Customer Satisfaction Survey</div>
+        <div class="card-desc">
+          Dành cho đại diện Khách hàng NV APPAREL (Kho, Logistics, An ninh) đánh giá định kỳ 6 tiêu chí: OTD, tính toàn vẹn seal chì, tác phong tài xế, kỹ thuật xe và điều độ 24/7.
+        </div>
+      </div>
+      
+      <div class="qr-preview">
+        <img src="qr_form1.png" alt="QR Form 1">
+        <div class="qr-caption">Quét mã QR để mở trên điện thoại</div>
+      </div>
+
+      <a href="form1_satisfaction.html" class="btn-action">Mở Biểu Mẫu 1 (Khảo Sát Hài Lòng) ➔</a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <div>
+        <div class="card-tag" style="color: var(--accent);">📝 YÊU CẦU 2 / REQUEST 2</div>
+        <h3>NV CTPAT Knowledge Survey</h3>
+        <div class="card-en">Security Knowledge & Operational Assessment</div>
+        <div class="card-desc">
+          Bài kiểm tra trắc nghiệm 10 câu hỏi thực chiến dành cho tài xế và nhân sự phục vụ tuyến NV Apparel: Quy trình 7 điểm, phương pháp VVTT, xử lý sự cố khẩn cấp WI-PRT-001. Có chấm điểm tự động.
+        </div>
+      </div>
+      
+      <div class="qr-preview">
+        <img src="qr_form2.png" alt="QR Form 2">
+        <div class="qr-caption">Quét mã QR để thi trắc nghiệm</div>
+      </div>
+
+      <a href="form2_knowledge.html" class="btn-action">Mở Biểu Mẫu 2 (Kiểm Tra C-TPAT) ➔</a>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <div>
+        <div class="card-tag" style="color: #0B3C5D;">🛡️ YÊU CẦU 3 / REQUEST 3</div>
+        <h3>NV CTPAT – Suggestions and Complaints</h3>
+        <div class="card-en">Whistleblower & Incident Reporting Channel</div>
+        <div class="card-desc">
+          Kênh tiếp nhận ý kiến đóng góp, phản ánh chậm trễ ETA, khiếu nại chất lượng và tố giác sự cố an ninh C-TPAT. Hỗ trợ gửi ẩn danh bảo mật 100% theo chính sách HS01-08, cấp mã Ticket tra cứu.
+        </div>
+      </div>
+      
+      <div class="qr-preview">
+        <img src="qr_form3.png" alt="QR Form 3">
+        <div class="qr-caption">Quét mã QR để gửi phản ánh</div>
+      </div>
+
+      <a href="form3_complaints.html" class="btn-action">Mở Biểu Mẫu 3 (Góp Ý & Khiếu Nại) ➔</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM</strong><br>
+    Trụ sở: Lầu 6, Số 84 Bạch Đằng, Phường 2, Quận Tân Bình, TP. Hồ Chí Minh | MST: 0316499876<br>
+    Hotline Điều độ: 077 871 9936 (Ms. Bích) | Hotline An toàn: 088 6464 988 (Mr. Thành) | Khẩn cấp 24/7: 0943 46 46 46
+  </div>
+</div>
+
+<script>
+  // Update live submission counters from LocalStorage
+  try {
+    const list = JSON.parse(localStorage.getItem('cargolink_surveys') || '[]');
+    let sat = 0, kno = 0, com = 0;
+    list.forEach(item => {
+      if (item.form_type === 'satisfaction_survey') sat++;
+      else if (item.form_type === 'knowledge_survey') kno++;
+      else if (item.form_type === 'suggestions_and_complaints') com++;
+    });
+    if (sat > 0) document.getElementById('countSat').innerText = sat;
+    if (kno > 0) document.getElementById('countKno').innerText = kno;
+    if (com > 0) document.getElementById('countCom').innerText = com;
+  } catch(e) {}
+</script>
+
+</body>
+</html>

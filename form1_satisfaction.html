@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phiếu Đánh Giá Mức Độ Hài Lòng Dịch Vụ CGL | C-TPAT & ISO 9001</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --primary-light: #0B3C5D;
+      --accent: #D4441E;
+      --accent-hover: #b83815;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --border: #CBD5E1;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --success: #059669;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 16px; min-height: 100vh; }
+    .container { max-width: 760px; margin: 0 auto; background: var(--card-bg); border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02); overflow: hidden; border: 1px solid var(--border); }
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 28px 24px; text-align: center; position: relative; }
+    .header-badge { display: inline-block; background: rgba(212, 68, 30, 0.9); color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
+    .header h1 { font-size: 20px; font-weight: 800; line-height: 1.3; margin-bottom: 6px; letter-spacing: -0.02em; }
+    .header h2 { font-size: 13px; font-weight: 400; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.5px; }
+    .header-sub { margin-top: 12px; font-size: 12px; opacity: 0.75; }
+    .form-body { padding: 28px 24px; }
+    .section-title { font-size: 14px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ""; display: inline-block; width: 4px; height: 16px; background: var(--accent); border-radius: 2px; }
+    .field-group { margin-bottom: 20px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
+    .label-sub { font-weight: 400; color: var(--text-muted); font-size: 11px; display: block; }
+    input[type="text"], input[type="tel"], input[type="date"], select, textarea {
+      width: 100%; padding: 10px 14px; font-size: 14px; border: 1.5px solid var(--border); border-radius: 8px; background: #FFF; color: var(--text-main); transition: all 0.2s; outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(11, 60, 93, 0.15); }
+    .row { display: flex; gap: 16px; }
+    .col { flex: 1; }
+    
+    /* Star Rating Grid */
+    .rating-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px; margin-bottom: 14px; transition: border-color 0.2s; }
+    .rating-card:hover { border-color: #CBD5E1; }
+    .rating-title { font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+    .rating-desc { font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px; }
+    .stars { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .star-btn { background: #FFFFFF; border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 6px; color: var(--text-muted); }
+    .star-btn:hover { border-color: #F59E0B; color: #D97706; background: #FFFBEB; }
+    .star-btn.active { background: #FEF3C7; border-color: #F59E0B; color: #B45309; font-weight: 700; box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2); }
+    .star-icon { font-size: 14px; color: #F59E0B; }
+    
+    .btn-submit { width: 100%; background: var(--accent); color: white; padding: 14px 24px; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.1s; margin-top: 10px; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-submit:hover { background: var(--accent-hover); }
+    .btn-submit:active { transform: scale(0.99); }
+    
+    .footer-note { text-align: center; margin-top: 24px; font-size: 11px; color: var(--text-muted); border-top: 1px dashed var(--border); padding-top: 16px; }
+    
+    /* Success Modal */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: white; border-radius: 16px; padding: 32px 24px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); animation: popIn 0.3s ease-out; }
+    @keyframes popIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    .success-icon { width: 64px; height: 64px; background: #DEF7EC; color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 16px; }
+    .modal-code { background: #F1F5F9; padding: 8px 16px; border-radius: 8px; font-family: monospace; font-size: 15px; font-weight: 700; color: var(--primary); margin: 16px 0; border: 1px dashed var(--border); display: inline-block; }
+    .btn-print { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 13px; border: none; cursor: pointer; margin-right: 8px; }
+    .btn-close { background: #E2E8F0; color: var(--text-main); padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 13px; border: none; cursor: pointer; }
+
+    @media (max-width: 600px) {
+      .row { flex-direction: column; gap: 0; }
+      .form-body { padding: 20px 16px; }
+      .header { padding: 20px 16px; }
+      .stars { gap: 6px; }
+      .star-btn { padding: 6px 10px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <span class="header-badge">C-TPAT & ISO 9001:2015 SURVEY</span>
+    <h1>PHIẾU ĐÁNH GIÁ MỨC ĐỘ HÀI LÒNG VỀ DỊCH VỤ</h1>
+    <h2>CARGOLINK EXPRESS — KHÁCH HÀNG NV APPAREL</h2>
+    <div class="header-sub">Mã biểu mẫu: CGL-QMS-SUR-01 | Customer Satisfaction Survey 2026</div>
+  </div>
+
+  <form id="surveyForm" class="form-body" onsubmit="handleSubmit(event)">
+    
+    <!-- Section 1: Customer Details -->
+    <div class="section-title">1. Thông tin đơn vị đánh giá / Client Information</div>
+    
+    <div class="field-group">
+      <label>Bộ phận / Đơn vị tại Nhà máy NV APPAREL <span class="label-sub">Department / Factory Unit</span></label>
+      <select id="department" required>
+        <option value="">-- Vui lòng chọn bộ phận --</option>
+        <option value="Kho Nguyên phụ liệu & Thành phẩm NV1">Kho Nguyên phụ liệu & Thành phẩm NV1 (KCN Bình Hòa)</option>
+        <option value="Phòng Xuất Nhập Khẩu & Logistics">Phòng Xuất Nhập Khẩu & Logistics (NV Apparel)</option>
+        <option value="Bộ phận An ninh & An toàn C-TPAT">Bộ phận An ninh & An toàn C-TPAT</option>
+        <option value="Ban Giám Đốc Nhà Máy NV Apparel">Ban Giám Đốc Nhà Máy NV Apparel</option>
+        <option value="Đối tác Thương hiệu xuất khẩu (Mizuno / Nice Group)">Đối tác Thương hiệu xuất khẩu (Mizuno / Nice Group)</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="col field-group">
+        <label>Họ và tên người đánh giá <span class="label-sub">Evaluator Name (Tùy chọn / Optional)</span></label>
+        <input type="text" id="evaluatorName" placeholder="VD: Trần Hoàng Nam">
+      </div>
+      <div class="col field-group">
+        <label>Số điện thoại / Email <span class="label-sub">Phone Number / Email</span></label>
+        <input type="text" id="evaluatorContact" placeholder="VD: 0912.xxx.xxx">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col field-group">
+        <label>Chuyến xe / Biển số xe đánh giá <span class="label-sub">Truck Plate (VD: 51C-964.55)</span></label>
+        <input type="text" id="truckPlate" value="51C-964.55" placeholder="51C-964.55">
+      </div>
+      <div class="col field-group">
+        <label>Ngày đánh giá <span class="label-sub">Evaluation Date</span></label>
+        <input type="date" id="evalDate" required>
+      </div>
+    </div>
+
+    <!-- Section 2: 6 Rating Criteria -->
+    <div class="section-title">2. Tiêu chí đánh giá chất lượng dịch vụ / Quality Criteria</div>
+    
+    <!-- Criterion 1 -->
+    <div class="rating-card" data-criterion="otd">
+      <div class="rating-title">1. Độ chính xác về thời gian giao nhận (On-Time Delivery - OTD)</div>
+      <div class="rating-desc">Xe có mặt bốc hàng và giao hàng tại cảng xuất/kho đúng khung giờ cam kết (ETA Cut-off).</div>
+      <div class="stars">
+        <button type="button" class="star-btn" onclick="setRating('otd', 1)"><span class="star-icon">★</span> 1 - Rất kém</button>
+        <button type="button" class="star-btn" onclick="setRating('otd', 2)"><span class="star-icon">★</span> 2 - Kém</button>
+        <button type="button" class="star-btn" onclick="setRating('otd', 3)"><span class="star-icon">★</span> 3 - Đạt</button>
+        <button type="button" class="star-btn active" onclick="setRating('otd', 4)"><span class="star-icon">★</span> 4 - Hài lòng</button>
+        <button type="button" class="star-btn" onclick="setRating('otd', 5)"><span class="star-icon">★</span> 5 - Rất hài lòng</button>
+      </div>
+    </div>
+
+    <!-- Criterion 2 -->
+    <div class="rating-card" data-criterion="seal">
+      <div class="rating-title">2. An ninh thùng xe & Tính toàn vẹn niêm phong Seal C-TPAT</div>
+      <div class="rating-desc">Xe thùng kín chắc chắn, chốt khóa an toàn, seal cối ISO 17712 nguyên vẹn 100%, thực hiện đúng kiểm tra VVTT.</div>
+      <div class="stars">
+        <button type="button" class="star-btn" onclick="setRating('seal', 1)"><span class="star-icon">★</span> 1 - Rất kém</button>
+        <button type="button" class="star-btn" onclick="setRating('seal', 2)"><span class="star-icon">★</span> 2 - Kém</button>
+        <button type="button" class="star-btn" onclick="setRating('seal', 3)"><span class="star-icon">★</span> 3 - Đạt</button>
+        <button type="button" class="star-btn" onclick="setRating('seal', 4)"><span class="star-icon">★</span> 4 - Hài lòng</button>
+        <button type="button" class="star-btn active" onclick="setRating('seal', 5)"><span class="star-icon">★</span> 5 - Rất hài lòng</button>
+      </div>
+    </div>
+
+    <!-- Criterion 3 -->
+    <div class="rating-card" data-criterion="driver">
+      <div class="rating-title">3. Tác phong & Tính chuyên nghiệp của Tài xế (Driver Professionalism)</div>
+      <div class="rating-desc">Tài xế mặc đồng phục, đeo thẻ, trung thực, lịch sự, phối hợp kiểm tra xe 7 điểm và hỗ trợ giao nhận chu đáo.</div>
+      <div class="stars">
+        <button type="button" class="star-btn" onclick="setRating('driver', 1)"><span class="star-icon">★</span> 1 - Rất kém</button>
+        <button type="button" class="star-btn" onclick="setRating('driver', 2)"><span class="star-icon">★</span> 2 - Kém</button>
+        <button type="button" class="star-btn" onclick="setRating('driver', 3)"><span class="star-icon">★</span> 3 - Đạt</button>
+        <button type="button" class="star-btn" onclick="setRating('driver', 4)"><span class="star-icon">★</span> 4 - Hài lòng</button>
+        <button type="button" class="star-btn active" onclick="setRating('driver', 5)"><span class="star-icon">★</span> 5 - Rất hài lòng</button>
+      </div>
+    </div>
+
+    <!-- Criterion 4 -->
+    <div class="rating-card" data-criterion="truck">
+      <div class="rating-title">4. Chất lượng kỹ thuật & Vệ sinh thùng phương tiện (Truck Cleanliness)</div>
+      <div class="rating-desc">Sàn xe khô ráo, sạch sẽ, không mùi hôi, không rỉ sét/thủng dột làm ảnh hưởng bao bì thùng carton hàng may mặc.</div>
+      <div class="stars">
+        <button type="button" class="star-btn" onclick="setRating('truck', 1)"><span class="star-icon">★</span> 1 - Rất kém</button>
+        <button type="button" class="star-btn" onclick="setRating('truck', 2)"><span class="star-icon">★</span> 2 - Kém</button>
+        <button type="button" class="star-btn" onclick="setRating('truck', 3)"><span class="star-icon">★</span> 3 - Đạt</button>
+        <button type="button" class="star-btn active" onclick="setRating('truck', 4)"><span class="star-icon">★</span> 4 - Hài lòng</button>
+        <button type="button" class="star-btn" onclick="setRating('truck', 5)"><span class="star-icon">★</span> 5 - Rất hài lòng</button>
+      </div>
+    </div>
+
+    <!-- Criterion 5 -->
+    <div class="rating-card" data-criterion="gps">
+      <div class="rating-title">5. Giám sát hành trình GPS & Tính minh bạch thông tin chuyến xe</div>
+      <div class="rating-desc">Hệ thống GPS trực tuyến 24/7 ổn định, chia sẻ tài khoản cho NV Apparel giám sát, cập nhật tiến độ chủ động.</div>
+      <div class="stars">
+        <button type="button" class="star-btn" onclick="setRating('gps', 1)"><span class="star-icon">★</span> 1 - Rất kém</button>
+        <button type="button" class="star-btn" onclick="setRating('gps', 2)"><span class="star-icon">★</span> 2 - Kém</button>
+        <button type="button" class="star-btn" onclick="setRating('gps', 3)"><span class="star-icon">★</span> 3 - Đạt</button>
+        <button type="button" class="star-btn active" onclick="setRating('gps', 4)"><span class="star-icon">★</span> 4 - Hài lòng</button>
+        <button type="button" class="star-btn" onclick="setRating('gps', 5)"><span class="star-icon">★</span> 5 - Rất hài lòng</button>
+      </div>
+    </div>
+
+    <!-- Criterion 6 -->
+    <div class="rating-card" data-criterion="support">
+      <div class="rating-title">6. Khả năng ứng phó sự cố & Chăm sóc khách hàng của Bộ phận Điều độ</div>
+      <div class="rating-desc">Đội ngũ Điều độ (Ms. Bích / Mr. Thành) tiếp nhận hotline 24/7 tức thì, điều xe cứu trợ linh hoạt, báo cáo minh bạch.</div>
+      <div class="stars">
+        <button type="button" class="star-btn" onclick="setRating('support', 1)"><span class="star-icon">★</span> 1 - Rất kém</button>
+        <button type="button" class="star-btn" onclick="setRating('support', 2)"><span class="star-icon">★</span> 2 - Kém</button>
+        <button type="button" class="star-btn" onclick="setRating('support', 3)"><span class="star-icon">★</span> 3 - Đạt</button>
+        <button type="button" class="star-btn" onclick="setRating('support', 4)"><span class="star-icon">★</span> 4 - Hài lòng</button>
+        <button type="button" class="star-btn active" onclick="setRating('support', 5)"><span class="star-icon">★</span> 5 - Rất hài lòng</button>
+      </div>
+    </div>
+
+    <!-- Section 3: Suggestions -->
+    <div class="section-title">3. Đóng góp ý kiến & Đề xuất cải tiến / Recommendations</div>
+    
+    <div class="field-group">
+      <label>Ý kiến góp ý cụ thể giúp Cargolink nâng cao chất lượng dịch vụ <span class="label-sub">Detailed Feedback & Improvement Suggestions</span></label>
+      <textarea id="comments" rows="3" placeholder="Quý khách có yêu cầu đặc biệt hoặc góp ý cải tiến về quy trình vận hành..."></textarea>
+    </div>
+
+    <div class="field-group">
+      <label>Quý khách có sẵn sàng tiếp tục đồng hành và lựa chọn Cargolink cho các đơn hàng tiếp theo? <span class="label-sub">Would you recommend Cargolink?</span></label>
+      <select id="recommend">
+        <option value="Chắc chắn tiếp tục lựa chọn (100% Yes)">Chắc chắn tiếp tục lựa chọn (100% Yes)</option>
+        <option value="Sẽ cân nhắc tùy theo từng đơn hàng">Sẽ cân nhắc tùy theo từng đơn hàng</option>
+        <option value="Cần cải thiện thêm các tiêu chí trên">Cần cải thiện thêm các tiêu chí trên</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn-submit">
+      <span>GỬI ĐÁNH GIÁ DỊCH VỤ / SUBMIT SURVEY</span> ➔
+    </button>
+
+    <div class="footer-note">
+      CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM — PHÒNG QUẢN LÝ CHẤT LƯỢNG ISO 9001 & AN NINH C-TPAT<br>
+      Cam kết bảo mật thông tin và tiếp thu 100% ý kiến của Khách hàng NV APPAREL. Hotline 24/7: 0943 46 46 46
+    </div>
+  </form>
+</div>
+
+<!-- Modal Popup Success -->
+<div id="successModal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="success-icon">✓</div>
+    <h2 style="font-size: 18px; color: var(--primary); margin-bottom: 8px;">CẢM ƠN QUÝ KHÁCH ĐÃ ĐÁNH GIÁ!</h2>
+    <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+      Ý kiến quý báu của Quý khách đã được ghi nhận vào hệ thống Quản lý Chất lượng ISO 9001 / C-TPAT của Cargolink Express.
+    </p>
+    <div>
+      <span class="modal-code" id="resCode">SAT-2026-96455</span>
+    </div>
+    <div style="margin-top: 20px;">
+      <button class="btn-print" onclick="window.print()">In phiếu xác nhận</button>
+      <button class="btn-close" onclick="closeModal()">Đóng cửa sổ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Set today date by default
+  document.getElementById('evalDate').value = new Date().toISOString().split('T')[0];
+
+  const ratings = {
+    otd: 4,
+    seal: 5,
+    driver: 5,
+    truck: 4,
+    gps: 4,
+    support: 5
+  };
+
+  function setRating(criterion, value) {
+    ratings[criterion] = value;
+    const card = document.querySelector(`.rating-card[data-criterion="${criterion}"]`);
+    if (card) {
+      const buttons = card.querySelectorAll('.star-btn');
+      buttons.forEach((btn, idx) => {
+        if (idx + 1 === value) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.innerHTML = 'Đang xử lý gửi dữ liệu...';
+
+    const code = 'SAT-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const data = {
+      form_type: 'satisfaction_survey',
+      reference_code: code,
+      department: document.getElementById('department').value,
+      evaluator_name: document.getElementById('evaluatorName').value || 'Ẩn danh (NV Apparel)',
+      evaluator_contact: document.getElementById('evaluatorContact').value || 'N/A',
+      truck_plate: document.getElementById('truckPlate').value,
+      eval_date: document.getElementById('evalDate').value,
+      ratings: ratings,
+      comments: document.getElementById('comments').value || 'Dịch vụ rất tốt, đảm bảo đúng tiến độ và an ninh C-TPAT.',
+      recommend: document.getElementById('recommend').value,
+      submitted_at: new Date().toISOString()
+    };
+
+    // Save to LocalStorage
+    try {
+      const existing = JSON.parse(localStorage.getItem('cargolink_surveys') || '[]');
+      existing.push(data);
+      localStorage.setItem('cargolink_surveys', JSON.stringify(existing));
+    } catch(err) {
+      console.log('LocalStorage note:', err);
+    }
+
+    // Try POSTing to local server API if running
+    try {
+      await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    } catch (err) {
+      // Offline fallback
+    }
+
+    setTimeout(() => {
+      document.getElementById('resCode').innerText = code;
+      document.getElementById('successModal').style.display = 'flex';
+      btn.disabled = false;
+      btn.innerHTML = '<span>GỬI ĐÁNH GIÁ DỊCH VỤ / SUBMIT SURVEY</span> ➔';
+    }, 400);
+  }
+
+  function closeModal() {
+    document.getElementById('successModal').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

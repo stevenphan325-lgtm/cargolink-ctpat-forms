@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NV CTPAT Knowledge Survey | Khảo Sát Kiến Thức An Ninh C-TPAT</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --primary-light: #0B3C5D;
+      --accent: #D4441E;
+      --accent-hover: #b83815;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --border: #CBD5E1;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --success: #059669;
+      --error: #DC2626;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 16px; min-height: 100vh; }
+    .container { max-width: 780px; margin: 0 auto; background: var(--card-bg); border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--border); }
+    .header { background: linear-gradient(135deg, #1E293B 0%, var(--primary) 100%); color: white; padding: 28px 24px; text-align: center; }
+    .header-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
+    .header h1 { font-size: 20px; font-weight: 800; line-height: 1.3; margin-bottom: 6px; }
+    .header h2 { font-size: 13px; font-weight: 400; opacity: 0.85; text-transform: uppercase; }
+    .header-sub { margin-top: 10px; font-size: 12px; opacity: 0.75; }
+    .progress-bar-container { background: #E2E8F0; height: 6px; width: 100%; }
+    .progress-bar-fill { background: var(--accent); height: 100%; width: 0%; transition: width 0.3s; }
+    .form-body { padding: 28px 24px; }
+    .section-title { font-size: 14px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ""; display: inline-block; width: 4px; height: 16px; background: var(--accent); border-radius: 2px; }
+    .field-group { margin-bottom: 18px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
+    .label-sub { font-weight: 400; color: var(--text-muted); font-size: 11px; display: block; }
+    input[type="text"], select {
+      width: 100%; padding: 10px 14px; font-size: 14px; border: 1.5px solid var(--border); border-radius: 8px; background: #FFF; outline: none; transition: border-color 0.2s;
+    }
+    input:focus, select:focus { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(11, 60, 93, 0.15); }
+    .row { display: flex; gap: 16px; }
+    .col { flex: 1; }
+
+    /* Question Cards */
+    .q-card { background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom: 16px; transition: all 0.2s; }
+    .q-num { font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .q-text { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+    .q-text-en { font-size: 12px; color: var(--text-muted); font-style: italic; margin-bottom: 14px; }
+    .opt-group { display: flex; flex-direction: column; gap: 8px; }
+    .opt-label { display: flex; align-items: center; gap: 10px; background: #FFF; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 14px; cursor: pointer; transition: all 0.15s; font-size: 13px; font-weight: 500; }
+    .opt-label:hover { border-color: var(--primary-light); background: #F1F5F9; }
+    .opt-label input[type="radio"] { accent-color: var(--accent); width: 16px; height: 16px; }
+    .opt-label.selected { border-color: var(--primary); background: #EFF6FF; font-weight: 600; color: var(--primary); }
+    
+    .btn-submit { width: 100%; background: var(--accent); color: white; padding: 14px 24px; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
+    .btn-submit:hover { background: var(--accent-hover); }
+
+    /* Results Screen */
+    .result-box { display: none; padding: 28px 24px; text-align: center; }
+    .score-badge { width: 90px; height: 90px; border-radius: 50%; background: #DEF7EC; color: var(--success); font-size: 32px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 4px solid #A7F3D0; }
+    .cert-box { background: #FEF3C7; border: 2px dashed #F59E0B; border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; }
+    .cert-title { font-size: 16px; font-weight: 800; color: #92400E; text-transform: uppercase; margin-bottom: 4px; }
+    .cert-sub { font-size: 12px; color: #B45309; }
+    .cert-code { font-family: monospace; font-size: 15px; font-weight: 700; color: #78350F; margin-top: 8px; }
+
+    @media (max-width: 600px) {
+      .row { flex-direction: column; gap: 0; }
+      .form-body { padding: 18px 14px; }
+      .header { padding: 20px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <span class="header-badge">C-TPAT SECURITY KNOWLEDGE ASSESSMENT</span>
+    <h1>NV CTPAT KNOWLEDGE SURVEY</h1>
+    <h2>KHẢO SÁT & KIỂM TRA KIẾN THỨC AN NINH CHUỖI CUNG ỨNG C-TPAT</h2>
+    <div class="header-sub">Đối tượng: Tài xế xe tải, Điều độ viên & Nhân viên phục vụ Khách hàng NV APPAREL (2026)</div>
+  </div>
+  <div class="progress-bar-container">
+    <div id="progressBar" class="progress-bar-fill"></div>
+  </div>
+
+  <form id="knowledgeForm" class="form-body" onsubmit="submitExam(event)">
+    
+    <div class="section-title">1. Thông tin người tham gia / Participant Details</div>
+    <div class="row">
+      <div class="col field-group">
+        <label>Họ và tên nhân sự / Lái xe <span class="label-sub">Full Name</span></label>
+        <input type="text" id="candName" value="LÊ VĂN TUI" required placeholder="VD: Lê Văn Tui">
+      </div>
+      <div class="col field-group">
+        <label>Số CCCD / Mã nhân viên <span class="label-sub">Citizen ID / Staff ID</span></label>
+        <input type="text" id="candID" value="089090009102" required placeholder="089090009102">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col field-group">
+        <label>Vị trí công tác <span class="label-sub">Role</span></label>
+        <select id="candRole" required>
+          <option value="Tài xế chuyên trách tuyến NV Apparel (Isuzu 51C-964.55)">Tài xế chuyên trách tuyến NV Apparel (Isuzu 51C-964.55)</option>
+          <option value="Tài xế đội xe tăng cường / Cứu trợ (50H-212.36)">Tài xế đội xe tăng cường / Cứu trợ (50H-212.36)</option>
+          <option value="Điều độ viên Vận tải (Ms. Bích / Logistics Ops)">Điều độ viên Vận tải (Ms. Bích / Logistics Ops)</option>
+          <option value="Cán bộ An toàn C-TPAT & Quản lý Đội xe">Cán bộ An toàn C-TPAT & Quản lý Đội xe</option>
+          <option value="Nhân viên Kho / Tiếp nhận hàng hóa">Nhân viên Kho / Tiếp nhận hàng hóa</option>
+        </select>
+      </div>
+      <div class="col field-group">
+        <label>Biển số xe phụ trách <span class="label-sub">Truck Plate</span></label>
+        <input type="text" id="candTruck" value="51C-964.55" placeholder="51C-964.55">
+      </div>
+    </div>
+
+    <div class="section-title">2. Bộ 10 câu hỏi nghiệp vụ an ninh C-TPAT / 10 Assessment Questions</div>
+
+    <!-- Q1 -->
+    <div class="q-card" data-q="1">
+      <div class="q-num">Câu hỏi 1 / Question 1</div>
+      <div class="q-text">Trước khi vào nhà máy NV Apparel nhận hàng may mặc xuất khẩu, tài xế bắt buộc phải thực hiện quy trình kiểm tra an ninh nào?</div>
+      <div class="q-text-en">Which mandatory security inspection must the driver perform before entering NV Apparel factory to load cargo?</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="q1" value="A" required onchange="updateProgress()"> A. Chỉ cần rửa sạch xe và kiểm tra nhiên liệu</label>
+        <label class="opt-label selected"><input type="radio" name="q1" value="B" checked onchange="updateProgress()"> B. Quy trình kiểm tra an ninh xe tải 7 điểm (hoặc 17 điểm đối với xe container) theo biểu mẫu C-TPAT</label>
+        <label class="opt-label"><input type="radio" name="q1" value="C" onchange="updateProgress()"> C. Chỉ cần kiểm tra giấy phép lái xe và phù hiệu vận tải</label>
+        <label class="opt-label"><input type="radio" name="q1" value="D" onchange="updateProgress()"> D. Đợi nhân viên bảo vệ cổng kiểm tra thay mà không cần tự thực hiện</label>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" data-q="2">
+      <div class="q-num">Câu hỏi 2 / Question 2</div>
+      <div class="q-text">Quy trình kiểm tra tính toàn vẹn của chì niêm phong (Seal) theo phương pháp "VVTT" của C-TPAT gồm 4 bước nào?</div>
+      <div class="q-text-en">What are the 4 steps of the C-TPAT "VVTT" seal inspection method?</div>
+      <div class="opt-group">
+        <label class="opt-label selected"><input type="radio" name="q2" value="A" checked required onchange="updateProgress()"> A. View (Quan sát) — Verify (Đối chiếu mã số) — Tug (Kéo giật ngàm) — Twist (Xoay tròn ổ khóa)</label>
+        <label class="opt-label"><input type="radio" name="q2" value="B" onchange="updateProgress()"> B. Validate — Verify — Test — Turn</label>
+        <label class="opt-label"><input type="radio" name="q2" value="C" onchange="updateProgress()"> C. Vận hành — Vệ sinh — Thắt chặt — Thu hồi</label>
+        <label class="opt-label"><input type="radio" name="q2" value="D" onchange="updateProgress()"> D. Chỉ cần nhìn qua xem seal còn treo ở cửa thùng xe hay không</label>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" data-q="3">
+      <div class="q-num">Câu hỏi 3 / Question 3</div>
+      <div class="q-text">Loại chì niêm phong (Seal) bắt buộc phải sử dụng để niêm phong hàng may mặc xuất khẩu theo quy chuẩn C-TPAT là loại nào?</div>
+      <div class="q-text-en">Which type of security seal is mandatory for export cargo under C-TPAT requirements?</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="q3" value="A" required onchange="updateProgress()"> A. Seal dây nhựa rút thông thường dùng trong siêu thị</label>
+        <label class="opt-label selected"><input type="radio" name="q3" value="B" checked onchange="updateProgress()"> B. Chì cối / Chì cáp an ninh cao (High Security Seal) đạt chuẩn chứng nhận quốc tế ISO 17712</label>
+        <label class="opt-label"><input type="radio" name="q3" value="C" onchange="updateProgress()"> C. Băng keo niêm phong dán kín các khe hở thùng xe</label>
+        <label class="opt-label"><input type="radio" name="q3" value="D" onchange="updateProgress()"> D. Bất kỳ loại khóa cơ truyền thống nào</label>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" data-q="4">
+      <div class="q-num">Câu hỏi 4 / Question 4</div>
+      <div class="q-text">Quy định về lộ trình vận chuyển từ Nhà máy NV Apparel (An Giang) về Cảng Cát Lái (TP.HCM) yêu cầu tài xế phải tuân thủ điều gì?</div>
+      <div class="q-text-en">What are the route regulations when transporting cargo from NV Apparel factory to Cat Lai Port?</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="q4" value="A" required onchange="updateProgress()"> A. Tài xế được tự do chọn lộ trình ngắn nhất tùy ý</label>
+        <label class="opt-label selected"><input type="radio" name="q4" value="B" checked onchange="updateProgress()"> B. Bắt buộc đi đúng lộ trình đã được thẩm định & phê duyệt, chỉ được dừng nghỉ tối đa 15 phút tại trạm dừng chân Châu Thành được chỉ định</label>
+        <label class="opt-label"><input type="radio" name="q4" value="C" onchange="updateProgress()"> C. Có thể tấp vào các quán ven đường ăn uống không cần báo Điều độ</label>
+        <label class="opt-label"><input type="radio" name="q4" value="D" onchange="updateProgress()"> D. Tắt định vị GPS khi chạy ban đêm để tiết kiệm ắc-quy</label>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card" data-q="5">
+      <div class="q-num">Câu hỏi 5 / Question 5</div>
+      <div class="q-text">Khi xe gặp sự cố kỹ thuật bất khả kháng trên đường (như chuyến xe 51C-964.55 tại Tuyến tránh Long Xuyên), hành động đầu tiên của tài xế là gì?</div>
+      <div class="q-text-en">When facing a mechanical breakdown on route (as 51C-964.55 did on Long Xuyen bypass), what is driver's immediate action?</div>
+      <div class="opt-group">
+        <label class="opt-label selected"><input type="radio" name="q5" value="A" checked required onchange="updateProgress()"> A. Đỗ xe an toàn, bật đèn khẩn cấp (hazard), đặt tam giác/biển cảnh báo nguy hiểm cách xe 50m, khóa cửa thùng xe và gọi hotline Điều độ trong 15 phút</label>
+        <label class="opt-label"><input type="radio" name="q5" value="B" onchange="updateProgress()"> B. Rời xe đi tìm thợ sửa chữa ven đường và để thùng xe tự do</label>
+        <label class="opt-label"><input type="radio" name="q5" value="C" onchange="updateProgress()"> C. Lập tức tự lấy kìm cắt seal cũ để bốc hàng xuống lề đường</label>
+        <label class="opt-label"><input type="radio" name="q5" value="D" onchange="updateProgress()"> D. Tự ý bắt xe khách chuyển hàng về TP.HCM</label>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card" data-q="6">
+      <div class="q-num">Câu hỏi 6 / Question 6</div>
+      <div class="q-text">Tài xế có được phép tự ý cắt seal chì trên đường mà không có sự phê chuẩn của Điều độ và không có người chứng kiến không?</div>
+      <div class="q-text-en">Is driver allowed to cut the security seal on road without Dispatcher approval and witness?</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="q6" value="A" required onchange="updateProgress()"> A. Được phép nếu thấy hàng hóa có dấu hiệu nóng hoặc xô lệch</label>
+        <label class="opt-label selected"><input type="radio" name="q6" value="B" checked onchange="updateProgress()"> B. Tuyệt đối NGHIÊM CẤM. Tự ý phá seal là vi phạm an ninh nghiêm trọng C-TPAT, phải có xe cứu trợ đến, có lệnh điều xe và lập biên bản có chữ ký 2 tài xế</label>
+        <label class="opt-label"><input type="radio" name="q6" value="C" onchange="updateProgress()"> C. Được phép nếu tài xế có mang theo kìm cộng lực</label>
+        <label class="opt-label"><input type="radio" name="q6" value="D" onchange="updateProgress()"> D. Tùy ý tài xế quyết định trên cabin</label>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card" data-q="7">
+      <div class="q-num">Câu hỏi 7 / Question 7</div>
+      <div class="q-text">Khi thực hiện sang hàng khẩn cấp từ xe gặp sự cố sang xe thay thế (VD: 51C-964.55 sang 50H-212.36), yêu cầu hình ảnh chụp minh chứng gồm những gì?</div>
+      <div class="q-text-en">During emergency transshipment, what photo evidence is mandatory?</div>
+      <div class="opt-group">
+        <label class="opt-label selected"><input type="radio" name="q7" value="A" checked required onchange="updateProgress()"> A. Đủ 4 giai đoạn: (1) Trước sang hàng kèm seal cũ; (2) Trong khi bốc chuyển kiện; (3) Sau khi sang hàng kẹp seal mới; (4) Bàn giao đích</label>
+        <label class="opt-label"><input type="radio" name="q7" value="B" onchange="updateProgress()"> B. Chỉ cần chụp 01 bức ảnh mặt trước xe</label>
+        <label class="opt-label"><input type="radio" name="q7" value="C" onchange="updateProgress()"> C. Không cần chụp ảnh nếu 2 tài xế quen biết nhau</label>
+        <label class="opt-label"><input type="radio" name="q7" value="D" onchange="updateProgress()"> D. Chỉ cần quay video ngắn tài xế đang lái xe</label>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card" data-q="8">
+      <div class="q-num">Câu hỏi 8 / Question 8</div>
+      <div class="q-text">Chính sách của Cargolink đối với việc chở người lạ lên cabin xe hoặc chở hàng ghép ngoài hợp đồng là gì?</div>
+      <div class="q-text-en">What is Cargolink policy regarding unauthorized passengers or unmanifested cargo?</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="q8" value="A" required onchange="updateProgress()"> A. Được phép cho đi nhờ nếu là người quen của tài xế</label>
+        <label class="opt-label selected"><input type="radio" name="q8" value="B" checked onchange="updateProgress()"> B. Nghiêm cấm tuyệt đối 100%. Vi phạm sẽ bị sa thải ngay lập tức và bàn giao cơ quan công an xử lý</label>
+        <label class="opt-label"><input type="radio" name="q8" value="C" onchange="updateProgress()"> C. Được phép chở thêm hàng nhỏ nếu còn chỗ trống trong thùng xe</label>
+        <label class="opt-label"><input type="radio" name="q8" value="D" onchange="updateProgress()"> D. Được phép nếu người đi nhờ trả tiền cước</label>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card" data-q="9">
+      <div class="q-num">Câu hỏi 9 / Question 9</div>
+      <div class="q-text">Quy định về nồng độ cồn và chất ma túy đối với nhân sự lái xe phục vụ khách hàng NV Apparel là như thế nào?</div>
+      <div class="q-text-en">What are the alcohol and drug regulations for drivers serving NV Apparel?</div>
+      <div class="opt-group">
+        <label class="opt-label selected"><input type="radio" name="q9" value="A" checked required onchange="updateProgress()"> A. Cấm tuyệt đối: Nồng độ cồn bằng 0.000 mg/L khí thở và âm tính 100% với 5 nhóm chất ma túy</label>
+        <label class="opt-label"><input type="radio" name="q9" value="B" onchange="updateProgress()"> B. Được uống 1 lon bia trước khi lái xe 2 giờ</label>
+        <label class="opt-label"><input type="radio" name="q9" value="C" onchange="updateProgress()"> C. Chỉ kiểm tra khi có tai nạn xảy ra</label>
+        <label class="opt-label"><input type="radio" name="q9" value="D" onchange="updateProgress()"> D. Cho phép nếu có đơn thuốc của bác sĩ mà không báo cáo</label>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card" data-q="10">
+      <div class="q-num">Câu hỏi 10 / Question 10</div>
+      <div class="q-text">Khi phát hiện có dấu hiệu bất thường (seal bị cưa cắt, có đối tượng bám theo nghi buôn lậu), tài xế phải liên hệ đầu mối khẩn cấp nào?</div>
+      <div class="q-text-en">When discovering security tampering or suspicious activities, which emergency contacts must driver call?</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="q10" value="A" required onchange="updateProgress()"> A. Đợi về đến nơi mới báo cáo</label>
+        <label class="opt-label selected"><input type="radio" name="q10" value="B" checked onchange="updateProgress()"> B. Báo ngay Hotline điều độ (Ms. Bích: 077 871 9936), An toàn (Mr. Thành: 088 6464 988) và Hotline khẩn cấp 0943 46 46 46 hoặc Công an 113</label>
+        <label class="opt-label"><input type="radio" name="q10" value="C" onchange="updateProgress()"> C. Tự ý thương lượng với đối tượng khả nghi</label>
+        <label class="opt-label"><input type="radio" name="q10" value="D" onchange="updateProgress()"> D. Đăng bài lên mạng xã hội để xin ý kiến</label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">
+      <span>NỘP BÀI KIỂM TRA & XEM KẾT QUẢ / SUBMIT EXAM</span> ➔
+    </button>
+  </form>
+
+  <!-- Result Screen -->
+  <div id="resultBox" class="result-box">
+    <div class="score-badge" id="scoreDisplay">10/10</div>
+    <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">KẾT QUẢ: ĐẠT TIÊU CHUẨN AN NINH C-TPAT NĂM 2026!</h2>
+    <p style="font-size: 13px; color: var(--text-muted); max-width: 500px; margin: 0 auto;">
+      Chúc mừng bạn đã hoàn thành xuất sắc bài kiểm tra định kỳ về quy chuẩn an ninh chuỗi cung ứng C-TPAT và quy trình vận hành xe chuyên trách phục vụ khách hàng NV APPAREL.
+    </p>
+
+    <div class="cert-box">
+      <div class="cert-title">GIẤY CHỨNG NHẬN ĐÀO TẠO AN NINH C-TPAT</div>
+      <div class="cert-sub">CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM — NĂM 2026</div>
+      <div style="font-size: 14px; font-weight: 700; color: #1E293B; margin-top: 10px;" id="certHolder">Học viên: LÊ VĂN TUI (CCCD: 089090009102)</div>
+      <div class="cert-code" id="certCode">CERT-CTPAT-2026-96455</div>
+    </div>
+
+    <div style="margin-top: 24px; display: flex; justify-content: center; gap: 12px;">
+      <button class="btn-submit" style="width: auto; padding: 10px 24px; margin-top: 0; background: var(--primary);" onclick="window.print()">In chứng chỉ kết quả</button>
+      <button class="btn-submit" style="width: auto; padding: 10px 24px; margin-top: 0; background: #E2E8F0; color: var(--text-main);" onclick="location.reload()">Làm lại bài kiểm tra</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateProgress() {
+    let answered = 0;
+    for (let i = 1; i <= 10; i++) {
+      if (document.querySelector(`input[name="q${i}"]:checked`)) {
+        answered++;
+      }
+    }
+    const pct = (answered / 10) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  }
+
+  // Update selection style
+  document.querySelectorAll('.opt-label input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      const parentCard = this.closest('.q-card');
+      parentCard.querySelectorAll('.opt-label').forEach(lbl => lbl.classList.remove('selected'));
+      this.closest('.opt-label').classList.add('selected');
+    });
+  });
+
+  updateProgress();
+
+  async function submitExam(e) {
+    e.preventDefault();
+    const btn = document.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.innerHTML = 'Đang chấm điểm bài làm...';
+
+    // Answer key: 1:B, 2:A, 3:B, 4:B, 5:A, 6:B, 7:A, 8:B, 9:A, 10:B
+    const keys = { q1: 'B', q2: 'A', q3: 'B', q4: 'B', q5: 'A', q6: 'B', q7: 'A', q8: 'B', q9: 'A', q10: 'B' };
+    let score = 0;
+    const answers = {};
+
+    for (let i = 1; i <= 10; i++) {
+      const val = document.querySelector(`input[name="q${i}"]:checked`)?.value;
+      answers[`q${i}`] = val;
+      if (val === keys[`q${i}`]) {
+        score++;
+      }
+    }
+
+    const certId = 'CERT-CTPAT-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const candName = document.getElementById('candName').value;
+    const candID = document.getElementById('candID').value;
+    const candRole = document.getElementById('candRole').value;
+    const candTruck = document.getElementById('candTruck').value;
+
+    const record = {
+      form_type: 'knowledge_survey',
+      cert_id: certId,
+      name: candName,
+      cccd: candID,
+      role: candRole,
+      truck: candTruck,
+      score: score,
+      max_score: 10,
+      passed: score >= 8,
+      submitted_at: new Date().toISOString()
+    };
+
+    // Save to LocalStorage
+    try {
+      const existing = JSON.parse(localStorage.getItem('cargolink_surveys') || '[]');
+      existing.push(record);
+      localStorage.setItem('cargolink_surveys', JSON.stringify(existing));
+    } catch(err) {}
+
+    // POST to local API
+    try {
+      await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+    } catch(err) {}
+
+    setTimeout(() => {
+      document.getElementById('knowledgeForm').style.display = 'none';
+      document.getElementById('resultBox').style.display = 'block';
+      document.getElementById('scoreDisplay').innerText = `${score}/10`;
+      document.getElementById('certHolder').innerText = `Học viên: ${candName} (CCCD: ${candID}) - Xe: ${candTruck}`;
+      document.getElementById('certCode').innerText = certId;
+    }, 400);
+  }
+</script>
+
+</body>
+</html>
