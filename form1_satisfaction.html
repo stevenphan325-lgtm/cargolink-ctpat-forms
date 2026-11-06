@@ -309,7 +309,7 @@
 
     // Try POSTing to local server API if running
     try {
-      await fetch('/api/submit', {
+      await fetch('https://winners-paul-done-firms.trycloudflare.com/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
