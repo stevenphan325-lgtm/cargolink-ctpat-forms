@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist Tự Đánh Giá Nội Bộ Sẵn Sàng Kiểm Toán C-TPAT | Cargolink Express</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --primary-light: #0B3C5D;
+      --accent: #D4441E;
+      --bg: #F1F5F9;
+      --card: #FFFFFF;
+      --border: #CBD5E1;
+      --text: #0F172A;
+      --muted: #64748B;
+      --success: #059669;
+      --danger: #DC2626;
+      --warning: #D97706;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.5; padding: 16px; min-height: 100vh; }
+    .container { max-width: 860px; margin: 0 auto; background: var(--card); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--border); }
+    .conf-banner { background: #FEF3C7; border-bottom: 1.5px dashed #D97706; color: #92400E; padding: 10px 14px; font-size: 11.5px; font-weight: 700; text-align: center; text-transform: uppercase; }
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 24px 20px; text-align: center; }
+    .header .badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 3px 12px; border-radius: 12px; margin-bottom: 8px; }
+    .header h1 { font-size: 20px; font-weight: 800; line-height: 1.3; }
+    .header p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+    .nav-back { display: inline-block; margin-bottom: 6px; color: #93C5FD; text-decoration: none; font-weight: 700; font-size: 13px; }
+    .form-body { padding: 24px 20px; }
+    .section-title { font-size: 14px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ""; display: inline-block; width: 4px; height: 16px; background: var(--accent); border-radius: 2px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .field-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    input[type="text"], input[type="date"], select, textarea {
+      width: 100%; padding: 9px 12px; font-size: 13.5px; border: 1.5px solid var(--border); border-radius: 8px; background: #FFF; outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary-light); }
+    textarea { min-height: 80px; }
+    .chk-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
+    .chk-table th { background: #071A36; color: white; padding: 10px 12px; text-align: left; font-size: 12px; text-transform: uppercase; }
+    .chk-table td { padding: 10px 12px; border-bottom: 1px solid #E2E8F0; vertical-align: middle; }
+    .chk-table tr:nth-child(even) { background: #F8FAFC; }
+    .status-opt { display: flex; gap: 10px; align-items: center; }
+    .status-opt label { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; cursor: pointer; margin-bottom: 0; }
+    .status-pass { color: var(--success); }
+    .status-fail { color: var(--danger); }
+    .audit-meter { background: #EFF6FF; border: 2px solid #93C5FD; border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 20px; }
+    .sig-box { background: #F8FAFC; border: 1.5px dashed var(--border); border-radius: 8px; padding: 14px; text-align: center; margin-top: 10px; }
+    canvas { background: white; border: 1px solid #CBD5E1; border-radius: 6px; width: 100%; max-width: 380px; height: 120px; touch-action: none; cursor: crosshair; }
+    .sig-btns { margin-top: 6px; }
+    .btn-clear { background: #E2E8F0; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .btn-submit { width: 100%; background: var(--accent); color: white; padding: 14px 20px; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; margin-top: 18px; }
+    .btn-submit:hover { background: #b83815; }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: white; border-radius: 16px; padding: 28px 20px; max-width: 440px; width: 100%; text-align: center; }
+    .btn-print { background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; margin-right: 8px; }
+    .btn-close { background: #E2E8F0; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; }
+    .footer { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="conf-banner">🔒 TÀI LIỆU LƯU HÀNH NỘI BỘ — CARGOLINK EXPRESS (INTERNAL C-TPAT AUDIT)</div>
+
+  <div class="header">
+    <a href="portal_driver.html" class="nav-back">⬅ Quay lại Cổng Tra Cứu</a>
+    <span class="badge">ĐÁNH GIÁ NỘI BỘ CHUỖI CUNG ỨNG (U.S. CBP C-TPAT)</span>
+    <h1>CHECKLIST TỰ ĐÁNH GIÁ NỘI BỘ SẴN SÀNG KIỂM TOÁN C-TPAT</h1>
+    <p>Đối chiếu toàn diện 12 Tiêu chuẩn An ninh trước đợt thanh tra khách hàng NV APPAREL</p>
+  </div>
+
+  <form id="audForm" class="form-body" onsubmit="handleAudSubmit(event)">
+    <div class="section-title">1. Thông tin Đợt Tự Kiểm Toán Nội Bộ</div>
+    <div class="grid-2">
+      <div class="field-group">
+        <label>Trưởng đoàn Kiểm toán nội bộ:</label>
+        <input type="text" id="leadAuditor" value="Mr. Thành (Trưởng ban An toàn & C-TPAT)" required>
+      </div>
+      <div class="field-group">
+        <label>Thư ký đoàn kiểm toán:</label>
+        <input type="text" id="auditorSecretary" value="Ms. Bích (Điều độ vận tải)" required>
+      </div>
+      <div class="field-group">
+        <label>Ngày thực hiện tự đánh giá:</label>
+        <input type="date" id="auditDate" required>
+      </div>
+      <div class="field-group">
+        <label>Mục đích kiểm toán:</label>
+        <select id="auditPurpose">
+          <option value="Sẵn sàng tiếp đoàn thanh tra Khách hàng NV APPAREL">Sẵn sàng tiếp đoàn Khách hàng NV APPAREL</option>
+          <option value="Đánh giá định kỳ 6 tháng C-TPAT nội bộ">Đánh giá định kỳ 6 tháng C-TPAT nội bộ</option>
+          <option value="Tái chứng nhận ISO 9001 / ISO 39001">Tái chứng nhận ISO 9001 / ISO 39001</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-title">2. Bảng đối chiếu 12 Tiêu chí An ninh C-TPAT & NV Vendor Audit</div>
+    <table class="chk-table">
+      <thead>
+        <tr>
+          <th style="width: 35px;">STT</th>
+          <th>12 Tiêu chí An ninh Chuỗi Cung Ứng C-TPAT</th>
+          <th style="width: 170px;">Đánh giá tuân thủ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>An ninh Đối tác (Business Partner):</strong> Thẩm định năng lực thầu phụ, cam kết an ninh C-TPAT.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c1" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c1" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>An ninh Phương tiện (Conveyance):</strong> Biên bản kiểm tra an ninh xe 7/17 điểm trước mỗi chuyến xe.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c2" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c2" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Kiểm soát Niêm phong Seal:</strong> Quy trình VVTT, sử dụng seal đạt chuẩn High Security ISO 17712.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c3" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c3" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>An ninh Vật lý Kho bãi:</strong> Hàng rào kiên cố, camera CCTV 24/7 lưu trữ 45 ngày, đèn chiếu sáng ban đêm.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c4" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c4" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>Kiểm soát Ra vào Cổng (Access Controls):</strong> Đeo thẻ nhân viên/khách, sổ nhật ký kiểm soát xe vào bãi.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c5" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c5" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>An ninh Nhân sự (Personnel Security):</strong> Xác minh lý lịch tư pháp, hợp đồng lao động, thu hồi thẻ khi nghỉ.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c6" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c6" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong>An toàn Quy trình & Giám sát GPS:</strong> Giám sát lộ trình xe trực tuyến, dừng đỗ đúng trạm quy định.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c7" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c7" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><strong>An ninh Thông tin & NĐ 13/2023/NĐ-CP:</strong> Mật khẩu mạnh, phân quyền dữ liệu, bảo mật thông tin tài xế.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c8" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c8" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><strong>Đào tạo Nhận thức C-TPAT:</strong> Huấn luyện định kỳ tài xế, bài thi trắc nghiệm có cấp chứng chỉ.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c9" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c9" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><strong>An ninh Nông nghiệp (Agricultural):</strong> Xe sạch sẽ, không có đất cát, rơm rạ, sinh vật ngoại lai.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c10" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c10" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><strong>An toàn Giao thông ISO 39001:</strong> Kiểm tra 0.00 mg/L nồng độ cồn & test âm tính ma túy trước giờ chạy.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c11" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c11" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><strong>CSR, Nhân quyền & Chống tiêu cực:</strong> Hộp thư tố giác an toàn, cấm lao động trẻ em, cấm cưỡng bức.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="c12" value="PASS" checked onchange="calcAuditMeter()"> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="c12" value="FAIL" onchange="calcAuditMeter()"> CẦN SỬA</label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="audit-meter">
+      <div style="font-size: 13px; font-weight: 700; color: #1E40AF; text-transform: uppercase;">MỨC ĐỘ SẴN SÀNG KIỂM TOÁN (AUDIT READINESS SCORE)</div>
+      <div style="font-size: 34px; font-weight: 800; color: #059669; margin: 6px 0;" id="auditScoreText">100% (12/12 ĐẠT)</div>
+      <div id="auditBadge" style="display: inline-block; background: #DCFCE7; color: #166534; padding: 6px 16px; border-radius: 20px; font-weight: 800; font-size: 14px; border: 1px solid #86EFAC;">
+        ✅ ĐỦ ĐIỀU KIỆN TIẾP ĐOÀN THANH TRA NV APPAREL (AUDIT READY)
+      </div>
+    </div>
+
+    <div class="section-title">3. Kế hoạch hành động khắc phục (Action Plan)</div>
+    <div class="field-group">
+      <label>Ghi chú các điểm cần lưu ý trước ngày kiểm toán chính thức:</label>
+      <textarea id="actionPlan" placeholder="VD: Nhắc nhở tài xế mang đầy đủ thẻ tên có ảnh, kiểm tra áp kế bình chữa cháy xe 51C-964.55 trước giờ đón đoàn...">100% tài xế và nhân viên điều độ đã hoàn thành khóa huấn luyện nhận thức C-TPAT. Toàn bộ hồ sơ bản cứng và bản điện tử đã được chuẩn hóa đồng bộ.</textarea>
+    </div>
+
+    <div class="section-title">4. Chữ ký số Ban Kiểm toán & Ban Giám đốc</div>
+    <div class="grid-2">
+      <div>
+        <label>Trưởng đoàn Kiểm toán nội bộ ký:</label>
+        <div class="sig-box">
+          <canvas id="sigLeadAuditor"></canvas>
+          <div class="sig-btns"><button type="button" class="btn-clear" onclick="clearSig('sigLeadAuditor')">Ký lại</button></div>
+        </div>
+      </div>
+      <div>
+        <label>Giám đốc Điều hành phê duyệt:</label>
+        <div class="sig-box">
+          <canvas id="sigDirector"></canvas>
+          <div class="sig-btns"><button type="button" class="btn-clear" onclick="clearSig('sigDirector')">Ký lại</button></div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">📋 LƯU BÁO CÁO TỰ ĐÁNH GIÁ SẴN SÀNG KIỂM TOÁN C-TPAT</button>
+  </form>
+
+  <div class="footer">
+    CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM — BAN ĐẢM BẢO CHẤT LƯỢNG (QA/QC)<br>
+    Báo cáo đối chiếu tuân thủ phục vụ thanh tra an ninh chuỗi cung ứng của Khách hàng NV APPAREL
+  </div>
+</div>
+
+<div id="modalSuccess" class="modal-overlay">
+  <div class="modal-box">
+    <div style="font-size: 40px; margin-bottom: 10px;">🏆</div>
+    <h3 style="color: var(--primary); margin-bottom: 8px;">ĐÃ LƯU BÁO CÁO TỰ KIỂM TOÁN</h3>
+    <p style="font-size: 13px; color: var(--muted); margin-bottom: 14px;">Mã báo cáo kiểm toán nội bộ:</p>
+    <div id="audCodeText" style="font-size: 18px; font-weight: 800; color: var(--accent); background: #F8FAFC; padding: 10px; border-radius: 8px; border: 1.5px dashed var(--border); margin-bottom: 16px;">AUD-2026-0000</div>
+    <p style="font-size: 12px; color: var(--muted); margin-bottom: 18px;">Hồ sơ năng lực và quy trình an ninh đã sẵn sàng phục vụ thanh tra chính thức từ đối tác NV APPAREL.</p>
+    <div>
+      <button class="btn-print" onclick="window.print()">🖨 In / Lưu PDF</button>
+      <button class="btn-close" onclick="closeModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initNow() {
+    const d = new Date();
+    document.getElementById('auditDate').value = d.toISOString().split('T')[0];
+  }
+  initNow();
+
+  function calcAuditMeter() {
+    let passCount = 0;
+    for (let i = 1; i <= 12; i++) {
+      const checked = document.querySelector(`input[name="c${i}"]:checked`);
+      if (checked && checked.value === 'PASS') passCount++;
+    }
+    const pct = Math.round((passCount / 12) * 100);
+    document.getElementById('auditScoreText').innerText = `${pct}% (${passCount}/12 ĐẠT)`;
+    const badge = document.getElementById('auditBadge');
+
+    if (pct >= 90) {
+      badge.style.background = '#DCFCE7';
+      badge.style.color = '#166534';
+      badge.style.borderColor = '#86EFAC';
+      badge.innerText = '✅ ĐỦ ĐIỀU KIỆN TIẾP ĐOÀN THANH TRA NV APPAREL (AUDIT READY)';
+    } else {
+      badge.style.background = '#FEF3C7';
+      badge.style.color = '#92400E';
+      badge.style.borderColor = '#FCD34D';
+      badge.innerText = '⚠️ CẦN HOÀN THIỆN CÁC ĐIỂM CHƯA ĐẠT TRƯỚC NGÀY KIỂM TOÁN';
+    }
+  }
+
+  function initCanvas(id) {
+    const c = document.getElementById(id);
+    const ctx = c.getContext('2d');
+    c.width = c.offsetWidth || 340;
+    c.height = 120;
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#071A36';
+    let drawing = false;
+
+    function getPos(e) {
+      const rect = c.getBoundingClientRect();
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: cx - rect.left, y: cy - rect.top };
+    }
+    function start(e) { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); }
+    function move(e) { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); }
+    function stop() { drawing = false; }
+
+    c.addEventListener('mousedown', start);
+    c.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', stop);
+    c.addEventListener('touchstart', start);
+    c.addEventListener('touchmove', move);
+    window.addEventListener('touchend', stop);
+  }
+
+  window.addEventListener('load', () => {
+    initCanvas('sigLeadAuditor');
+    initCanvas('sigDirector');
+    calcAuditMeter();
+  });
+
+  function clearSig(id) {
+    const c = document.getElementById(id);
+    c.getContext('2d').clearRect(0, 0, c.width, c.height);
+  }
+
+  async function handleAudSubmit(e) {
+    e.preventDefault();
+    const code = 'AUD-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const checks = {};
+    for (let i = 1; i <= 12; i++) {
+      checks[`c${i}`] = document.querySelector(`input[name="c${i}"]:checked`).value;
+    }
+    const record = {
+      form_type: 'ctpat_internal_self_audit',
+      reference_code: code,
+      lead_auditor: document.getElementById('leadAuditor').value,
+      auditor_secretary: document.getElementById('auditorSecretary').value,
+      audit_date: document.getElementById('auditDate').value,
+      audit_purpose: document.getElementById('auditPurpose').value,
+      criteria: checks,
+      score_text: document.getElementById('auditScoreText').innerText,
+      badge_text: document.getElementById('auditBadge').innerText,
+      action_plan: document.getElementById('actionPlan').value,
+      submitted_at: new Date().toISOString()
+    };
+
+    try {
+      const list = JSON.parse(localStorage.getItem('cgl_audit_checklists') || '[]');
+      list.push(record);
+      localStorage.setItem('cgl_audit_checklists', JSON.stringify(list));
+    } catch(err) {}
+
+    const api = (window.location.origin.includes('github.io') || window.location.protocol === 'file:')
+      ? 'https://continent-msie-goals-watt.trycloudflare.com/api/submit'
+      : '/api/submit';
+    try {
+      await fetch(api, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+    } catch(err) {}
+
+    document.getElementById('audCodeText').innerText = code;
+    document.getElementById('modalSuccess').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modalSuccess').style.display = 'none';
+  }
+</script>
+</body>
+</html>

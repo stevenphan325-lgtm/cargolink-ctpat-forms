@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sổ Theo Dõi Chỉ Số Năng Lượng & Văn Phòng Xanh | Cargolink ISO 14001</title>
+  <style>
+    :root {
+      --primary: #064E3B;
+      --primary-light: #047857;
+      --accent: #D97706;
+      --bg: #F0FDF4;
+      --card: #FFFFFF;
+      --border: #CBD5E1;
+      --text: #0F172A;
+      --muted: #64748B;
+      --success: #059669;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.5; padding: 16px; min-height: 100vh; }
+    .container { max-width: 820px; margin: 0 auto; background: var(--card); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--border); }
+    .conf-banner { background: #DCFCE7; border-bottom: 1.5px dashed #16A34A; color: #166534; padding: 10px 14px; font-size: 11.5px; font-weight: 700; text-align: center; text-transform: uppercase; }
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 24px 20px; text-align: center; }
+    .header .badge { display: inline-block; background: #34D399; color: #064E3B; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 3px 12px; border-radius: 12px; margin-bottom: 8px; }
+    .header h1 { font-size: 20px; font-weight: 800; line-height: 1.3; }
+    .header p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+    .nav-back { display: inline-block; margin-bottom: 6px; color: #A7F3D0; text-decoration: none; font-weight: 700; font-size: 13px; }
+    .form-body { padding: 24px 20px; }
+    .section-title { font-size: 14px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ""; display: inline-block; width: 4px; height: 16px; background: #059669; border-radius: 2px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .field-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    input[type="text"], input[type="number"], select {
+      width: 100%; padding: 9px 12px; font-size: 13.5px; border: 1.5px solid var(--border); border-radius: 8px; background: #FFF; outline: none;
+    }
+    input:focus, select:focus { border-color: var(--primary-light); }
+    .metric-card { background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 10px; padding: 14px; text-align: center; }
+    .metric-card .title { font-size: 12px; font-weight: 700; color: #64748B; text-transform: uppercase; }
+    .metric-card .val { font-size: 22px; font-weight: 800; color: var(--primary); margin: 6px 0; }
+    .metric-card .target { font-size: 11px; color: #059669; font-weight: 600; }
+    .sig-box { background: #F8FAFC; border: 1.5px dashed var(--border); border-radius: 8px; padding: 14px; text-align: center; margin-top: 10px; }
+    canvas { background: white; border: 1px solid #CBD5E1; border-radius: 6px; width: 100%; max-width: 380px; height: 120px; touch-action: none; cursor: crosshair; }
+    .sig-btns { margin-top: 6px; }
+    .btn-clear { background: #E2E8F0; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .btn-submit { width: 100%; background: #059669; color: white; padding: 14px 20px; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; margin-top: 18px; }
+    .btn-submit:hover { background: #047857; }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: white; border-radius: 16px; padding: 28px 20px; max-width: 440px; width: 100%; text-align: center; }
+    .btn-print { background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; margin-right: 8px; }
+    .btn-close { background: #E2E8F0; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; }
+    .footer { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="conf-banner">🌿 HỆ THỐNG QUẢN LÝ MÔI TRƯỜNG & VĂN PHÒNG XANH — ISO 14001:2015</div>
+
+  <div class="header">
+    <a href="portal_driver.html" class="nav-back">⬅ Quay lại Cổng Tra Cứu</a>
+    <span class="badge">VĂN PHÒNG XANH & TIẾT KIỆM NĂNG LƯỢNG (HS01-02)</span>
+    <h1>SỔ THEO DÕI CHỈ SỐ NĂNG LƯỢNG & MÔI TRƯỜNG ĐIỆN TỬ</h1>
+    <p>Theo dõi định kỳ mức tiêu thụ điện, nước, giấy in A4 và rác thải tái chế toàn công ty</p>
+  </div>
+
+  <form id="grnForm" class="form-body" onsubmit="handleGrnSubmit(event)">
+    <div class="section-title">1. Cơ sở & Kỳ theo dõi báo cáo</div>
+    <div class="grid-2">
+      <div class="field-group">
+        <label>Tháng / Năm báo cáo:</label>
+        <select id="reportMonth" required>
+          <option value="Tháng 03/2026">Tháng 03/2026</option>
+          <option value="Tháng 02/2026">Tháng 02/2026</option>
+          <option value="Tháng 01/2026">Tháng 01/2026</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Địa điểm / Bộ phận theo dõi:</label>
+        <select id="facility" required>
+          <option value="Trụ sở Văn phòng (Lầu 6, 84 Bạch Đằng)">Trụ sở Văn phòng (Lầu 6, 84 Bạch Đằng)</option>
+          <option value="Bãi xe tập kết & Trạm Điều độ C-TPAT">Bãi xe tập kết & Trạm Điều độ C-TPAT</option>
+          <option value="Tổng hợp toàn công ty">Tổng hợp toàn công ty</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-title">2. Số liệu Năng lượng & Tiêu thụ Tài nguyên</div>
+    <div class="grid-2">
+      <div class="field-group">
+        <label>Điện năng tiêu thụ (kWh):</label>
+        <input type="number" id="elecKwh" value="450" required oninput="calcGreenKPI()">
+      </div>
+      <div class="field-group">
+        <label>Nước sạch tiêu thụ (m³):</label>
+        <input type="number" id="waterM3" value="18" required>
+      </div>
+      <div class="field-group">
+        <label>Số ram giấy in A4 sử dụng (ram):</label>
+        <input type="number" id="paperReams" value="12" required oninput="calcGreenKPI()">
+      </div>
+      <div class="field-group">
+        <label>Tỷ lệ tài liệu in 2 mặt (%):</label>
+        <input type="number" id="duplexRatio" value="85" min="0" max="100" required>
+      </div>
+      <div class="field-group">
+        <label>Rác thải tái chế thu gom (kg bìa/nhựa):</label>
+        <input type="number" id="recycleKg" value="42" required>
+      </div>
+      <div class="field-group">
+        <label>Định mức tiêu hao nhiên liệu xe (Lít dầu/100km):</label>
+        <input type="number" id="fuelRate" step="0.1" value="14.2" required>
+      </div>
+    </div>
+
+    <div class="section-title">3. Tự động Đánh giá Tiến độ Mục tiêu ISO 14001</div>
+    <div class="grid-3">
+      <div class="metric-card">
+        <div class="title">Tiết kiệm Điện</div>
+        <div class="val" id="elecKpi" style="color: #059669;">-11.2%</div>
+        <div class="target">Mục tiêu: Giảm -10% (ĐẠT)</div>
+      </div>
+      <div class="metric-card">
+        <div class="title">Tiết kiệm Giấy A4</div>
+        <div class="val" id="paperKpi" style="color: #059669;">-22.5%</div>
+        <div class="target">Mục tiêu: Giảm -20% (ĐẠT)</div>
+      </div>
+      <div class="metric-card">
+        <div class="title">Đánh giá chung</div>
+        <div class="val" id="overallKpi" style="color: #059669;">XUẤT SẮC</div>
+        <div class="target">Chuẩn ISO 14001</div>
+      </div>
+    </div>
+
+    <div class="section-title">4. Chữ ký số Ban ISO & Môi trường</div>
+    <div class="grid-2">
+      <div>
+        <label>Cán bộ thống kê số liệu ký:</label>
+        <div class="sig-box">
+          <canvas id="sigOfficer"></canvas>
+          <div class="sig-btns"><button type="button" class="btn-clear" onclick="clearSig('sigOfficer')">Ký lại</button></div>
+        </div>
+      </div>
+      <div>
+        <label>Trưởng Ban ISO Môi trường phê duyệt:</label>
+        <div class="sig-box">
+          <canvas id="sigLead"></canvas>
+          <div class="sig-btns"><button type="button" class="btn-clear" onclick="clearSig('sigLead')">Ký lại</button></div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">🌱 LƯU BÁO CÁO VĂN PHÒNG XANH & NĂNG LƯỢNG</button>
+  </form>
+
+  <div class="footer">
+    CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM — BAN QUẢN LÝ MÔI TRƯỜNG ISO 14001<br>
+    Chương trình giảm phát thải Carbon, tối ưu hóa năng lượng và kinh tế tuần hoàn
+  </div>
+</div>
+
+<div id="modalSuccess" class="modal-overlay">
+  <div class="modal-box">
+    <div style="font-size: 40px; margin-bottom: 10px;">🌿</div>
+    <h3 style="color: #064E3B; margin-bottom: 8px;">ĐÃ LƯU BÁO CÁO MÔI TRƯỜNG</h3>
+    <p style="font-size: 13px; color: var(--muted); margin-bottom: 14px;">Mã báo cáo năng lượng điện tử:</p>
+    <div id="grnCodeText" style="font-size: 18px; font-weight: 800; color: #059669; background: #DCFCE7; padding: 10px; border-radius: 8px; border: 1.5px dashed #86EFAC; margin-bottom: 16px;">GRN-2026-0000</div>
+    <p style="font-size: 12px; color: #064E3B; margin-bottom: 18px;">Dữ liệu đã được tích hợp vào báo cáo giám sát mục tiêu chất lượng và môi trường ISO 14001.</p>
+    <div>
+      <button class="btn-print" onclick="window.print()">🖨 In / Lưu PDF</button>
+      <button class="btn-close" onclick="closeModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function calcGreenKPI() {
+    const elec = parseFloat(document.getElementById('elecKwh').value) || 0;
+    const paper = parseFloat(document.getElementById('paperReams').value) || 0;
+    // Benchmark: elec base = 500 kWh, paper base = 15 reams
+    const elecSave = ((500 - elec) / 500 * 100).toFixed(1);
+    const paperSave = ((15 - paper) / 15 * 100).toFixed(1);
+
+    document.getElementById('elecKpi').innerText = (elecSave > 0 ? '-' : '+') + Math.abs(elecSave) + '%';
+    document.getElementById('elecKpi').style.color = elecSave >= 10 ? '#059669' : '#D97706';
+
+    document.getElementById('paperKpi').innerText = (paperSave > 0 ? '-' : '+') + Math.abs(paperSave) + '%';
+    document.getElementById('paperKpi').style.color = paperSave >= 20 ? '#059669' : '#D97706';
+  }
+
+  function initCanvas(id) {
+    const c = document.getElementById(id);
+    const ctx = c.getContext('2d');
+    c.width = c.offsetWidth || 340;
+    c.height = 120;
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#064E3B';
+    let drawing = false;
+
+    function getPos(e) {
+      const rect = c.getBoundingClientRect();
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: cx - rect.left, y: cy - rect.top };
+    }
+    function start(e) { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); }
+    function move(e) { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); }
+    function stop() { drawing = false; }
+
+    c.addEventListener('mousedown', start);
+    c.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', stop);
+    c.addEventListener('touchstart', start);
+    c.addEventListener('touchmove', move);
+    window.addEventListener('touchend', stop);
+  }
+
+  window.addEventListener('load', () => {
+    initCanvas('sigOfficer');
+    initCanvas('sigLead');
+    calcGreenKPI();
+  });
+
+  function clearSig(id) {
+    const c = document.getElementById(id);
+    c.getContext('2d').clearRect(0, 0, c.width, c.height);
+  }
+
+  async function handleGrnSubmit(e) {
+    e.preventDefault();
+    const code = 'GRN-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const record = {
+      form_type: 'green_office_energy_log',
+      reference_code: code,
+      report_month: document.getElementById('reportMonth').value,
+      facility: document.getElementById('facility').value,
+      elec_kwh: document.getElementById('elecKwh').value,
+      water_m3: document.getElementById('waterM3').value,
+      paper_reams: document.getElementById('paperReams').value,
+      duplex_ratio: document.getElementById('duplexRatio').value,
+      recycle_kg: document.getElementById('recycleKg').value,
+      fuel_rate: document.getElementById('fuelRate').value,
+      submitted_at: new Date().toISOString()
+    };
+
+    try {
+      const list = JSON.parse(localStorage.getItem('cgl_green_logs') || '[]');
+      list.push(record);
+      localStorage.setItem('cgl_green_logs', JSON.stringify(list));
+    } catch(err) {}
+
+    const api = (window.location.origin.includes('github.io') || window.location.protocol === 'file:')
+      ? 'https://continent-msie-goals-watt.trycloudflare.com/api/submit'
+      : '/api/submit';
+    try {
+      await fetch(api, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+    } catch(err) {}
+
+    document.getElementById('grnCodeText').innerText = code;
+    document.getElementById('modalSuccess').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modalSuccess').style.display = 'none';
+  }
+</script>
+</body>
+</html>

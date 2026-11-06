@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biên Bản Kiểm Tra Xe Tải 7 Điểm & 17 Điểm Điện Tử | Cargolink C-TPAT</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --primary-light: #0B3C5D;
+      --accent: #D4441E;
+      --bg: #F1F5F9;
+      --card: #FFFFFF;
+      --border: #CBD5E1;
+      --text: #0F172A;
+      --muted: #64748B;
+      --success: #059669;
+      --danger: #DC2626;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.5; padding: 16px; min-height: 100vh; }
+    .container { max-width: 820px; margin: 0 auto; background: var(--card); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--border); }
+    
+    .conf-banner { background: #FEF3C7; border-bottom: 1.5px dashed #D97706; color: #92400E; padding: 10px 14px; font-size: 11.5px; font-weight: 700; text-align: center; text-transform: uppercase; }
+
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 24px 20px; text-align: center; }
+    .header .badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 3px 12px; border-radius: 12px; margin-bottom: 8px; }
+    .header h1 { font-size: 20px; font-weight: 800; line-height: 1.3; }
+    .header p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+
+    .form-body { padding: 24px 20px; }
+    .section-title { font-size: 14px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ""; display: inline-block; width: 4px; height: 16px; background: var(--accent); border-radius: 2px; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .field-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    input[type="text"], input[type="date"], input[type="time"], select {
+      width: 100%; padding: 9px 12px; font-size: 13.5px; border: 1.5px solid var(--border); border-radius: 8px; background: #FFF; outline: none;
+    }
+    input:focus, select:focus { border-color: var(--primary-light); }
+
+    /* Checklist Table */
+    .chk-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
+    .chk-table th { background: #071A36; color: white; padding: 10px 12px; text-align: left; font-size: 12px; text-transform: uppercase; }
+    .chk-table td { padding: 10px 12px; border-bottom: 1px solid #E2E8F0; vertical-align: middle; }
+    .chk-table tr:nth-child(even) { background: #F8FAFC; }
+
+    .status-opt { display: flex; gap: 12px; align-items: center; }
+    .status-opt label { display: flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 600; cursor: pointer; margin-bottom: 0; }
+    .status-pass { color: var(--success); }
+    .status-fail { color: var(--danger); }
+
+    /* Signature area */
+    .sig-box { background: #F8FAFC; border: 1.5px dashed var(--border); border-radius: 8px; padding: 14px; text-align: center; margin-top: 10px; }
+    canvas { background: white; border: 1px solid #CBD5E1; border-radius: 6px; width: 100%; max-width: 380px; height: 120px; touch-action: none; cursor: crosshair; }
+    .sig-btns { margin-top: 6px; }
+    .btn-clear { background: #E2E8F0; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; }
+
+    .btn-submit { width: 100%; background: var(--accent); color: white; padding: 14px 20px; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; margin-top: 18px; }
+    .btn-submit:hover { background: #b83815; }
+
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: white; border-radius: 16px; padding: 28px 20px; max-width: 440px; width: 100%; text-align: center; }
+    .btn-print { background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; margin-right: 8px; }
+    .btn-close { background: #E2E8F0; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; }
+
+    .footer { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 12px; }
+    .nav-back { display: inline-block; margin-bottom: 12px; color: var(--primary); text-decoration: none; font-weight: 700; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="conf-banner">🔒 TÀI LIỆU LƯU HÀNH NỘI BỘ — CARGOLINK EXPRESS (E-INSPECTION LOG)</div>
+
+  <div class="header">
+    <a href="portal_driver.html" class="nav-back" style="color: #93C5FD; display: block; margin-bottom: 6px;">⬅ Quay lại Cổng Tra Cứu</a>
+    <span class="badge">QUY TRÌNH KIỂM SOÁT PHƯƠNG TIỆN (WI-SEC-001)</span>
+    <h1>PHIẾU KIỂM TRA AN NINH XE TẢI 7 ĐIỂM & 17 ĐIỂM ĐIỆN TỬ</h1>
+    <p>Áp dụng bắt buộc trước khi xe xuất bến và trước khi bốc hàng tại Nhà máy NV APPAREL</p>
+  </div>
+
+  <form id="inspForm" class="form-body" onsubmit="handleInspSubmit(event)">
+    <div class="section-title">1. Thông tin chuyến xe & Tài xế kiểm tra</div>
+    <div class="grid-2">
+      <div class="field-group">
+        <label>Biển số xe tải / Rơ-moóc:</label>
+        <select id="truckPlate" required>
+          <option value="51C-964.55 (Xe tải Isuzu 2.5T)">51C-964.55 (Xe tải Isuzu 2.5T)</option>
+          <option value="51D-882.14 (Xe tải Hino 5T)">51D-882.14 (Xe tải Hino 5T)</option>
+          <option value="50H-123.68 (Xe tải Isuzu 8T)">50H-123.68 (Xe tải Isuzu 8T)</option>
+          <option value="51C-774.92 (Xe tải Hyundai 3.5T)">51C-774.92 (Xe tải Hyundai 3.5T)</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Họ và tên Lái xe thực hiện:</label>
+        <input type="text" id="driverName" value="Nguyễn Văn Thành (Tài xế chính)" required>
+      </div>
+      <div class="field-group">
+        <label>Ngày kiểm tra:</label>
+        <input type="date" id="inspDate" required>
+      </div>
+      <div class="field-group">
+        <label>Giờ kiểm tra xuất bãi:</label>
+        <input type="time" id="inspTime" required>
+      </div>
+    </div>
+
+    <div class="section-title">2. Danh mục 7 Điểm kiểm tra an ninh xe tải (Daily Checklist)</div>
+    <table class="chk-table">
+      <thead>
+        <tr>
+          <th style="width: 35px;">STT</th>
+          <th>Vị Trí & Hạng Mục Kiểm Tra</th>
+          <th style="width: 170px;">Kết Quả</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>
+            <strong>Cản trước, Đèn & Kính chiếu hậu:</strong><br>
+            <span style="font-size: 11.5px; color: var(--muted);">Không có vật thể lạ gài dưới cản xe, đèn sáng rõ, gương quan sát tốt.</span>
+          </td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="p1" value="Đạt" checked> ✓ Đạt</label>
+              <label class="status-fail"><input type="radio" name="p1" value="Không đạt"> ✗ Lỗi</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>
+            <strong>Khoang động cơ & Nắp capo:</strong><br>
+            <span style="font-size: 11.5px; color: var(--muted);">Dầu máy, nước làm mát đủ, không có gói hàng lạ giấu trong khoang máy.</span>
+          </td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="p2" value="Đạt" checked> ✓ Đạt</label>
+              <label class="status-fail"><input type="radio" name="p2" value="Không đạt"> ✗ Lỗi</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>
+            <strong>Lốp xe, La-zăng & Gầm xe:</strong><br>
+            <span style="font-size: 11.5px; color: var(--muted);">Gõ búa kiểm tra áp suất lốp, không dị vật kẹt kẽ lốp, gầm xe không ngăn bí mật.</span>
+          </td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="p3" value="Đạt" checked> ✓ Đạt</label>
+              <label class="status-fail"><input type="radio" name="p3" value="Không đạt"> ✗ Lỗi</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>
+            <strong>Sàn thùng & Vách ngoài thùng xe:</strong><br>
+            <span style="font-size: 11.5px; color: var(--muted);">Vách tôn/bạt nguyên vẹn, không dấu vết cắt khoét, hàn vá bất thường.</span>
+          </td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="p4" value="Đạt" checked> ✓ Đạt</label>
+              <label class="status-fail"><input type="radio" name="p4" value="Không đạt"> ✗ Lỗi</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>
+            <strong>Bên trong thùng & Nóc trần thùng:</strong><br>
+            <span style="font-size: 11.5px; color: var(--muted);">Vệ sinh sạch sẽ, khô ráo, không mùi ẩm mốc/hóa chất, nóc thùng kín không dột nước.</span>
+          </td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="p5" value="Đạt" checked> ✓ Đạt</label>
+              <label class="status-fail"><input type="radio" name="p5" value="Không đạt"> ✗ Lỗi</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>
+            <strong>Cửa sau, Bản lề & Gioăng cao su:</strong><br>
+            <span style="font-size: 11.5px; color: var(--muted);">Bản lề chắc chắn, đinh tán không lung lay, gioăng cao su khít ngăn bụi nước.</span>
+          </td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="p6" value="Đạt" checked> ✓ Đạt</label>
+              <label class="status-fail"><input type="radio" name="p6" value="Không đạt"> ✗ Lỗi</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>
+            <strong>Bát khóa & Cơ cấu niêm phong Seal:</strong><br>
+            <span style="font-size: 11.5px; color: var(--muted);">Bát khóa tiêu chuẩn, lỗ xỏ seal nguyên vẹn, đảm bảo bấm khóa seal ISO 17712 chắc chắn.</span>
+          </td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="p7" value="Đạt" checked> ✓ Đạt</label>
+              <label class="status-fail"><input type="radio" name="p7" value="Không đạt"> ✗ Lỗi</label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">3. Chữ ký điện tử xác nhận / Digital Sign-off</div>
+    <div class="grid-2">
+      <div class="sig-box">
+        <label>Chữ ký Lái xe kiểm tra:</label>
+        <canvas id="sigCanvasDriver"></canvas>
+        <div class="sig-btns">
+          <button type="button" class="btn-clear" onclick="clearSig('sigCanvasDriver')">Xóa ký lại</button>
+        </div>
+      </div>
+      <div class="sig-box">
+        <label>Cán bộ Điều độ / Bảo vệ duyệt xuất:</label>
+        <canvas id="sigCanvasDisp"></canvas>
+        <div class="sig-btns">
+          <button type="button" class="btn-clear" onclick="clearSig('sigCanvasDisp')">Xóa ký lại</button>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">
+      ✓ LƯU BIÊN BẢN KIỂM TRA XE & CẤP MÃ SỐ HÓA ➔
+    </button>
+
+    <div class="footer">
+      CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM — PHÒNG AN TOÀN VẬN TẢI C-TPAT<br>
+      Dữ liệu kiểm tra xe được lưu trữ điện tử đối chiếu kiểm toán ISO 9001 & C-TPAT. Hotline 24/7: 0943 46 46 46
+    </div>
+  </form>
+</div>
+
+<!-- Modal Success -->
+<div id="modalSuccess" class="modal-overlay">
+  <div class="modal-box">
+    <div style="font-size: 44px; color: #059669; margin-bottom: 8px;">✓</div>
+    <h3 style="color: #071A36; font-size: 17px; margin-bottom: 6px;">ĐÃ LƯU BIÊN BẢN KIỂM TRA XE THÀNH CÔNG!</h3>
+    <p style="font-size: 13px; color: #64748B;">Phương tiện đủ điều kiện an ninh C-TPAT để thực hiện chuyến hàng phục vụ khách hàng NV APPAREL.</p>
+    <div style="background: #F1F5F9; border: 1px dashed #CBD5E1; padding: 8px 14px; border-radius: 6px; font-family: monospace; font-size: 15px; font-weight: 700; color: #071A36; margin: 14px 0;" id="inspCodeText">
+      CHK-7P-2026-96455
+    </div>
+    <div>
+      <button class="btn-print" onclick="window.print()">In Biên Bản</button>
+      <button class="btn-close" onclick="closeModal()">Đóng cửa sổ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Setup default date & time
+  document.getElementById('inspDate').value = new Date().toISOString().split('T')[0];
+  const now = new Date();
+  document.getElementById('inspTime').value = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+
+  // Simple Canvas Drawing
+  function initCanvas(id) {
+    const c = document.getElementById(id);
+    const ctx = c.getContext('2d');
+    let drawing = false;
+
+    // resize for HiDPI
+    c.width = c.offsetWidth;
+    c.height = c.offsetHeight;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#071A36';
+
+    function getPos(e) {
+      const rect = c.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function start(e) { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); }
+    function move(e) { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); }
+    function stop() { drawing = false; }
+
+    c.addEventListener('mousedown', start);
+    c.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', stop);
+
+    c.addEventListener('touchstart', start);
+    c.addEventListener('touchmove', move);
+    window.addEventListener('touchend', stop);
+  }
+
+  window.addEventListener('load', () => {
+    initCanvas('sigCanvasDriver');
+    initCanvas('sigCanvasDisp');
+  });
+
+  function clearSig(id) {
+    const c = document.getElementById(id);
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+  }
+
+  async function handleInspSubmit(e) {
+    e.preventDefault();
+    const code = 'CHK-7P-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const record = {
+      form_type: 'vehicle_7point_inspection',
+      inspection_code: code,
+      truck_plate: document.getElementById('truckPlate').value,
+      driver_name: document.getElementById('driverName').value,
+      insp_date: document.getElementById('inspDate').value,
+      insp_time: document.getElementById('inspTime').value,
+      points: {
+        p1: document.querySelector('input[name="p1"]:checked').value,
+        p2: document.querySelector('input[name="p2"]:checked').value,
+        p3: document.querySelector('input[name="p3"]:checked').value,
+        p4: document.querySelector('input[name="p4"]:checked').value,
+        p5: document.querySelector('input[name="p5"]:checked').value,
+        p6: document.querySelector('input[name="p6"]:checked').value,
+        p7: document.querySelector('input[name="p7"]:checked').value,
+      },
+      submitted_at: new Date().toISOString()
+    };
+
+    // Save LocalStorage
+    try {
+      const list = JSON.parse(localStorage.getItem('cgl_inspections') || '[]');
+      list.push(record);
+      localStorage.setItem('cgl_inspections', JSON.stringify(list));
+    } catch(err) {}
+
+    // Send API
+    try {
+      await fetch('https://continent-msie-goals-watt.trycloudflare.com/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+    } catch(err) {}
+
+    document.getElementById('inspCodeText').innerText = code;
+    document.getElementById('modalSuccess').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modalSuccess').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

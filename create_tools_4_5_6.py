@@ -1,0 +1,972 @@
+# -*- coding: utf-8 -*-
+import os, sys
+
+sys.stdout.reconfigure(encoding='utf-8')
+output_dir = r"c:\Users\steve\OneDrive\audit truck\AUDIT TRUCK 2026\CTPAT_QR_FORMS"
+
+# ==========================================
+# TOOL 4: app_incident_rapid_report.html
+# ==========================================
+tool4_html = """<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo Cáo Nhanh Sự Cố Trên Tuyến Vận Tải & Chậm ETA Trong 15 Phút | Cargolink Hotline 24/7</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --primary-light: #0B3C5D;
+      --accent: #DC2626;
+      --bg: #F1F5F9;
+      --card: #FFFFFF;
+      --border: #CBD5E1;
+      --text: #0F172A;
+      --muted: #64748B;
+      --success: #059669;
+      --warning: #D97706;
+      --danger: #DC2626;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.5; padding: 16px; min-height: 100vh; }
+    .container { max-width: 820px; margin: 0 auto; background: var(--card); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--border); }
+    .conf-banner { background: #FEE2E2; border-bottom: 1.5px dashed #DC2626; color: #991B1B; padding: 10px 14px; font-size: 11.5px; font-weight: 700; text-align: center; text-transform: uppercase; }
+    .header { background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 100%); color: white; padding: 24px 20px; text-align: center; }
+    .header .badge { display: inline-block; background: #FEF08A; color: #854D0E; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 3px 12px; border-radius: 12px; margin-bottom: 8px; }
+    .header h1 { font-size: 20px; font-weight: 800; line-height: 1.3; }
+    .header p { font-size: 13px; opacity: 0.95; margin-top: 4px; }
+    .nav-back { display: inline-block; margin-bottom: 6px; color: #FED7AA; text-decoration: none; font-weight: 700; font-size: 13px; }
+    .form-body { padding: 24px 20px; }
+    .section-title { font-size: 14px; font-weight: 800; color: #7F1D1D; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ""; display: inline-block; width: 4px; height: 16px; background: #DC2626; border-radius: 2px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .field-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    input[type="text"], input[type="date"], input[type="time"], input[type="tel"], select, textarea {
+      width: 100%; padding: 9px 12px; font-size: 13.5px; border: 1.5px solid var(--border); border-radius: 8px; background: #FFF; outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: #DC2626; }
+    textarea { min-height: 90px; }
+    .hotline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .hotline-card { background: #FEF2F2; border: 1.5px solid #FCA5A5; border-radius: 10px; padding: 12px; text-align: center; text-decoration: none; display: block; transition: 0.2s; }
+    .hotline-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(220,38,38,0.15); }
+    .hotline-card .role { font-size: 11px; font-weight: 700; color: #991B1B; text-transform: uppercase; }
+    .hotline-card .num { font-size: 16px; font-weight: 800; color: #DC2626; margin: 4px 0; }
+    .hotline-card .sub { font-size: 11px; color: #7F1D1D; }
+    .gps-btn { background: #1E3A8A; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 4px; }
+    .gps-btn:hover { background: #1E40AF; }
+    .sig-box { background: #F8FAFC; border: 1.5px dashed var(--border); border-radius: 8px; padding: 14px; text-align: center; margin-top: 10px; }
+    canvas { background: white; border: 1px solid #CBD5E1; border-radius: 6px; width: 100%; max-width: 380px; height: 120px; touch-action: none; cursor: crosshair; }
+    .sig-btns { margin-top: 6px; }
+    .btn-clear { background: #E2E8F0; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .btn-submit { width: 100%; background: #DC2626; color: white; padding: 14px 20px; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; margin-top: 18px; }
+    .btn-submit:hover { background: #b91c1c; }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: white; border-radius: 16px; padding: 28px 20px; max-width: 440px; width: 100%; text-align: center; }
+    .btn-print { background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; margin-right: 8px; }
+    .btn-close { background: #E2E8F0; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; }
+    .footer { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="conf-banner">🚨 BÁO CÁO KHẨN CẤP AN NINH & SỰ CỐ TRÊN ĐƯỜNG (KÍCH HOẠT TRONG 15 PHÚT)</div>
+
+  <div class="header">
+    <a href="portal_driver.html" class="nav-back">⬅ Quay lại Cổng Tra Cứu</a>
+    <span class="badge">QUY TRÌNH ỨNG PHÓ SỰ CỐ 24/7 (HS18-01 & HS18-03)</span>
+    <h1>PHIẾU BÁO CÁO NHANH SỰ CỐ & CHẬM ETA TRONG 15 PHÚT</h1>
+    <p>Bắt buộc thông báo điều độ khi trễ hẹn >15 phút, gặp sự cố kỹ thuật, niêm phong seal hoặc nghi vấn an ninh</p>
+  </div>
+
+  <div class="form-body">
+    <div class="section-title">ĐƯỜNG DÂY NÓNG KHẨN CẤP 24/7 (BẤM ĐỂ GỌI TRỰC TIẾP)</div>
+    <div class="hotline-grid">
+      <a href="tel:0943464646" class="hotline-card">
+        <div class="role">Khẩn Cấp C-TPAT 24/7</div>
+        <div class="num">📞 0943 46 46 46</div>
+        <div class="sub">Trực ban an toàn 24/7</div>
+      </a>
+      <a href="tel:0886464988" class="hotline-card">
+        <div class="role">Hotline An Toàn & Kỹ Thuật</div>
+        <div class="num">📞 088 6464 988</div>
+        <div class="sub">Mr. Thành (Trưởng ban An toàn)</div>
+      </a>
+      <a href="tel:0778719936" class="hotline-card">
+        <div class="role">Hotline Điều Độ Tuyến NV</div>
+        <div class="num">📞 077 871 9936</div>
+        <div class="sub">Ms. Bích (Điều độ vận tải)</div>
+      </a>
+    </div>
+
+    <form id="incForm" onsubmit="handleIncSubmit(event)">
+      <div class="section-title">1. Thông tin Xe & Tài xế gặp sự cố</div>
+      <div class="grid-2">
+        <div class="field-group">
+          <label>Họ tên Lái xe báo cáo:</label>
+          <input type="text" id="driverName" value="Nguyễn Văn Thành (Tài xế)" required>
+        </div>
+        <div class="field-group">
+          <label>Số điện thoại liên hệ hiện tại:</label>
+          <input type="tel" id="driverPhone" value="0908 123 456" required>
+        </div>
+        <div class="field-group">
+          <label>Biển số xe gặp sự cố:</label>
+          <select id="truckPlate" required>
+            <option value="51C-964.55">51C-964.55 (Isuzu 2.5T)</option>
+            <option value="51D-882.14">51D-882.14 (Hino 5T)</option>
+            <option value="50H-123.68">50H-123.68 (Isuzu 8T)</option>
+            <option value="51C-774.92">51C-774.92 (Hyundai 3.5T)</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Khách hàng & Chuyến hàng:</label>
+          <input type="text" id="customer" value="Công ty TNHH May Mặc NV (NV Apparel)" readonly>
+        </div>
+      </div>
+
+      <div class="section-title">2. Chi tiết Sự cố & Phân loại tính chất</div>
+      <div class="grid-2">
+        <div class="field-group">
+          <label>Phân loại sự cố phát sinh:</label>
+          <select id="incidentType" required style="font-weight: 700; color: #991B1B;">
+            <option value="Ùn tắc giao thông / Chậm ETA vượt quá 15 phút">⚠️ Ùn tắc giao thông / Chậm ETA vượt quá 15 phút</option>
+            <option value="Hư hỏng kỹ thuật xe / Nổ lốp / Chết máy dọc đường">🔧 Hư hỏng kỹ thuật xe / Nổ lốp / Chết máy</option>
+            <option value="Nghi vấn bị theo dõi / Cạy phá / Mất cắp hàng hóa">🚨 Nghi vấn bị theo dõi / Cạy phá hàng hóa (C-TPAT)</option>
+            <option value="Đứt seal / Móp méo / Sai lệch số seal niêm phong">🔒 Đứt seal / Móp méo hư hại seal C-TPAT</option>
+            <option value="Mất tín hiệu định vị GPS hành trình">📡 Mất tín hiệu định vị GPS hành trình</option>
+            <option value="Tai nạn va chạm giao thông trên đường">💥 Tai nạn va chạm giao thông trên đường</option>
+            <option value="Thời tiết bất khả kháng (Mưa bão, ngập lụt)">🌧 Thời tiết bất khả kháng (Mưa bão, ngập lụt)</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Thời gian phát sinh sự cố:</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="date" id="incDate" required>
+            <input type="time" id="incTime" required>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>ETA (Giờ đến dự kiến ban đầu):</label>
+          <input type="time" id="origEta" required>
+        </div>
+        <div class="field-group">
+          <label>ETA MỚI (Ước tính giờ đến sau sự cố):</label>
+          <input type="time" id="newEta" required style="font-weight: 700; color: #DC2626;">
+        </div>
+      </div>
+
+      <div class="section-title">3. Vị trí Hiện tại & Tọa độ GPS</div>
+      <div class="field-group">
+        <label>Tọa độ GPS tự động (Bấm để lấy vị trí chính xác):</label>
+        <button type="button" class="gps-btn" onclick="captureGPS()">📍 LẤY TỌA ĐỘ VỊ TRÍ HIỆN TẠI (GPS GEOLOCATION)</button>
+        <input type="text" id="gpsCoords" placeholder="Đang chờ bấm lấy tọa độ GPS..." readonly style="margin-top: 8px; font-weight: 700; color: #1E3A8A;">
+      </div>
+      <div class="field-group">
+        <label>Địa chỉ / Cột mốc vị trí xe đang dừng:</label>
+        <input type="text" id="locationText" placeholder="VD: Quốc lộ 22, gần Cầu An Hạ, Củ Chi hoặc Trạm dừng Petrolimex..." required>
+      </div>
+      <div class="field-group">
+        <label>Mô tả chi tiết sự việc & Biện pháp đã xử lý ban đầu:</label>
+        <textarea id="incDescription" placeholder="Mô tả cụ thể: Xe đang dừng tại làn nào, seal có nguyên vẹn không, đã bật đèn cảnh báo sự cố chưa, có cần điều xe cứu hộ hoặc chuyển tải hàng không..." required></textarea>
+      </div>
+
+      <div class="section-title">4. Chữ ký xác nhận của Lái xe</div>
+      <div class="sig-box">
+        <canvas id="sigDriver"></canvas>
+        <div class="sig-btns"><button type="button" class="btn-clear" onclick="clearSig('sigDriver')">Ký lại</button></div>
+      </div>
+
+      <button type="submit" class="btn-submit">🚨 GỬI BÁO CÁO SỰ CỐ NGAY ĐẾN BAN ĐIỀU ĐỘ & AN TOÀN</button>
+    </form>
+  </div>
+
+  <div class="footer">
+    CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM — TRUNG TÂM PHẢN ỨNG NHANH C-TPAT<br>
+    Quy định bắt buộc: Mọi sự cố chậm ETA > 15 phút phải kích hoạt báo cáo tức thời để thông báo Khách hàng NV Apparel
+  </div>
+</div>
+
+<div id="modalSuccess" class="modal-overlay">
+  <div class="modal-box">
+    <div style="font-size: 40px; margin-bottom: 10px;">🚨</div>
+    <h3 style="color: #991B1B; margin-bottom: 8px;">ĐÃ PHÁT TÍN HIỆU BÁO CÁO SỰ CỐ</h3>
+    <p style="font-size: 13px; color: var(--muted); margin-bottom: 14px;">Mã báo cáo sự cố khẩn cấp:</p>
+    <div id="incCodeText" style="font-size: 18px; font-weight: 800; color: #DC2626; background: #FEF2F2; padding: 10px; border-radius: 8px; border: 1.5px dashed #FCA5A5; margin-bottom: 16px;">INC-2026-0000</div>
+    <p style="font-size: 12px; color: #7F1D1D; margin-bottom: 18px;">Hệ thống đã gửi dữ liệu tới Điều độ Ms. Bích và An toàn Mr. Thành. Tài xế giữ an toàn, bảo vệ niêm phong seal và giữ liên lạc 24/7.</p>
+    <div>
+      <button class="btn-print" onclick="window.print()">🖨 In / Lưu PDF</button>
+      <button class="btn-close" onclick="closeModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initNow() {
+    const d = new Date();
+    document.getElementById('incDate').value = d.toISOString().split('T')[0];
+    document.getElementById('incTime').value = d.toTimeString().slice(0,5);
+    document.getElementById('origEta').value = d.toTimeString().slice(0,5);
+    // Suggest new ETA 45m later
+    const dNew = new Date(d.getTime() + 45*60000);
+    document.getElementById('newEta').value = dNew.toTimeString().slice(0,5);
+  }
+  initNow();
+
+  function captureGPS() {
+    const input = document.getElementById('gpsCoords');
+    input.value = "Đang tìm kiếm vệ tinh GPS...";
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          input.value = `Lat: ${pos.coords.latitude.toFixed(6)}, Lng: ${pos.coords.longitude.toFixed(6)} (Độ chính xác: ~${Math.round(pos.coords.accuracy)}m)`;
+        },
+        (err) => {
+          input.value = "Tọa độ ước tính bãi xe Cargolink: 10.816482, 106.664591 (Lỗi GPS: " + err.message + ")";
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    } else {
+      input.value = "Trình duyệt không hỗ trợ Geolocation (Đã ghi nhận vị trí lộ trình tuyến NV).";
+    }
+  }
+
+  function initCanvas(id) {
+    const c = document.getElementById(id);
+    const ctx = c.getContext('2d');
+    c.width = c.offsetWidth || 340;
+    c.height = 120;
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#7F1D1D';
+    let drawing = false;
+
+    function getPos(e) {
+      const rect = c.getBoundingClientRect();
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: cx - rect.left, y: cy - rect.top };
+    }
+    function start(e) { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); }
+    function move(e) { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); }
+    function stop() { drawing = false; }
+
+    c.addEventListener('mousedown', start);
+    c.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', stop);
+    c.addEventListener('touchstart', start);
+    c.addEventListener('touchmove', move);
+    window.addEventListener('touchend', stop);
+  }
+
+  window.addEventListener('load', () => {
+    initCanvas('sigDriver');
+  });
+
+  function clearSig(id) {
+    const c = document.getElementById(id);
+    c.getContext('2d').clearRect(0, 0, c.width, c.height);
+  }
+
+  async function handleIncSubmit(e) {
+    e.preventDefault();
+    const code = 'INC-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const record = {
+      form_type: 'incident_rapid_report',
+      reference_code: code,
+      driver_name: document.getElementById('driverName').value,
+      driver_phone: document.getElementById('driverPhone').value,
+      truck_plate: document.getElementById('truckPlate').value,
+      customer: document.getElementById('customer').value,
+      incident_type: document.getElementById('incidentType').value,
+      inc_date: document.getElementById('incDate').value,
+      inc_time: document.getElementById('incTime').value,
+      orig_eta: document.getElementById('origEta').value,
+      new_eta: document.getElementById('newEta').value,
+      gps_coords: document.getElementById('gpsCoords').value,
+      location_text: document.getElementById('locationText').value,
+      description: document.getElementById('incDescription').value,
+      submitted_at: new Date().toISOString()
+    };
+
+    try {
+      const list = JSON.parse(localStorage.getItem('cgl_incident_reports') || '[]');
+      list.push(record);
+      localStorage.setItem('cgl_incident_reports', JSON.stringify(list));
+    } catch(err) {}
+
+    const api = (window.location.origin.includes('github.io') || window.location.protocol === 'file:')
+      ? 'https://continent-msie-goals-watt.trycloudflare.com/api/submit'
+      : '/api/submit';
+    try {
+      await fetch(api, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+    } catch(err) {}
+
+    document.getElementById('incCodeText').innerText = code;
+    document.getElementById('modalSuccess').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modalSuccess').style.display = 'none';
+  }
+</script>
+</body>
+</html>
+"""
+
+# ==========================================
+# TOOL 5: app_trip_dispatch_log.html
+# ==========================================
+tool5_html = """<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lệnh Điều Xe Điện Tử & Giám Sát Hành Trình Tuyến NV | Cargolink C-TPAT</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --primary-light: #0B3C5D;
+      --accent: #D4441E;
+      --bg: #F1F5F9;
+      --card: #FFFFFF;
+      --border: #CBD5E1;
+      --text: #0F172A;
+      --muted: #64748B;
+      --success: #059669;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.5; padding: 16px; min-height: 100vh; }
+    .container { max-width: 820px; margin: 0 auto; background: var(--card); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--border); }
+    .conf-banner { background: #FEF3C7; border-bottom: 1.5px dashed #D97706; color: #92400E; padding: 10px 14px; font-size: 11.5px; font-weight: 700; text-align: center; text-transform: uppercase; }
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 24px 20px; text-align: center; }
+    .header .badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 3px 12px; border-radius: 12px; margin-bottom: 8px; }
+    .header h1 { font-size: 20px; font-weight: 800; line-height: 1.3; }
+    .header p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+    .nav-back { display: inline-block; margin-bottom: 6px; color: #93C5FD; text-decoration: none; font-weight: 700; font-size: 13px; }
+    .form-body { padding: 24px 20px; }
+    .section-title { font-size: 14px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ""; display: inline-block; width: 4px; height: 16px; background: var(--accent); border-radius: 2px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .field-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    input[type="text"], input[type="date"], input[type="time"], select, textarea {
+      width: 100%; padding: 9px 12px; font-size: 13.5px; border: 1.5px solid var(--border); border-radius: 8px; background: #FFF; outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary-light); }
+    .sig-box { background: #F8FAFC; border: 1.5px dashed var(--border); border-radius: 8px; padding: 14px; text-align: center; margin-top: 10px; }
+    canvas { background: white; border: 1px solid #CBD5E1; border-radius: 6px; width: 100%; max-width: 380px; height: 120px; touch-action: none; cursor: crosshair; }
+    .sig-btns { margin-top: 6px; }
+    .btn-clear { background: #E2E8F0; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .btn-submit { width: 100%; background: var(--accent); color: white; padding: 14px 20px; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; margin-top: 18px; }
+    .btn-submit:hover { background: #b83815; }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: white; border-radius: 16px; padding: 28px 20px; max-width: 440px; width: 100%; text-align: center; }
+    .btn-print { background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; margin-right: 8px; }
+    .btn-close { background: #E2E8F0; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; }
+    .footer { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 12px; }
+    .rule-box { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 14px; font-size: 12.5px; color: #334155; margin-bottom: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="conf-banner">🔒 TÀI LIỆU LƯU HÀNH NỘI BỘ — CARGOLINK EXPRESS (E-DISPATCH ORDER)</div>
+
+  <div class="header">
+    <a href="portal_driver.html" class="nav-back">⬅ Quay lại Cổng Tra Cứu</a>
+    <span class="badge">ĐIỀU ĐỘ & THEO DÕI HÀNH TRÌNH (HS16-01)</span>
+    <h1>LỆNH ĐIỀU XE ĐIỆN TỬ & THEO DÕI HÀNH TRÌNH TUYẾN NV</h1>
+    <p>Kiểm soát lộ trình tuyến vận chuyển hàng may mặc xuất khẩu Nhà máy NV APPAREL</p>
+  </div>
+
+  <form id="dspForm" class="form-body" onsubmit="handleDspSubmit(event)">
+    <div class="section-title">1. Thông tin Lệnh điều xe & Chuyến vận chuyển</div>
+    <div class="grid-2">
+      <div class="field-group">
+        <label>Mã Lệnh Điều Xe:</label>
+        <input type="text" id="dispatchId" value="CGL-NV-DSP-2026-088" required style="font-weight: 700; color: #1E3A8A;">
+      </div>
+      <div class="field-group">
+        <label>Khách hàng vận chuyển:</label>
+        <input type="text" id="clientName" value="Công ty TNHH May Mặc NV (NV Apparel)" readonly>
+      </div>
+      <div class="field-group">
+        <label>Biển số xe tải phân công:</label>
+        <select id="truckPlate" required>
+          <option value="51C-964.55 (Isuzu 2.5T)">51C-964.55 (Isuzu 2.5T)</option>
+          <option value="51D-882.14 (Hino 5T)">51D-882.14 (Hino 5T)</option>
+          <option value="50H-123.68 (Isuzu 8T)">50H-123.68 (Isuzu 8T)</option>
+          <option value="51C-774.92 (Hyundai 3.5T)">51C-774.92 (Hyundai 3.5T)</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Họ tên Lái xe chính đảm nhận:</label>
+        <select id="driverName" required>
+          <option value="Nguyễn Văn Thành (Chính)">Nguyễn Văn Thành (Tài xế chính)</option>
+          <option value="Trần Văn Hùng (Chính)">Trần Văn Hùng (Tài xế chính)</option>
+          <option value="Lê Thanh Tùng (Chính)">Lê Thanh Tùng (Tài xế chính)</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Loại hàng hóa vận chuyển:</label>
+        <input type="text" id="cargoType" value="Hàng may mặc xuất khẩu (Garment for Export)" required>
+      </div>
+      <div class="field-group">
+        <label>Số lượng kiện hàng (Cartons/Pallets):</label>
+        <input type="text" id="cargoQty" placeholder="VD: 450 thùng carton" required>
+      </div>
+    </div>
+
+    <div class="section-title">2. Lộ trình vận chuyển & Trạm dừng đỗ được chỉ định</div>
+    <div class="grid-2">
+      <div class="field-group">
+        <label>Điểm đóng hàng (Nhà máy xuất phát):</label>
+        <input type="text" id="origin" value="Nhà máy NV APPAREL VIETNAM" required>
+      </div>
+      <div class="field-group">
+        <label>Điểm dỡ hàng (Kho / Cảng đích):</label>
+        <select id="destination" required>
+          <option value="Cảng Cát Lái (Cát Lái Port, TP.HCM)">Cảng Cát Lái (TP. Thủ Đức, TP.HCM)</option>
+          <option value="Sân bay Quốc tế Tân Sơn Nhất (SGN Air Cargo)">Sân bay Quốc tế Tân Sơn Nhất (TCS/SCSC)</option>
+          <option value="Kho CFS Tân Tạo / Kho CFS Linh Trung">Kho CFS Tân Tạo / CFS Linh Trung</option>
+          <option value="Cảng Quốc tế Cái Mép (CMIT / SSIT Bà Rịa - Vũng Tàu)">Cảng Cái Mép (Bà Rịa - Vũng Tàu)</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Giờ xuất bến dự kiến:</label>
+        <input type="time" id="deptTime" required>
+      </div>
+      <div class="field-group">
+        <label>Giờ đến đích dự kiến (ETA):</label>
+        <input type="time" id="arrEta" required>
+      </div>
+      <div class="field-group" style="grid-column: 1 / -1;">
+        <label>Trạm dừng đỗ được phê duyệt trên tuyến (C-TPAT Approved Rest Stops):</label>
+        <select id="approvedStops" required>
+          <option value="Trạm dừng Petrolimex QL22 / Trạm dịch vụ cao tốc">Trạm Petrolimex QL22 / Trạm dịch vụ Cao tốc (Được phê duyệt C-TPAT)</option>
+          <option value="Đi thẳng không dừng (Non-stop direct delivery)">Đi thẳng không dừng đỗ (Direct Delivery - Ưu tiên hàng gấp)</option>
+          <option value="Trạm dừng cây xăng Comeco QL1A">Trạm dừng Cây xăng Comeco QL1A</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-title">3. Cam kết an ninh C-TPAT của Lái xe</div>
+    <div class="rule-box">
+      <strong>Lái xe cam kết chấp hành nghiêm ngặt:</strong><br>
+      1. Tuyệt đối không chở người lạ, không nhận hàng gửi ngoài chứng từ hợp lệ.<br>
+      2. Không dừng đỗ ngoài các điểm đã được Điều độ Cargolink phê duyệt.<br>
+      3. Giữ thiết bị giám sát hành trình GPS luôn hoạt động 100% trong suốt chuyến đi.<br>
+      4. Báo cáo ngay cho Điều độ Ms. Bích (077 871 9936) khi chậm ETA quá 15 phút.
+    </div>
+
+    <div class="section-title">4. Chữ ký số xác nhận hai bên</div>
+    <div class="grid-2">
+      <div>
+        <label>Điều độ viên phát lệnh ký:</label>
+        <div class="sig-box">
+          <canvas id="sigDisp"></canvas>
+          <div class="sig-btns"><button type="button" class="btn-clear" onclick="clearSig('sigDisp')">Ký lại</button></div>
+        </div>
+      </div>
+      <div>
+        <label>Tài xế tiếp nhận lệnh ký:</label>
+        <div class="sig-box">
+          <canvas id="sigDriver"></canvas>
+          <div class="sig-btns"><button type="button" class="btn-clear" onclick="clearSig('sigDriver')">Ký lại</button></div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">📋 KÍCH HOẠT LỆNH ĐIỀU XE & THEO DÕI HÀNH TRÌNH</button>
+  </form>
+
+  <div class="footer">
+    CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM — PHÒNG ĐIỀU ĐỘ VẬN TẢI<br>
+    Lệnh điều xe điện tử tích hợp dữ liệu GPS hành trình chuẩn an ninh chuỗi cung ứng C-TPAT
+  </div>
+</div>
+
+<div id="modalSuccess" class="modal-overlay">
+  <div class="modal-box">
+    <div style="font-size: 40px; margin-bottom: 10px;">📋</div>
+    <h3 style="color: var(--primary); margin-bottom: 8px;">LỆNH ĐIỀU XE ĐÃ KÍCH HOẠT</h3>
+    <p style="font-size: 13px; color: var(--muted); margin-bottom: 14px;">Mã xác thực lệnh điều xe điện tử:</p>
+    <div id="dspCodeText" style="font-size: 18px; font-weight: 800; color: var(--accent); background: #F8FAFC; padding: 10px; border-radius: 8px; border: 1.5px dashed var(--border); margin-bottom: 16px;">DSP-2026-0000</div>
+    <p style="font-size: 12px; color: var(--muted); margin-bottom: 18px;">Lộ trình đã được kích hoạt trên hệ thống giám sát hành trình GPS trực tuyến.</p>
+    <div>
+      <button class="btn-print" onclick="window.print()">🖨 In / Lưu PDF</button>
+      <button class="btn-close" onclick="closeModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initNow() {
+    const d = new Date();
+    document.getElementById('deptTime').value = d.toTimeString().slice(0,5);
+    const dArr = new Date(d.getTime() + 150*60000); // +2h30m
+    document.getElementById('arrEta').value = dArr.toTimeString().slice(0,5);
+  }
+  initNow();
+
+  function initCanvas(id) {
+    const c = document.getElementById(id);
+    const ctx = c.getContext('2d');
+    c.width = c.offsetWidth || 340;
+    c.height = 120;
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#071A36';
+    let drawing = false;
+
+    function getPos(e) {
+      const rect = c.getBoundingClientRect();
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: cx - rect.left, y: cy - rect.top };
+    }
+    function start(e) { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); }
+    function move(e) { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); }
+    function stop() { drawing = false; }
+
+    c.addEventListener('mousedown', start);
+    c.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', stop);
+    c.addEventListener('touchstart', start);
+    c.addEventListener('touchmove', move);
+    window.addEventListener('touchend', stop);
+  }
+
+  window.addEventListener('load', () => {
+    initCanvas('sigDisp');
+    initCanvas('sigDriver');
+  });
+
+  function clearSig(id) {
+    const c = document.getElementById(id);
+    c.getContext('2d').clearRect(0, 0, c.width, c.height);
+  }
+
+  async function handleDspSubmit(e) {
+    e.preventDefault();
+    const code = 'DSP-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const record = {
+      form_type: 'trip_dispatch_log',
+      reference_code: code,
+      dispatch_id: document.getElementById('dispatchId').value,
+      client_name: document.getElementById('clientName').value,
+      truck_plate: document.getElementById('truckPlate').value,
+      driver_name: document.getElementById('driverName').value,
+      cargo_type: document.getElementById('cargoType').value,
+      cargo_qty: document.getElementById('cargoQty').value,
+      origin: document.getElementById('origin').value,
+      destination: document.getElementById('destination').value,
+      dept_time: document.getElementById('deptTime').value,
+      arr_eta: document.getElementById('arrEta').value,
+      approved_stops: document.getElementById('approvedStops').value,
+      submitted_at: new Date().toISOString()
+    };
+
+    try {
+      const list = JSON.parse(localStorage.getItem('cgl_dispatch_logs') || '[]');
+      list.push(record);
+      localStorage.setItem('cgl_dispatch_logs', JSON.stringify(list));
+    } catch(err) {}
+
+    const api = (window.location.origin.includes('github.io') || window.location.protocol === 'file:')
+      ? 'https://continent-msie-goals-watt.trycloudflare.com/api/submit'
+      : '/api/submit';
+    try {
+      await fetch(api, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+    } catch(err) {}
+
+    document.getElementById('dspCodeText').innerText = code;
+    document.getElementById('modalSuccess').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modalSuccess').style.display = 'none';
+  }
+</script>
+</body>
+</html>
+"""
+
+# ==========================================
+# TOOL 6: app_ppe_pccc_log.html
+# ==========================================
+tool6_html = """<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sổ Kiểm Tra PCCC & Trang Bị Bảo Hộ Lao Động PPE Xe Tải | Cargolink ISO 45001</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --primary-light: #0B3C5D;
+      --accent: #D4441E;
+      --bg: #F1F5F9;
+      --card: #FFFFFF;
+      --border: #CBD5E1;
+      --text: #0F172A;
+      --muted: #64748B;
+      --success: #059669;
+      --danger: #DC2626;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.5; padding: 16px; min-height: 100vh; }
+    .container { max-width: 820px; margin: 0 auto; background: var(--card); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--border); }
+    .conf-banner { background: #FEF3C7; border-bottom: 1.5px dashed #D97706; color: #92400E; padding: 10px 14px; font-size: 11.5px; font-weight: 700; text-align: center; text-transform: uppercase; }
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 24px 20px; text-align: center; }
+    .header .badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 3px 12px; border-radius: 12px; margin-bottom: 8px; }
+    .header h1 { font-size: 20px; font-weight: 800; line-height: 1.3; }
+    .header p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+    .nav-back { display: inline-block; margin-bottom: 6px; color: #93C5FD; text-decoration: none; font-weight: 700; font-size: 13px; }
+    .form-body { padding: 24px 20px; }
+    .section-title { font-size: 14px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ""; display: inline-block; width: 4px; height: 16px; background: var(--accent); border-radius: 2px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .field-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    input[type="text"], input[type="date"], select {
+      width: 100%; padding: 9px 12px; font-size: 13.5px; border: 1.5px solid var(--border); border-radius: 8px; background: #FFF; outline: none;
+    }
+    input:focus, select:focus { border-color: var(--primary-light); }
+    .chk-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
+    .chk-table th { background: #071A36; color: white; padding: 10px 12px; text-align: left; font-size: 12px; text-transform: uppercase; }
+    .chk-table td { padding: 10px 12px; border-bottom: 1px solid #E2E8F0; vertical-align: middle; }
+    .chk-table tr:nth-child(even) { background: #F8FAFC; }
+    .status-opt { display: flex; gap: 12px; align-items: center; }
+    .status-opt label { display: flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 600; cursor: pointer; margin-bottom: 0; }
+    .status-pass { color: var(--success); }
+    .status-fail { color: var(--danger); }
+    .sig-box { background: #F8FAFC; border: 1.5px dashed var(--border); border-radius: 8px; padding: 14px; text-align: center; margin-top: 10px; }
+    canvas { background: white; border: 1px solid #CBD5E1; border-radius: 6px; width: 100%; max-width: 380px; height: 120px; touch-action: none; cursor: crosshair; }
+    .sig-btns { margin-top: 6px; }
+    .btn-clear { background: #E2E8F0; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .btn-submit { width: 100%; background: var(--accent); color: white; padding: 14px 20px; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; margin-top: 18px; }
+    .btn-submit:hover { background: #b83815; }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: white; border-radius: 16px; padding: 28px 20px; max-width: 440px; width: 100%; text-align: center; }
+    .btn-print { background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; margin-right: 8px; }
+    .btn-close { background: #E2E8F0; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; }
+    .footer { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="conf-banner">🔒 TÀI LIỆU LƯU HÀNH NỘI BỘ — CARGOLINK EXPRESS (E-PPE & FIRE SAFETY LOG)</div>
+
+  <div class="header">
+    <a href="portal_driver.html" class="nav-back">⬅ Quay lại Cổng Tra Cứu</a>
+    <span class="badge">AN TOÀN LAO ĐỘNG & PCCC (HS14-01 & ISO 45001)</span>
+    <h1>SỔ KIỂM TRA TRANG BỊ BẢO HỘ (PPE) & PCCC TRÊN XE TẢI</h1>
+    <p>Kiểm soát định kỳ tình trạng bình chữa cháy, túi cứu thương và bảo hộ lao động tài xế</p>
+  </div>
+
+  <form id="ppeForm" class="form-body" onsubmit="handlePpeSubmit(event)">
+    <div class="section-title">1. Thông tin Xe & Người thực hiện kiểm tra</div>
+    <div class="grid-2">
+      <div class="field-group">
+        <label>Biển số xe kiểm tra:</label>
+        <select id="truckPlate" required>
+          <option value="51C-964.55">51C-964.55 (Isuzu 2.5T)</option>
+          <option value="51D-882.14">51D-882.14 (Hino 5T)</option>
+          <option value="50H-123.68">50H-123.68 (Isuzu 8T)</option>
+          <option value="51C-774.92">51C-774.92 (Hyundai 3.5T)</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Họ tên Lái xe phụ trách xe:</label>
+        <input type="text" id="driverName" value="Nguyễn Văn Thành" required>
+      </div>
+      <div class="field-group">
+        <label>Ngày kiểm tra:</label>
+        <input type="date" id="checkDate" required>
+      </div>
+      <div class="field-group">
+        <label>Định kỳ kiểm tra:</label>
+        <select id="period">
+          <option value="Đầu ca vận hành / Chuyến hàng NV">Đầu ca vận hành / Chuyến hàng NV</option>
+          <option value="Kiểm tra an toàn định kỳ hàng tuần">Kiểm tra an toàn định kỳ hàng tuần</option>
+          <option value="Kiểm toán nội bộ tháng ISO 45001">Kiểm toán nội bộ tháng ISO 45001</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-title">2. Kiểm tra Trang bị PCCC & Cứu sinh khẩn cấp trên xe</div>
+    <table class="chk-table">
+      <thead>
+        <tr>
+          <th style="width: 35px;">STT</th>
+          <th>Trang bị PCCC & Cứu nạn</th>
+          <th style="width: 170px;">Kết quả</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Bình chữa cháy Cabin (MFZ4):</strong> Áp kế chỉ vùng xanh, còn kẹp chì niêm phong, hạn kiểm định còn hiệu lực.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="pccc1" value="PASS" checked> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="pccc1" value="FAIL"> HỎNG/HẾT HẠN</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Bình chữa cháy Thùng xe (CO2 / Bột):</strong> Giá đỡ cố định chắc chắn, vòi phun thông suốt không nứt gãy.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="pccc2" value="PASS" checked> ĐẠT</label>
+              <label class="status-fail"><input type="radio" name="pccc2" value="FAIL"> CHƯA ĐẠT</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Tam giác phản quang cảnh báo sự cố:</strong> Đầy đủ 02 biển tam giác phản quang xếp gọn trong cabin.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="pccc3" value="PASS" checked> ĐỦ (02 CÁI)</label>
+              <label class="status-fail"><input type="radio" name="pccc3" value="FAIL"> THIẾU</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>Đèn pin tuần tra chiếu sáng sự cố:</strong> Đèn hoạt động tốt, pin sạc đầy đủ để soi kiểm tra đêm.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="pccc4" value="PASS" checked> TỐT</label>
+              <label class="status-fail"><input type="radio" name="pccc4" value="FAIL"> HỎNG PIN</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>Túi sơ cấp cứu y tế (First Aid Kit):</strong> Băng gạc vô trùng, cồn sát khuẩn, băng dán, kéo, thuốc hạ sốt cơ bản.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="pccc5" value="PASS" checked> ĐẦY ĐỦ</label>
+              <label class="status-fail"><input type="radio" name="pccc5" value="FAIL"> THIẾU THUỐC</label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">3. Kiểm tra Trang bị Bảo hộ cá nhân (PPE) của Lái xe</div>
+    <table class="chk-table">
+      <thead>
+        <tr>
+          <th style="width: 35px;">STT</th>
+          <th>Trang thiết bị bảo hộ lao động cá nhân (PPE)</th>
+          <th style="width: 170px;">Tình trạng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Áo phản quang Cargolink:</strong> Sạch sẽ, dải phản quang sáng rõ, có in logo nhận diện thương hiệu.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="ppe1" value="PASS" checked> ĐẠT CHUẨN</label>
+              <label class="status-fail"><input type="radio" name="ppe1" value="FAIL"> RÁCH/CŨ</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Giày bảo hộ mũi thép:</strong> Chống đâm xuyên đế, chống dập ngón chân khi bốc xếp hàng hóa.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="ppe2" value="PASS" checked> ĐẠT CHUẨN</label>
+              <label class="status-fail"><input type="radio" name="ppe2" value="FAIL"> KHÔNG ĐẠT</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Nón bảo hộ lao động:</strong> Đúng tiêu chuẩn an toàn, quai nón chắc chắn khi vào kho bãi NV.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="ppe3" value="PASS" checked> CÓ SẴN</label>
+              <label class="status-fail"><input type="radio" name="ppe3" value="FAIL"> THIẾU</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>Thẻ nhân viên Cargolink có ảnh:</strong> Đeo ngực rõ ràng, quét mã QR nhận diện C-TPAT.</td>
+          <td>
+            <div class="status-opt">
+              <label class="status-pass"><input type="radio" name="ppe4" value="PASS" checked> ĐỦ ĐIỀU KIỆN</label>
+              <label class="status-fail"><input type="radio" name="ppe4" value="FAIL"> QUÊN THẺ</label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">4. Chữ ký số xác nhận (Signatures)</div>
+    <div class="grid-2">
+      <div>
+        <label>Lái xe cam kết giữ gìn trang bị:</label>
+        <div class="sig-box">
+          <canvas id="sigDriver"></canvas>
+          <div class="sig-btns"><button type="button" class="btn-clear" onclick="clearSig('sigDriver')">Ký lại</button></div>
+        </div>
+      </div>
+      <div>
+        <label>Cán bộ An toàn / Giám sát kiểm tra:</label>
+        <div class="sig-box">
+          <canvas id="sigSafety"></canvas>
+          <div class="sig-btns"><button type="button" class="btn-clear" onclick="clearSig('sigSafety')">Ký lại</button></div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">🧯 LƯU BIÊN BẢN KIỂM TRA PPE & PCCC ĐIỆN TỬ</button>
+  </form>
+
+  <div class="footer">
+    CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM — PHÒNG AN TOÀN LAO ĐỘNG & PCCC<br>
+    Hệ thống quản lý an toàn và sức khỏe nghề nghiệp tuân thủ tiêu chuẩn ISO 45001:2018
+  </div>
+</div>
+
+<div id="modalSuccess" class="modal-overlay">
+  <div class="modal-box">
+    <div style="font-size: 40px; margin-bottom: 10px;">🧯</div>
+    <h3 style="color: var(--primary); margin-bottom: 8px;">ĐÃ LƯU BIÊN BẢN KIỂM TRA PPE & PCCC</h3>
+    <p style="font-size: 13px; color: var(--muted); margin-bottom: 14px;">Mã phiếu kiểm tra trang bị an toàn:</p>
+    <div id="ppeCodeText" style="font-size: 18px; font-weight: 800; color: var(--accent); background: #F8FAFC; padding: 10px; border-radius: 8px; border: 1.5px dashed var(--border); margin-bottom: 16px;">PPE-2026-0000</div>
+    <p style="font-size: 12px; color: var(--muted); margin-bottom: 18px;">Phương tiện và người điều khiển phương tiện đủ điều kiện an toàn lao động và PCCC.</p>
+    <div>
+      <button class="btn-print" onclick="window.print()">🖨 In / Lưu PDF</button>
+      <button class="btn-close" onclick="closeModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initNow() {
+    const d = new Date();
+    document.getElementById('checkDate').value = d.toISOString().split('T')[0];
+  }
+  initNow();
+
+  function initCanvas(id) {
+    const c = document.getElementById(id);
+    const ctx = c.getContext('2d');
+    c.width = c.offsetWidth || 340;
+    c.height = 120;
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#071A36';
+    let drawing = false;
+
+    function getPos(e) {
+      const rect = c.getBoundingClientRect();
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: cx - rect.left, y: cy - rect.top };
+    }
+    function start(e) { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); }
+    function move(e) { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); }
+    function stop() { drawing = false; }
+
+    c.addEventListener('mousedown', start);
+    c.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', stop);
+    c.addEventListener('touchstart', start);
+    c.addEventListener('touchmove', move);
+    window.addEventListener('touchend', stop);
+  }
+
+  window.addEventListener('load', () => {
+    initCanvas('sigDriver');
+    initCanvas('sigSafety');
+  });
+
+  function clearSig(id) {
+    const c = document.getElementById(id);
+    c.getContext('2d').clearRect(0, 0, c.width, c.height);
+  }
+
+  async function handlePpeSubmit(e) {
+    e.preventDefault();
+    const code = 'PPE-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const record = {
+      form_type: 'ppe_and_pccc_inspection',
+      reference_code: code,
+      truck_plate: document.getElementById('truckPlate').value,
+      driver_name: document.getElementById('driverName').value,
+      check_date: document.getElementById('checkDate').value,
+      period: document.getElementById('period').value,
+      pccc: {
+        item1: document.querySelector('input[name="pccc1"]:checked').value,
+        item2: document.querySelector('input[name="pccc2"]:checked').value,
+        item3: document.querySelector('input[name="pccc3"]:checked').value,
+        item4: document.querySelector('input[name="pccc4"]:checked').value,
+        item5: document.querySelector('input[name="pccc5"]:checked').value,
+      },
+      ppe: {
+        item1: document.querySelector('input[name="ppe1"]:checked').value,
+        item2: document.querySelector('input[name="ppe2"]:checked').value,
+        item3: document.querySelector('input[name="ppe3"]:checked').value,
+        item4: document.querySelector('input[name="ppe4"]:checked').value,
+      },
+      submitted_at: new Date().toISOString()
+    };
+
+    try {
+      const list = JSON.parse(localStorage.getItem('cgl_ppe_logs') || '[]');
+      list.push(record);
+      localStorage.setItem('cgl_ppe_logs', JSON.stringify(list));
+    } catch(err) {}
+
+    const api = (window.location.origin.includes('github.io') || window.location.protocol === 'file:')
+      ? 'https://continent-msie-goals-watt.trycloudflare.com/api/submit'
+      : '/api/submit';
+    try {
+      await fetch(api, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+    } catch(err) {}
+
+    document.getElementById('ppeCodeText').innerText = code;
+    document.getElementById('modalSuccess').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modalSuccess').style.display = 'none';
+  }
+</script>
+</body>
+</html>
+"""
+
+with open(os.path.join(output_dir, "app_incident_rapid_report.html"), "w", encoding="utf-8") as f:
+    f.write(tool4_html)
+
+with open(os.path.join(output_dir, "app_trip_dispatch_log.html"), "w", encoding="utf-8") as f:
+    f.write(tool5_html)
+
+with open(os.path.join(output_dir, "app_ppe_pccc_log.html"), "w", encoding="utf-8") as f:
+    f.write(tool6_html)
+
+print("Tools 4, 5, 6 created successfully.")
