@@ -3,272 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NV CTPAT – Suggestions and Complaints | Tiếp Nhận Góp Ý & Khiếu Nại</title>
+  <title>NV CTPAT – Suggestions and Complaints | Hộp Thư Góp Ý & Khiếu Nại</title>
+  <meta http-equiv="refresh" content="1;url=https://docs.google.com/forms/d/1WDy9kSA-TzIavBlsSNgcMvU4Wcm0p8yomeZPZ-HgOzo/viewform">
   <style>
-    :root {
-      --primary: #071A36;
-      --primary-light: #0B3C5D;
-      --accent: #D4441E;
-      --accent-hover: #b83815;
-      --bg: #F8FAFC;
-      --card-bg: #FFFFFF;
-      --border: #CBD5E1;
-      --text-main: #0F172A;
-      --text-muted: #64748B;
-      --success: #059669;
-      --warning: #D97706;
-      --danger: #DC2626;
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #F1F5F9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 16px; min-height: 100vh; }
-    .container { max-width: 760px; margin: 0 auto; background: var(--card-bg); border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--border); }
-    .header { background: linear-gradient(135deg, #0F172A 0%, var(--primary-light) 100%); color: white; padding: 28px 24px; text-align: center; }
-    .header-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
-    .header h1 { font-size: 20px; font-weight: 800; line-height: 1.3; margin-bottom: 6px; }
-    .header h2 { font-size: 13px; font-weight: 400; opacity: 0.85; text-transform: uppercase; }
-    .header-sub { margin-top: 10px; font-size: 12px; opacity: 0.75; }
-    
-    .confidential-banner { background: #FEF2F2; border-left: 4px solid var(--danger); padding: 14px 18px; margin: 20px 24px 0; border-radius: 0 8px 8px 0; font-size: 12.5px; color: #991B1B; }
-    .confidential-title { font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
-    
-    .form-body { padding: 24px; }
-    .section-title { font-size: 14px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 8px; }
-    .section-title::before { content: ""; display: inline-block; width: 4px; height: 16px; background: var(--accent); border-radius: 2px; }
-    .field-group { margin-bottom: 18px; }
-    label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
-    .label-sub { font-weight: 400; color: var(--text-muted); font-size: 11px; display: block; }
-    input[type="text"], input[type="datetime-local"], select, textarea {
-      width: 100%; padding: 10px 14px; font-size: 14px; border: 1.5px solid var(--border); border-radius: 8px; background: #FFF; outline: none; transition: border-color 0.2s;
+    .box {
+      background: white;
+      border-radius: 16px;
+      padding: 36px 28px;
+      max-width: 540px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border: 1px solid #CBD5E1;
     }
-    input:focus, select:focus, textarea:focus { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(11, 60, 93, 0.15); }
-    .row { display: flex; gap: 16px; }
-    .col { flex: 1; }
-
-    /* Anon Toggle Box */
-    .toggle-box { background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
-    .toggle-info { font-size: 13px; font-weight: 600; color: var(--primary); }
-    .toggle-sub { font-size: 11.5px; color: var(--text-muted); font-weight: 400; }
-    .switch { position: relative; display: inline-block; width: 48px; height: 26px; }
-    .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #CBD5E1; transition: .3s; border-radius: 26px; }
-    .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
-    input:checked + .slider { background-color: var(--accent); }
-    input:checked + .slider:before { transform: translateX(22px); }
-
-    /* File drop area */
-    .drop-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 20px; text-align: center; background: #F8FAFC; cursor: pointer; transition: all 0.2s; }
-    .drop-zone:hover { border-color: var(--primary-light); background: #F1F5F9; }
-    .drop-icon { font-size: 28px; color: var(--text-muted); margin-bottom: 6px; }
-    .drop-text { font-size: 13px; font-weight: 600; color: var(--primary); }
-    .drop-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-
-    .btn-submit { width: 100%; background: var(--accent); color: white; padding: 14px 24px; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
-    .btn-submit:hover { background: var(--accent-hover); }
-
-    /* Modal */
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-    .modal-box { background: white; border-radius: 16px; padding: 32px 24px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); }
-    .success-icon { width: 64px; height: 64px; background: #DEF7EC; color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 16px; }
-    .ticket-badge { background: #F1F5F9; padding: 8px 16px; border-radius: 8px; font-family: monospace; font-size: 16px; font-weight: 700; color: var(--accent); margin: 16px 0; border: 1.5px dashed var(--accent); display: inline-block; }
-
-    @media (max-width: 600px) {
-      .row { flex-direction: column; gap: 0; }
-      .form-body { padding: 18px 14px; }
-      .header { padding: 20px 14px; }
+    .badge {
+      display: inline-block;
+      background: #D4441E;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
     }
+    h1 {
+      font-size: 18px;
+      color: #071A36;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 13.5px;
+      color: #64748B;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-block;
+      background: #071A36;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #0B3C5D;
+    }
+    .spinner {
+      border: 3px solid #E2E8F0;
+      border-top: 3px solid #D4441E;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 18px;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="header">
-    <span class="header-badge">C-TPAT WHISTLEBLOWER & FEEDBACK CHANNEL</span>
-    <h1>NV CTPAT – SUGGESTIONS AND COMPLAINTS</h1>
-    <h2>KÊNH TIẾP NHẬN ĐÓNG GÓP Ý KIẾN, KHIẾU NẠI & TỐ GIÁC SỰ CỐ AN NINH</h2>
-    <div class="header-sub">Hệ thống Tiếp nhận Trực tuyến Độc lập — Cargolink Express & Khách hàng NV APPAREL</div>
-  </div>
-
-  <div class="confidential-banner">
-    <div class="confidential-title">🛡️ CAM KẾT BẢO MẬT & BẢO VỆ NGƯỜI PHẢN ÁNH (ISO 9001 & C-TPAT)</div>
-    Theo Chính sách Bảo vệ người tố giác (HS01-08), Công ty Cargolink cam kết bảo mật 100% danh tính người phản ánh, bảo vệ tuyệt đối và không có bất kỳ hình thức phân biệt đối xử hay trù dập nào. Quý vị hoàn toàn có thể chọn gửi ẩn danh.
-  </div>
-
-  <form id="complaintForm" class="form-body" onsubmit="submitComplaint(event)">
-    
-    <!-- Anonymous Switch -->
-    <div class="toggle-box">
-      <div>
-        <div class="toggle-info">Chế độ gửi ẩn danh (Anonymous Mode)</div>
-        <div class="toggle-sub">Giữ bí mật tuyệt đối danh tính, không lưu tên hoặc số điện thoại</div>
-      </div>
-      <label class="switch">
-        <input type="checkbox" id="anonToggle" checked onchange="toggleAnonMode()">
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <!-- Contact Info (Shown if not anon) -->
-    <div id="contactFields" style="display: none; margin-bottom: 20px; background: #F1F5F9; padding: 14px; border-radius: 8px;">
-      <div class="row">
-        <div class="col field-group" style="margin-bottom: 0;">
-          <label>Họ và tên người phản ánh <span class="label-sub">Full Name</span></label>
-          <input type="text" id="reporterName" placeholder="VD: Nguyễn Văn A">
-        </div>
-        <div class="col field-group" style="margin-bottom: 0;">
-          <label>Số điện thoại nhận phản hồi <span class="label-sub">Phone Number for Follow-up</span></label>
-          <input type="text" id="reporterPhone" placeholder="VD: 09xx.xxx.xxx">
-        </div>
-      </div>
-    </div>
-
-    <div class="section-title">1. Phân loại phản ánh & Mức độ khẩn cấp / Category</div>
-
-    <div class="field-group">
-      <label>Loại ý kiến / Sự vụ phản ánh <span class="label-sub">Issue Category</span></label>
-      <select id="issueCategory" required>
-        <option value="">-- Chọn loại phản ánh --</option>
-        <option value="Sáng kiến đóng góp cải tiến quy trình vận tải & an ninh">1. Đóng góp sáng kiến cải tiến quy trình vận tải & an ninh C-TPAT</option>
-        <option value="Phản ánh xe trễ giờ ETA / Tiến độ giao hàng chậm">2. Phản ánh xe đến chậm, trễ ETA Cut-off, gián đoạn thông tin GPS</option>
-        <option value="Báo cáo vi phạm an ninh C-TPAT & Niêm phong Seal">3. Báo cáo nghi vấn vi phạm an ninh C-TPAT (seal bị lỏng, tráo seal, dừng đỗ sai quy định)</option>
-        <option value="Khiếu nại thái độ, tác phong tài xế / nhân viên điều độ">4. Khiếu nại tác phong, thái độ giao tiếp không đúng mực của nhân sự</option>
-        <option value="Tố giác gian lận thương mại, buôn lậu, hàng cấm hoặc vi phạm đạo đức">5. Tố giác buôn lậu, chở hàng lậu, trộm cắp hoặc hành vi phi đạo đức</option>
-        <option value="Phản ánh kỹ thuật xe không đảm bảo / thùng xe dột">6. Phản ánh chất lượng xe không đạt chuẩn, thùng dột, rách bao bì hàng</option>
-      </select>
-    </div>
-
-    <div class="field-group">
-      <label>Mức độ ưu tiên xử lý <span class="label-sub">Priority Level</span></label>
-      <select id="priorityLevel" required>
-        <option value="Bình thường (Xử lý trong vòng 48h)">Bình thường — Tiếp nhận xử lý trong vòng 48 giờ</option>
-        <option value="Khẩn cấp (Xử lý trong vòng 24h)">Khẩn cấp — Tiếp nhận và xử lý trong vòng 24 giờ</option>
-        <option value="RẤT KHẨN CẤP: Sự cố an ninh C-TPAT (Kích hoạt xử lý trong 2 giờ!)" selected>RẤT KHẨN CẤP: Sự cố an ninh C-TPAT (Kích hoạt xử lý trong 2 giờ!)</option>
-      </select>
-    </div>
-
-    <div class="section-title">2. Thông tin chi tiết vụ việc / Incident Details</div>
-
-    <div class="row">
-      <div class="col field-group">
-        <label>Biển số xe liên quan (nếu có) <span class="label-sub">Truck Plate (VD: 51C-964.55)</span></label>
-        <input type="text" id="incTruck" value="51C-964.55" placeholder="51C-964.55">
-      </div>
-      <div class="col field-group">
-        <label>Thời điểm phát sinh <span class="label-sub">Incident Time</span></label>
-        <input type="datetime-local" id="incTime" required>
-      </div>
-    </div>
-
-    <div class="field-group">
-      <label>Địa điểm xảy ra sự việc <span class="label-sub">Location (Tuyến đường / Nhà máy / Kho cảng)</span></label>
-      <input type="text" id="incLocation" value="Tuyến đường tránh Long Xuyên, Tỉnh An Giang" required placeholder="VD: Tuyến đường tránh Long Xuyên, Tỉnh An Giang">
-    </div>
-
-    <div class="field-group">
-      <label>Mô tả chi tiết nội dung sự việc / Ý kiến đóng góp <span class="label-sub">Detailed Description & Evidence Description</span></label>
-      <textarea id="incDescription" rows="4" required placeholder="Vui lòng mô tả cụ thể diễn biến, thời gian, nhân sự liên quan, tình trạng seal/hàng hóa..."></textarea>
-    </div>
-
-    <div class="field-group">
-      <label>Hình ảnh / Chứng từ minh chứng hiện trường <span class="label-sub">Photo or Document Evidence</span></label>
-      <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
-        <div class="drop-icon">📷</div>
-        <div class="drop-text">Bấm vào đây để chụp ảnh hoặc tải ảnh từ điện thoại</div>
-        <div class="drop-sub">Hỗ trợ định dạng: JPG, PNG, PDF (Tối đa 10MB)</div>
-        <input type="file" id="fileInput" style="display: none;" accept="image/*,.pdf" onchange="handleFileSelect(event)">
-        <div id="fileNotice" style="margin-top: 8px; font-size: 12px; font-weight: 700; color: var(--success);"></div>
-      </div>
-    </div>
-
-    <button type="submit" class="btn-submit">
-      <span>GỬI PHẢN ÁNH / SUBMIT COMPLAINT & FEEDBACK</span> ➔
-    </button>
-  </form>
-</div>
-
-<!-- Modal Success -->
-<div id="successModal" class="modal-overlay">
-  <div class="modal-box">
-    <div class="success-icon">✓</div>
-    <h2 style="font-size: 18px; color: var(--primary); margin-bottom: 6px;">ĐÃ TIẾP NHẬN PHẢN ÁNH THÀNH CÔNG!</h2>
-    <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
-      Thông tin đã được mã hóa an toàn và chuyển trực tiếp tới Ban Giám Đốc và Tổ Công Tác An Ninh C-TPAT Công ty Cargolink.
-    </p>
-    <div>
-      <span class="ticket-badge" id="ticketDisplay">TKT-CGL-2026-96455</span>
-    </div>
-    <p style="font-size: 12px; color: var(--accent); font-weight: 600;">
-      Thời hạn phản hồi cam kết: Trong vòng 2 - 24 giờ làm việc.
-    </p>
-    <div style="margin-top: 20px;">
-      <button class="btn-submit" style="margin-top: 0; width: auto; padding: 10px 24px; display: inline-block;" onclick="location.reload()">Gửi phản ánh khác</button>
-    </div>
+<div class="box">
+  <div class="spinner"></div>
+  <span class="badge">NV APPAREL & CARGOLINK EXPRESS</span>
+  <h1>HỘP THƯ GÓP Ý VÀ KHIẾU NẠI C-TPAT</h1>
+  <p>Đang tự động chuyển hướng Quý khách sang Biểu mẫu Tiếp nhận Chính thức của Khách hàng NV APPAREL (Google Forms)...</p>
+  
+  <a href="https://docs.google.com/forms/d/1WDy9kSA-TzIavBlsSNgcMvU4Wcm0p8yomeZPZ-HgOzo/viewform" class="btn">
+    MỞ BIỂU MẪU GOOGLE FORMS NGAY ➔
+  </a>
+  
+  <div style="font-size: 11.5px; color: #94A3B8; margin-top: 24px;">
+    Kênh tiếp nhận được bảo mật bởi Chương trình An ninh chuỗi cung ứng C-TPAT NV APPAREL.
   </div>
 </div>
 
 <script>
-  // Set current datetime
-  const now = new Date();
-  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-  document.getElementById('incTime').value = now.toISOString().slice(0, 16);
-
-  function toggleAnonMode() {
-    const isAnon = document.getElementById('anonToggle').checked;
-    document.getElementById('contactFields').style.display = isAnon ? 'none' : 'block';
-  }
-
-  function handleFileSelect(e) {
-    if (e.target.files.length > 0) {
-      document.getElementById('fileNotice').innerText = '✓ Đã đính kèm tệp: ' + e.target.files[0].name;
-    }
-  }
-
-  async function submitComplaint(e) {
-    e.preventDefault();
-    const btn = document.querySelector('.btn-submit');
-    btn.disabled = true;
-    btn.innerHTML = 'Đang mã hóa & gửi thông tin...';
-
-    const ticket = 'TKT-CGL-2026-' + Math.floor(1000 + Math.random() * 9000);
-    const isAnon = document.getElementById('anonToggle').checked;
-
-    const payload = {
-      form_type: 'suggestions_and_complaints',
-      ticket_id: ticket,
-      is_anonymous: isAnon,
-      reporter_name: isAnon ? 'Ẩn danh (Bảo mật)' : document.getElementById('reporterName').value,
-      reporter_phone: isAnon ? 'N/A' : document.getElementById('reporterPhone').value,
-      category: document.getElementById('issueCategory').value,
-      priority: document.getElementById('priorityLevel').value,
-      truck_plate: document.getElementById('incTruck').value,
-      incident_time: document.getElementById('incTime').value,
-      location: document.getElementById('incLocation').value,
-      description: document.getElementById('incDescription').value,
-      submitted_at: new Date().toISOString()
-    };
-
-    // Save LocalStorage
-    try {
-      const existing = JSON.parse(localStorage.getItem('cargolink_surveys') || '[]');
-      existing.push(payload);
-      localStorage.setItem('cargolink_surveys', JSON.stringify(existing));
-    } catch(err) {}
-
-    // POST to local API
-    try {
-      await fetch('https://winners-paul-done-firms.trycloudflare.com/api/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    } catch(err) {}
-
-    setTimeout(() => {
-      document.getElementById('ticketDisplay').innerText = ticket;
-      document.getElementById('successModal').style.display = 'flex';
-      btn.disabled = false;
-      btn.innerHTML = '<span>GỬI PHẢN ÁNH / SUBMIT COMPLAINT & FEEDBACK</span> ➔';
-    }, 400);
-  }
+  window.location.href = "https://docs.google.com/forms/d/1WDy9kSA-TzIavBlsSNgcMvU4Wcm0p8yomeZPZ-HgOzo/viewform";
 </script>
 
 </body>
