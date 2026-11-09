@@ -114,7 +114,7 @@ def create_next_steps_docx():
          "• Cặp HS09 & HS10: Danh sách đào tạo C-TPAT có chữ ký, Bài kiểm tra, Sao kê ngân hàng Vietcombank chi trả lương.\n"
          "• Dãy cặp còng HS15: Nhãn gáy CGL-CTPAT-VEHICLE-INSP-2026 phân chia từng biển số xe chứa biên bản kiểm tra 17 điểm.\n"
          "• Cặp HS16: Mẫu Job Sheet kiêm Lệnh vận chuyển có mã chạy duy nhất JOB-CGL-2026-XXXXX liên kết C-TPAT.\n\n"
-         "Người phụ trách: Kế toán trưởng (Bà Phương) & Trưởng phòng Điều độ (Ms. Bích)."),
+         "Người phụ trách: Giám đốc (Mr. Thắng), Kế toán trưởng (Ms. Tú) & Trưởng phòng Điều độ (Ms. Bích)."),
         
         ("GIAI ĐOẠN 4: TẬP HUẤN ĐỘI NGŨ LÁI XE & QUẢN TRỊ VẬN HÀNH (NGÀY 17/11 - 19/11/2026)",
          "Mục tiêu: Đảm bảo 100% lái xe và điều độ viên nắm vững quy trình và biết cách trả lời phỏng vấn chuyên nghiệp.\n\n"

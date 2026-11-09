@@ -87,11 +87,11 @@ evidence_items = [
     },
     {
         "id": "EVID-07",
-        "title": "Bằng chứng 07: Tủ sắt chống cháy bảo mật hồ sơ do Kế toán trưởng quản lý",
-        "finding": "Finding 4 (Bảo mật hồ sơ nhân viên)",
+        "title": "Bằng chứng 07: Tủ sắt chống cháy bảo mật hồ sơ do Giám đốc & Kế toán trưởng đồng quản trị",
+        "finding": "Finding 4 (Bảo mật hồ sơ nhân viên, lý lịch tư pháp & sao kê lương)",
         "file": "HS02-05_ANH_MAU_TU_HO_SO_BAO_MAT_KE_TOAN.png",
-        "action": "Tủ sắt chống cháy khóa mã số có nhãn 'HỒ SƠ BẢO MẬT - KẾ TOÁN TRƯỞNG QUẢN LÝ', Sổ bàn giao hồ sơ bảo mật và camera an ninh giám sát.",
-        "requirement": "Chỉ có Kế toán trưởng (Bà Phương) giữ mã và chìa khóa. Mọi hoạt động mượn/trả hồ sơ phải ký sổ bàn giao."
+        "action": "Tủ sắt chống cháy khóa 2 lớp: 'HỒ SƠ BẢO MẬT - GIÁM ĐỐC & KẾ TOÁN TRƯỞNG ĐỒNG QUẢN TRỊ', Sổ bàn giao hồ sơ bảo mật và camera an ninh giám sát 24/7.",
+        "requirement": "Cơ chế 2 lớp khóa Dual Control: Giám đốc Nguyễn Tất Thắng và Kế toán trưởng Lê Thị Tú đồng quản lý. Mọi hoạt động mượn/trả hồ sơ, lý lịch tư pháp và sao kê lương phải ký Sổ bàn giao (HS02-05)."
     },
     {
         "id": "EVID-08",
