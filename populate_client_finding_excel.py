@@ -127,7 +127,7 @@ findings_data = {
     15: {
         "evidence": "HS16-04: Quy chế phát hành và quản lý Phiếu công việc (Job Sheet) kiêm Lệnh vận chuyển có mã số chạy duy nhất liên kết lộ trình C-TPAT.\nFile mẫu Excel: HS16-04 - Mẫu Phiếu công việc Job Sheet kiêm Lệnh vận chuyển C-TPAT 2 liên có số nhảy tự động (JOB-CGL-2026-XXXXX), in 2 liên (1 liên điều độ, 1 liên tài xế).",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Ms. Bùi Thị Ngọc Bích (Điều độ trưởng)",
+        "person": "Ms. Lưu Thị Ngọc Bích (Điều độ trưởng)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     16: {
@@ -145,7 +145,7 @@ findings_data = {
     18: {
         "evidence": "HS18-06: Sơ đồ liên kết đầu mối chức danh tiếp nhận sự cố: Điều độ (Ms. Bích 077 871 9936), An toàn (Mr. Thành 088 6464 988), Giám đốc (Mr. Thắng 0943 46 46 46), Công an 113, Cứu hỏa 114, Cứu thương 115.",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Ms. Bùi Thị Ngọc Bích & Mr. Thành",
+        "person": "Ms. Lưu Thị Ngọc Bích & Mr. Thành",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     19: {

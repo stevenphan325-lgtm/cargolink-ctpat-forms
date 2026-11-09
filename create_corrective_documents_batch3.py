@@ -527,7 +527,7 @@ def create_hs18_06():
         r.font.color.rgb = NAVY
         
     data = [
-        ["ĐIỀU ĐỘ TRỰC CA\n(Tiếp nhận cấp 1)", "Ms. Bùi Thị Ngọc Bích\n(Trưởng phòng Điều độ)", "077 871 9936\n(Hotline Điều độ 24/7)", "Tiếp nhận thông tin hỏng xe, kẹt xe, chậm tiến độ < 30 phút. Điều xe cứu hộ hoặc xe thay thế."],
+        ["ĐIỀU ĐỘ TRỰC CA\n(Tiếp nhận cấp 1)", "Ms. Lưu Thị Ngọc Bích\n(Trưởng phòng Điều độ)", "077 871 9936\n(Hotline Điều độ 24/7)", "Tiếp nhận thông tin hỏng xe, kẹt xe, chậm tiến độ < 30 phút. Điều xe cứu hộ hoặc xe thay thế."],
         ["TRƯỞNG BAN AN TOÀN\n(Tiếp nhận sự cố an ninh)", "Mr. Phan Công Thành\n(Trưởng ban An toàn)", "088 6464 988\n(Hotline An toàn)", "Tiếp nhận sự cố đứt niêm phong Seal, va chạm giao thông, nghi vấn hàng hóa bất thường."],
         ["GIÁM ĐỐC ĐIỀU HÀNH\n(Chỉ đạo tối cao)", "Mr. Nguyễn Tất Thắng\n(Giám đốc)", "0943 46 46 46\n(Khẩn cấp 24/7/365)", "Quyết định xử lý tai nạn nghiêm trọng, thông báo khẩn cho Ban lãnh đạo NV Apparel và cơ quan điều tra."],
         ["CẢNH SÁT KHẨN CẤP", "Công an P. Bình Hưng Hòa B\nCảnh sát Phản ứng nhanh", "113\n(028. 3750 5935)", "Hỗ trợ trấn áp tội phạm, bảo vệ hiện trường tai nạn, xử lý hành vi phá hoại hoặc cướp hàng."],

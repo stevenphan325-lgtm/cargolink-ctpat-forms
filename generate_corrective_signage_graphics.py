@@ -205,7 +205,7 @@ def make_hotline_sticker():
     
     # 2-column contact cards
     cards = [
-        ("ĐIỀU ĐỘ VẬN HÀNH (DISPATCH 24/7)", "Ms. Bùi Thị Ngọc Bích (Trưởng phòng Điều độ)", "077 871 9936", "#EFF6FF", "#1E40AF"),
+        ("ĐIỀU ĐỘ VẬN HÀNH (DISPATCH 24/7)", "Ms. Lưu Thị Ngọc Bích (Trưởng phòng Điều độ)", "077 871 9936", "#EFF6FF", "#1E40AF"),
         ("AN TOÀN C-TPAT & KỸ THUẬT XE", "Mr. Phan Công Thành (Trưởng ban An toàn)", "088 6464 988", "#FEF2F2", "#DC2626"),
         ("KHẨN CẤP 24/7/365 & BAN GIÁM ĐỐC", "Mr. Nguyễn Tất Thắng (Giám đốc)", "0943 46 46 46", "#FEFCE8", "#B45309"),
         ("CƠ QUAN CHỨC NĂNG KHẨN CẤP", "Cảnh sát phản ứng nhanh / PCCC / Cấp cứu y tế", "113  |  114  |  115", "#F0FDF4", "#15803D")

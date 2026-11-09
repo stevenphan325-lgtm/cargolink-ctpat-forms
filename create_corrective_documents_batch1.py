@@ -316,7 +316,7 @@ GIÁM ĐỐC CÔNG TY QUYẾT ĐỊNH:
 
 Điều 3: Quy trình bàn giao khi thay đổi nhân sự, vắng mặt hoặc chuyển giao công tác:
 - Trong trường hợp Kế toán trưởng Lê Thị Tú hoặc Giám đốc Nguyễn Tất Thắng vắng mặt (nghỉ phép từ 03 ngày trở lên, đi công tác):
-  * Phải lập "Biên bản bàn giao chìa khóa và quyền quản lý tủ hồ sơ bảo mật" cho nhân sự được ủy quyền bằng văn bản (Bà Bùi Thị Ngọc Bích - Trưởng phòng Điều độ).
+  * Phải lập "Biên bản bàn giao chìa khóa và quyền quản lý tủ hồ sơ bảo mật" cho nhân sự được ủy quyền bằng văn bản (Bà Lưu Thị Ngọc Bích - Trưởng phòng Điều độ).
   * Biên bản bàn giao phải ghi rõ số lượng từng cặp hồ sơ, tình trạng niêm phong chìa khóa và phải có đầy đủ chữ ký của: Người bàn giao, Người nhận bàn giao và Giám đốc phê duyệt xác nhận.
   * Khi Kế toán trưởng trở lại làm việc, hai bên tiến hành kiểm kê đối chiếu hiện trạng và lập biên bản tái tiếp nhận quyền quản lý.
 

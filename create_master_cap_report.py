@@ -97,7 +97,7 @@ def create_cap_docx():
     r.font.color.rgb = NAVY
     doc.add_paragraph(
         "Công ty TNHH Cargolink Express Việt Nam trân trọng gửi lời cảm ơn sâu sắc tới Ban đánh giá an ninh C-TPAT của Công ty TNHH NV Apparel (Tập đoàn Nice Group) đã tiến hành đợt đánh giá thường niên ngày 04/11/2026 tại văn phòng và hệ thống phương tiện bãi xe của Cargolink.\n\n"
-        "Ngay sau khi tiếp nhận bảng tổng hợp kiến nghị (Slide Finding & Sheet 14) từ đại diện khách hàng, Ban Giám Đốc Cargolink đã triệu tập cuộc họp khẩn cấp, thành lập Ban Đặc trách Khắc phục C-TPAT 2026 do Giám đốc Nguyễn Tất Thắng trực tiếp chỉ đạo, phối hợp chặt chẽ cùng Trưởng ban An toàn Phan Công Thành, Kế toán trưởng Lê Thị Tú và Trưởng phòng Điều độ Bùi Thị Ngọc Bích.\n\n"
+        "Ngay sau khi tiếp nhận bảng tổng hợp kiến nghị (Slide Finding & Sheet 14) từ đại diện khách hàng, Ban Giám Đốc Cargolink đã triệu tập cuộc họp khẩn cấp, thành lập Ban Đặc trách Khắc phục C-TPAT 2026 do Giám đốc Nguyễn Tất Thắng trực tiếp chỉ đạo, phối hợp chặt chẽ cùng Trưởng ban An toàn Phan Công Thành, Kế toán trưởng Lê Thị Tú và Trưởng phòng Điều độ Lưu Thị Ngọc Bích.\n\n"
         "Cargolink cam kết tuân thủ 100% 5 yêu cầu cốt lõi của khách hàng:\n"
         "1. Hoàn thành toàn diện Sheet 14 (An toàn cơ sở & công việc), phân tách rõ các hạng mục hóa chất / nhà máy màu đỏ được miễn trừ và đạt điểm tuyệt đối 100% đối với các tiêu chí thuộc phạm vi nhà vận tải.\n"
         "2. Khắc phục triệt để 31 Finding trong Slide Finding, ban hành đầy đủ chính sách và đưa vào thực tế vận hành.\n"

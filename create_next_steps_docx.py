@@ -195,7 +195,7 @@ def create_next_steps_docx():
             r2.font.size = Pt(9.5)
         elif i == 1:
             p_sig.paragraph_format.space_before = Pt(36)
-            r2 = p_sig.add_run("Bùi Thị Ngọc Bích\n(Trưởng phòng Điều độ)")
+            r2 = p_sig.add_run("Lưu Thị Ngọc Bích\n(Trưởng phòng Điều độ)")
             r2.font.size = Pt(9.5)
         elif i == 2:
             p_sig.paragraph_format.space_before = Pt(4)
