@@ -378,13 +378,41 @@ def generate_docx_album():
 # 2. GENERATE HTML GALLERY: 00_BO_ANH_BANG_CHUNG_MAU_AUDIT_CTPAT_2026.html
 # -------------------------------------------------------------
 def generate_html_album():
+    import shutil
+    # Ensure all 20 images exist in BASE_DIR, ASSETS_DIR, QR_DIR, and ARTIFACT_DIR
+    for item in evidence_items:
+        fn = item['file']
+        src_candidates = [
+            os.path.join(ASSETS_DIR, fn),
+            os.path.join(QR_DIR, fn),
+            os.path.join(BASE_DIR, fn)
+        ]
+        found_src = None
+        for cand in src_candidates:
+            if os.path.exists(cand):
+                found_src = cand
+                break
+        if found_src:
+            for target_dir in [BASE_DIR, ASSETS_DIR, QR_DIR, ARTIFACT_DIR]:
+                dst = os.path.join(target_dir, fn)
+                if not os.path.exists(dst) or os.path.getsize(dst) != os.path.getsize(found_src):
+                    try:
+                        shutil.copy2(found_src, dst)
+                    except:
+                        pass
+
     cards_html = ""
     for item in evidence_items:
         cards_html += f"""
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('{item['file']}', '{item['title']}', '{item['id']}')">
       <div class="card-img-wrap">
-        <img src="{item['file']}" alt="{item['title']}" loading="lazy">
+        <img src="{item['file']}" 
+             data-filename="{item['file']}" 
+             onerror="handleImageFallback(this)" 
+             alt="{item['title']}" 
+             loading="lazy">
         <div class="badge-id">{item['id']}</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">{item['finding']}</div>
@@ -478,6 +506,7 @@ def generate_html_album():
       display: flex;
       flex-direction: column;
       transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
     }}
     .evidence-card:hover {{
       transform: translateY(-4px);
@@ -498,6 +527,10 @@ def generate_html_album():
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.3s;
+    }}
+    .evidence-card:hover .card-img-wrap img {{
+      transform: scale(1.03);
     }}
     .badge-id {{
       position: absolute;
@@ -510,6 +543,25 @@ def generate_html_album():
       padding: 4px 8px;
       border-radius: 6px;
       backdrop-filter: blur(4px);
+      z-index: 2;
+    }}
+    .zoom-hint {{
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(7, 26, 54, 0.8);
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 2;
+      backdrop-filter: blur(2px);
+    }}
+    .evidence-card:hover .zoom-hint {{
+      opacity: 1;
     }}
     
     .card-body {{
@@ -557,11 +609,72 @@ def generate_html_album():
       border: 1px solid #86EFAC;
     }}
     
+    /* Modal Lightbox */
+    .modal {{
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 26, 54, 0.94);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }}
+    .modal-content-wrap {{
+      max-width: 95vw;
+      max-height: 95vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }}
+    .modal-header {{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }}
+    .modal-badge {{
+      background: var(--accent);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 12px;
+    }}
+    .modal-img {{
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      object-fit: contain;
+      background: #0B192C;
+    }}
+    .modal-close {{
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #FFF;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }}
+    .modal-close:hover {{
+      color: var(--accent);
+    }}
+
     .footer {{
       text-align: center;
       padding: 30px 16px;
       color: var(--muted);
       font-size: 12.5px;
+      line-height: 1.6;
     }}
   </style>
 </head>
@@ -600,11 +713,71 @@ def generate_html_album():
     </div>
   </div>
 
+  <!-- Modal Lightbox -->
+  <div id="imgModal" class="modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <div class="modal-content-wrap" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span id="modalBadge" class="modal-badge"></span>
+        <h3 id="modalTitle" style="color:white; font-size:16px;"></h3>
+      </div>
+      <img id="modalImg" class="modal-img" src="" alt="Full size preview">
+    </div>
+  </div>
+
   <div class="footer">
     <strong>CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM</strong><br>
     Trụ sở: Lầu 6, Số 84 Bạch Đằng, Phường Tân Sơn Hòa, TP. Hồ Chí Minh | MST: 0313492159<br>
-    Hotline Điều độ: 077 871 9936 (Ms. Bích) | Hotline An toàn: 088 6464 988 (Mr. Thành) | Khẩn cấp 24/7: 0943 46 46 46
+    Hotline Điều độ: 077 871 9936 (Ms. Lưu Thị Ngọc Bích) | Hotline An toàn: 088 6464 988 (Mr. Phan Công Thành) | Ban Giám đốc: 0943 46 46 46 (Mr. Nguyễn Tất Thắng)
   </div>
+
+  <script>
+    const fallbackSources = [
+      (fn) => "00_BO_BANNER_VA_LOGO_CARGOLINK/" + fn,
+      (fn) => "CTPAT_QR_FORMS/" + fn,
+      (fn) => "../00_BO_BANNER_VA_LOGO_CARGOLINK/" + fn,
+      (fn) => "https://thangcargolink.github.io/cargolink-ctpat-portal/" + fn
+    ];
+
+    function handleImageFallback(img) {{
+      let step = parseInt(img.getAttribute('data-step') || '0', 10);
+      const fn = img.getAttribute('data-filename') || img.src.split('/').pop().split('?')[0];
+      if (step < fallbackSources.length) {{
+        img.setAttribute('data-step', step + 1);
+        img.src = fallbackSources[step](fn);
+      }}
+    }}
+
+    function openModal(src, title, id) {{
+      const modal = document.getElementById('imgModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBadge = document.getElementById('modalBadge');
+      
+      const cardImgs = document.querySelectorAll(`img[data-filename="${{src}}"]`);
+      if (cardImgs.length > 0 && cardImgs[0].currentSrc) {{
+        modalImg.src = cardImgs[0].currentSrc;
+      }} else {{
+        modalImg.src = src;
+      }}
+      modalImg.setAttribute('data-filename', src);
+      modalImg.onerror = function() {{ handleImageFallback(this); }};
+      modalTitle.innerText = title;
+      modalBadge.innerText = id;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }}
+
+    function closeModal() {{
+      const modal = document.getElementById('imgModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }}
+
+    document.addEventListener('keydown', function(e) {{
+      if (e.key === 'Escape') closeModal();
+    }});
+  </script>
 
 </body>
 </html>

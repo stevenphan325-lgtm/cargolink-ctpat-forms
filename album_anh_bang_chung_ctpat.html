@@ -78,6 +78,7 @@
       display: flex;
       flex-direction: column;
       transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
     }
     .evidence-card:hover {
       transform: translateY(-4px);
@@ -98,6 +99,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .evidence-card:hover .card-img-wrap img {
+      transform: scale(1.03);
     }
     .badge-id {
       position: absolute;
@@ -110,6 +115,25 @@
       padding: 4px 8px;
       border-radius: 6px;
       backdrop-filter: blur(4px);
+      z-index: 2;
+    }
+    .zoom-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(7, 26, 54, 0.8);
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 2;
+      backdrop-filter: blur(2px);
+    }
+    .evidence-card:hover .zoom-hint {
+      opacity: 1;
     }
     
     .card-body {
@@ -157,11 +181,72 @@
       border: 1px solid #86EFAC;
     }
     
+    /* Modal Lightbox */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 26, 54, 0.94);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-content-wrap {
+      max-width: 95vw;
+      max-height: 95vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .modal-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .modal-badge {
+      background: var(--accent);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 12px;
+    }
+    .modal-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      object-fit: contain;
+      background: #0B192C;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #FFF;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover {
+      color: var(--accent);
+    }
+
     .footer {
       text-align: center;
       padding: 30px 16px;
       color: var(--muted);
       font-size: 12.5px;
+      line-height: 1.6;
     }
   </style>
 </head>
@@ -197,10 +282,15 @@
   <div class="container">
     <div class="gallery-grid">
       
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS15-06_ANH_MAU_KIEM_TRA_XE_17_DIEM.png', 'Bằng chứng 01: Quy trình kiểm tra an ninh xe tải 17 điểm C-TPAT', 'EVID-01')">
       <div class="card-img-wrap">
-        <img src="HS15-06_ANH_MAU_KIEM_TRA_XE_17_DIEM.png" alt="Bằng chứng 01: Quy trình kiểm tra an ninh xe tải 17 điểm C-TPAT" loading="lazy">
+        <img src="HS15-06_ANH_MAU_KIEM_TRA_XE_17_DIEM.png" 
+             data-filename="HS15-06_ANH_MAU_KIEM_TRA_XE_17_DIEM.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 01: Quy trình kiểm tra an ninh xe tải 17 điểm C-TPAT" 
+             loading="lazy">
         <div class="badge-id">EVID-01</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 21 & Sheet 14 (Vehicle & Container Security)</div>
@@ -213,10 +303,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS01-05_ANH_MAU_BAI_XE_CCTV_CARGOLINK.png', 'Bằng chứng 02: Toàn cảnh bãi xe logistics, tường rào 2.6m & hệ thống CCTV', 'EVID-02')">
       <div class="card-img-wrap">
-        <img src="HS01-05_ANH_MAU_BAI_XE_CCTV_CARGOLINK.png" alt="Bằng chứng 02: Toàn cảnh bãi xe logistics, tường rào 2.6m & hệ thống CCTV" loading="lazy">
+        <img src="HS01-05_ANH_MAU_BAI_XE_CCTV_CARGOLINK.png" 
+             data-filename="HS01-05_ANH_MAU_BAI_XE_CCTV_CARGOLINK.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 02: Toàn cảnh bãi xe logistics, tường rào 2.6m & hệ thống CCTV" 
+             loading="lazy">
         <div class="badge-id">EVID-02</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 3 & Finding 25 (Hạ tầng bãi xe & Hiện trạng)</div>
@@ -229,10 +324,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS03-08_ANH_MAU_DO_NONG_DO_CON_TAI_XE.png', 'Bằng chứng 03: Kiểm tra nồng độ cồn và xét nghiệm ma túy tài xế', 'EVID-03')">
       <div class="card-img-wrap">
-        <img src="HS03-08_ANH_MAU_DO_NONG_DO_CON_TAI_XE.png" alt="Bằng chứng 03: Kiểm tra nồng độ cồn và xét nghiệm ma túy tài xế" loading="lazy">
+        <img src="HS03-08_ANH_MAU_DO_NONG_DO_CON_TAI_XE.png" 
+             data-filename="HS03-08_ANH_MAU_DO_NONG_DO_CON_TAI_XE.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 03: Kiểm tra nồng độ cồn và xét nghiệm ma túy tài xế" 
+             loading="lazy">
         <div class="badge-id">EVID-03</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 23 & Sheet 14 (Chính sách Zero Tolerance)</div>
@@ -245,10 +345,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS18-06_ANH_MAU_CABIN_DAN_HOTLINE_VA_QR.png', 'Bằng chứng 04: Nhãn dán Hotline khẩn cấp và Bộ Decal 3 QR Code trong cabin', 'EVID-04')">
       <div class="card-img-wrap">
-        <img src="HS18-06_ANH_MAU_CABIN_DAN_HOTLINE_VA_QR.png" alt="Bằng chứng 04: Nhãn dán Hotline khẩn cấp và Bộ Decal 3 QR Code trong cabin" loading="lazy">
+        <img src="HS18-06_ANH_MAU_CABIN_DAN_HOTLINE_VA_QR.png" 
+             data-filename="HS18-06_ANH_MAU_CABIN_DAN_HOTLINE_VA_QR.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 04: Nhãn dán Hotline khẩn cấp và Bộ Decal 3 QR Code trong cabin" 
+             loading="lazy">
         <div class="badge-id">EVID-04</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 17, 18, 20 & Finding 24 (Trực quan hóa cabin xe)</div>
@@ -261,10 +366,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS14-08_ANH_MAU_TU_SO_CUU_PCCC_VAN_PHONG.png', 'Bằng chứng 05: Trạm an toàn PCCC, Tủ sơ cứu First Aid và Văn phòng xanh', 'EVID-05')">
       <div class="card-img-wrap">
-        <img src="HS14-08_ANH_MAU_TU_SO_CUU_PCCC_VAN_PHONG.png" alt="Bằng chứng 05: Trạm an toàn PCCC, Tủ sơ cứu First Aid và Văn phòng xanh" loading="lazy">
+        <img src="HS14-08_ANH_MAU_TU_SO_CUU_PCCC_VAN_PHONG.png" 
+             data-filename="HS14-08_ANH_MAU_TU_SO_CUU_PCCC_VAN_PHONG.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 05: Trạm an toàn PCCC, Tủ sơ cứu First Aid và Văn phòng xanh" 
+             loading="lazy">
         <div class="badge-id">EVID-05</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 1, 12, 14 & Sheet 14 (PCCC & Y tế)</div>
@@ -277,10 +387,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS14-08_ANH_MAU_DIEM_TAP_KET_SO_TAN_PCCC.png', 'Bằng chứng 06: Điểm tập kết sơ tán PCCC song ngữ Anh - Thái ngoài trời', 'EVID-06')">
       <div class="card-img-wrap">
-        <img src="HS14-08_ANH_MAU_DIEM_TAP_KET_SO_TAN_PCCC.png" alt="Bằng chứng 06: Điểm tập kết sơ tán PCCC song ngữ Anh - Thái ngoài trời" loading="lazy">
+        <img src="HS14-08_ANH_MAU_DIEM_TAP_KET_SO_TAN_PCCC.png" 
+             data-filename="HS14-08_ANH_MAU_DIEM_TAP_KET_SO_TAN_PCCC.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 06: Điểm tập kết sơ tán PCCC song ngữ Anh - Thái ngoài trời" 
+             loading="lazy">
         <div class="badge-id">EVID-06</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 13 & Sheet 14.11 (Assembly Point)</div>
@@ -293,10 +408,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS02-05_ANH_MAU_TU_HO_SO_BAO_MAT_KE_TOAN.png', 'Bằng chứng 07: Tủ sắt chống cháy bảo mật hồ sơ do Giám đốc & Kế toán trưởng đồng quản trị', 'EVID-07')">
       <div class="card-img-wrap">
-        <img src="HS02-05_ANH_MAU_TU_HO_SO_BAO_MAT_KE_TOAN.png" alt="Bằng chứng 07: Tủ sắt chống cháy bảo mật hồ sơ do Giám đốc & Kế toán trưởng đồng quản trị" loading="lazy">
+        <img src="HS02-05_ANH_MAU_TU_HO_SO_BAO_MAT_KE_TOAN.png" 
+             data-filename="HS02-05_ANH_MAU_TU_HO_SO_BAO_MAT_KE_TOAN.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 07: Tủ sắt chống cháy bảo mật hồ sơ do Giám đốc & Kế toán trưởng đồng quản trị" 
+             loading="lazy">
         <div class="badge-id">EVID-07</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 4 (Bảo mật hồ sơ nhân viên, lý lịch tư pháp & sao kê lương)</div>
@@ -309,10 +429,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS16-04_ANH_MAU_JOB_SHEET_THEO_XE.png', 'Bằng chứng 08: Phiếu công việc Job Sheet có số chạy duy nhất liên kết C-TPAT', 'EVID-08')">
       <div class="card-img-wrap">
-        <img src="HS16-04_ANH_MAU_JOB_SHEET_THEO_XE.png" alt="Bằng chứng 08: Phiếu công việc Job Sheet có số chạy duy nhất liên kết C-TPAT" loading="lazy">
+        <img src="HS16-04_ANH_MAU_JOB_SHEET_THEO_XE.png" 
+             data-filename="HS16-04_ANH_MAU_JOB_SHEET_THEO_XE.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 08: Phiếu công việc Job Sheet có số chạy duy nhất liên kết C-TPAT" 
+             loading="lazy">
         <div class="badge-id">EVID-08</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 15 & Finding 28 (Truy xuất nguồn gốc & Lộ trình)</div>
@@ -325,10 +450,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS14-08_ANH_MAU_KHU_VUC_HUT_THUOC_RIENG_BIET.png', 'Bằng chứng 09: Khu vực hút thuốc riêng biệt ngoài trời cách xe 15m', 'EVID-09')">
       <div class="card-img-wrap">
-        <img src="HS14-08_ANH_MAU_KHU_VUC_HUT_THUOC_RIENG_BIET.png" alt="Bằng chứng 09: Khu vực hút thuốc riêng biệt ngoài trời cách xe 15m" loading="lazy">
+        <img src="HS14-08_ANH_MAU_KHU_VUC_HUT_THUOC_RIENG_BIET.png" 
+             data-filename="HS14-08_ANH_MAU_KHU_VUC_HUT_THUOC_RIENG_BIET.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 09: Khu vực hút thuốc riêng biệt ngoài trời cách xe 15m" 
+             loading="lazy">
         <div class="badge-id">EVID-09</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 14 & Sheet 14.12 (Designated Smoking Area)</div>
@@ -341,10 +471,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS20-06_ANH_MAU_HE_THONG_CAMERA_CCTV_180_NGAY.png', 'Bằng chứng 10: Phòng điều hành CCTV 14 mắt & Nâng cấp lưu trữ 180 ngày', 'EVID-10')">
       <div class="card-img-wrap">
-        <img src="HS20-06_ANH_MAU_HE_THONG_CAMERA_CCTV_180_NGAY.png" alt="Bằng chứng 10: Phòng điều hành CCTV 14 mắt & Nâng cấp lưu trữ 180 ngày" loading="lazy">
+        <img src="HS20-06_ANH_MAU_HE_THONG_CAMERA_CCTV_180_NGAY.png" 
+             data-filename="HS20-06_ANH_MAU_HE_THONG_CAMERA_CCTV_180_NGAY.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 10: Phòng điều hành CCTV 14 mắt & Nâng cấp lưu trữ 180 ngày" 
+             loading="lazy">
         <div class="badge-id">EVID-10</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 19 & Finding 26 (CCTV Surveillance 6 Months)</div>
@@ -357,10 +492,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS15-06_ANH_MAU_CAP_CONG_HO_SO_KIEM_TRA_XE.png', 'Bằng chứng 11: Cặp còng hồ sơ kiểm tra an ninh xe theo ngày & biển số', 'EVID-11')">
       <div class="card-img-wrap">
-        <img src="HS15-06_ANH_MAU_CAP_CONG_HO_SO_KIEM_TRA_XE.png" alt="Bằng chứng 11: Cặp còng hồ sơ kiểm tra an ninh xe theo ngày & biển số" loading="lazy">
+        <img src="HS15-06_ANH_MAU_CAP_CONG_HO_SO_KIEM_TRA_XE.png" 
+             data-filename="HS15-06_ANH_MAU_CAP_CONG_HO_SO_KIEM_TRA_XE.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 11: Cặp còng hồ sơ kiểm tra an ninh xe theo ngày & biển số" 
+             loading="lazy">
         <div class="badge-id">EVID-11</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 21 (Hệ thống cặp file vật lý)</div>
@@ -373,10 +513,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS09-06_ANH_MAU_LOP_DAO_TAO_AN_NINH_CTPAT.png', 'Bằng chứng 12: Khóa đào tạo bồi dưỡng định kỳ An ninh C-TPAT & Luật giao thông', 'EVID-12')">
       <div class="card-img-wrap">
-        <img src="HS09-06_ANH_MAU_LOP_DAO_TAO_AN_NINH_CTPAT.png" alt="Bằng chứng 12: Khóa đào tạo bồi dưỡng định kỳ An ninh C-TPAT & Luật giao thông" loading="lazy">
+        <img src="HS09-06_ANH_MAU_LOP_DAO_TAO_AN_NINH_CTPAT.png" 
+             data-filename="HS09-06_ANH_MAU_LOP_DAO_TAO_AN_NINH_CTPAT.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 12: Khóa đào tạo bồi dưỡng định kỳ An ninh C-TPAT & Luật giao thông" 
+             loading="lazy">
         <div class="badge-id">EVID-12</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 9 & Finding 31 (Đào tạo & Sát hạch C-TPAT)</div>
@@ -389,10 +534,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS15-07_ANH_MAU_BAO_DUONG_XE_GARAGE.png', 'Bằng chứng 13: Bảo dưỡng phương tiện định kỳ tại Garage chuyên nghiệp', 'EVID-13')">
       <div class="card-img-wrap">
-        <img src="HS15-07_ANH_MAU_BAO_DUONG_XE_GARAGE.png" alt="Bằng chứng 13: Bảo dưỡng phương tiện định kỳ tại Garage chuyên nghiệp" loading="lazy">
+        <img src="HS15-07_ANH_MAU_BAO_DUONG_XE_GARAGE.png" 
+             data-filename="HS15-07_ANH_MAU_BAO_DUONG_XE_GARAGE.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 13: Bảo dưỡng phương tiện định kỳ tại Garage chuyên nghiệp" 
+             loading="lazy">
         <div class="badge-id">EVID-13</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 22 (Bảo dưỡng định kỳ theo kế hoạch)</div>
@@ -405,10 +555,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS10-04_ANH_MAU_SAO_KE_LUONG_NGAN_HANG.png', 'Bằng chứng 14: Chứng từ sao kê ngân hàng & Bằng chứng chi trả lương lái xe', 'EVID-14')">
       <div class="card-img-wrap">
-        <img src="HS10-04_ANH_MAU_SAO_KE_LUONG_NGAN_HANG.png" alt="Bằng chứng 14: Chứng từ sao kê ngân hàng & Bằng chứng chi trả lương lái xe" loading="lazy">
+        <img src="HS10-04_ANH_MAU_SAO_KE_LUONG_NGAN_HANG.png" 
+             data-filename="HS10-04_ANH_MAU_SAO_KE_LUONG_NGAN_HANG.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 14: Chứng từ sao kê ngân hàng & Bằng chứng chi trả lương lái xe" 
+             loading="lazy">
         <div class="badge-id">EVID-14</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 10 (Minh bạch lương thưởng & Trách nhiệm xã hội)</div>
@@ -421,10 +576,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS14-01_ANH_MAU_NHA_VE_SINH_NAM_NU_DAT_CHUAN.png', 'Bằng chứng 15: Nhà vệ sinh nam nữ riêng biệt đạt chuẩn phúc lợi & ISO', 'EVID-15')">
       <div class="card-img-wrap">
-        <img src="HS14-01_ANH_MAU_NHA_VE_SINH_NAM_NU_DAT_CHUAN.png" alt="Bằng chứng 15: Nhà vệ sinh nam nữ riêng biệt đạt chuẩn phúc lợi & ISO" loading="lazy">
+        <img src="HS14-01_ANH_MAU_NHA_VE_SINH_NAM_NU_DAT_CHUAN.png" 
+             data-filename="HS14-01_ANH_MAU_NHA_VE_SINH_NAM_NU_DAT_CHUAN.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 15: Nhà vệ sinh nam nữ riêng biệt đạt chuẩn phúc lợi & ISO" 
+             loading="lazy">
         <div class="badge-id">EVID-15</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Sheet 14.40 - 14.45 (Phúc lợi & Vệ sinh môi trường)</div>
@@ -437,10 +597,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS14-08_EXIT_SIGN_ENGLISH_THAI.png', 'Bằng chứng 16: Biển báo Lối thoát hiểm Song ngữ Anh - Thái chuẩn ISO 7010', 'EVID-16')">
       <div class="card-img-wrap">
-        <img src="HS14-08_EXIT_SIGN_ENGLISH_THAI.png" alt="Bằng chứng 16: Biển báo Lối thoát hiểm Song ngữ Anh - Thái chuẩn ISO 7010" loading="lazy">
+        <img src="HS14-08_EXIT_SIGN_ENGLISH_THAI.png" 
+             data-filename="HS14-08_EXIT_SIGN_ENGLISH_THAI.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 16: Biển báo Lối thoát hiểm Song ngữ Anh - Thái chuẩn ISO 7010" 
+             loading="lazy">
         <div class="badge-id">EVID-16</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 12 & Sheet 14.10 (Exit Sign)</div>
@@ -453,10 +618,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS14-08_ASSEMBLY_POINT_SIGN_ENGLISH_THAI.png', 'Bằng chứng 17: Biển báo Điểm tập kết sơ tán Song ngữ Anh - Thái', 'EVID-17')">
       <div class="card-img-wrap">
-        <img src="HS14-08_ASSEMBLY_POINT_SIGN_ENGLISH_THAI.png" alt="Bằng chứng 17: Biển báo Điểm tập kết sơ tán Song ngữ Anh - Thái" loading="lazy">
+        <img src="HS14-08_ASSEMBLY_POINT_SIGN_ENGLISH_THAI.png" 
+             data-filename="HS14-08_ASSEMBLY_POINT_SIGN_ENGLISH_THAI.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 17: Biển báo Điểm tập kết sơ tán Song ngữ Anh - Thái" 
+             loading="lazy">
         <div class="badge-id">EVID-17</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 13 & Sheet 14.11 (Assembly Point)</div>
@@ -469,10 +639,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS14-08_NO_SMOKING_SIGN_ENGLISH_THAI.png', 'Bằng chứng 18: Biển báo Cấm hút thuốc Song ngữ Anh - Thái', 'EVID-18')">
       <div class="card-img-wrap">
-        <img src="HS14-08_NO_SMOKING_SIGN_ENGLISH_THAI.png" alt="Bằng chứng 18: Biển báo Cấm hút thuốc Song ngữ Anh - Thái" loading="lazy">
+        <img src="HS14-08_NO_SMOKING_SIGN_ENGLISH_THAI.png" 
+             data-filename="HS14-08_NO_SMOKING_SIGN_ENGLISH_THAI.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 18: Biển báo Cấm hút thuốc Song ngữ Anh - Thái" 
+             loading="lazy">
         <div class="badge-id">EVID-18</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 14 & Sheet 14.12 (No Smoking)</div>
@@ -485,10 +660,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS18-06_EMERGENCY_HOTLINE_STICKER.png', 'Bằng chứng 19: Nhãn dán Hotline khẩn cấp phản quang trên xe tải', 'EVID-19')">
       <div class="card-img-wrap">
-        <img src="HS18-06_EMERGENCY_HOTLINE_STICKER.png" alt="Bằng chứng 19: Nhãn dán Hotline khẩn cấp phản quang trên xe tải" loading="lazy">
+        <img src="HS18-06_EMERGENCY_HOTLINE_STICKER.png" 
+             data-filename="HS18-06_EMERGENCY_HOTLINE_STICKER.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 19: Nhãn dán Hotline khẩn cấp phản quang trên xe tải" 
+             loading="lazy">
         <div class="badge-id">EVID-19</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 17, 18, 20 (Emergency Contact)</div>
@@ -501,10 +681,15 @@
       </div>
     </div>
 
-    <div class="evidence-card">
+    <div class="evidence-card" onclick="openModal('HS21-03_DECAL_3_QR_CODE_DAN_CABIN_XE.png', 'Bằng chứng 20: Bộ Decal 3 Mã QR Chuyên biệt Dán Cabin Xe Tải', 'EVID-20')">
       <div class="card-img-wrap">
-        <img src="HS21-03_DECAL_3_QR_CODE_DAN_CABIN_XE.png" alt="Bằng chứng 20: Bộ Decal 3 Mã QR Chuyên biệt Dán Cabin Xe Tải" loading="lazy">
+        <img src="HS21-03_DECAL_3_QR_CODE_DAN_CABIN_XE.png" 
+             data-filename="HS21-03_DECAL_3_QR_CODE_DAN_CABIN_XE.png" 
+             onerror="handleImageFallback(this)" 
+             alt="Bằng chứng 20: Bộ Decal 3 Mã QR Chuyên biệt Dán Cabin Xe Tải" 
+             loading="lazy">
         <div class="badge-id">EVID-20</div>
+        <div class="zoom-hint">🔍 Xem chi tiết</div>
       </div>
       <div class="card-body">
         <div class="finding-tag">Finding 24 & Finding 8 (Driver QR System)</div>
@@ -520,11 +705,71 @@
     </div>
   </div>
 
+  <!-- Modal Lightbox -->
+  <div id="imgModal" class="modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <div class="modal-content-wrap" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span id="modalBadge" class="modal-badge"></span>
+        <h3 id="modalTitle" style="color:white; font-size:16px;"></h3>
+      </div>
+      <img id="modalImg" class="modal-img" src="" alt="Full size preview">
+    </div>
+  </div>
+
   <div class="footer">
     <strong>CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM</strong><br>
     Trụ sở: Lầu 6, Số 84 Bạch Đằng, Phường Tân Sơn Hòa, TP. Hồ Chí Minh | MST: 0313492159<br>
-    Hotline Điều độ: 077 871 9936 (Ms. Bích) | Hotline An toàn: 088 6464 988 (Mr. Thành) | Khẩn cấp 24/7: 0943 46 46 46
+    Hotline Điều độ: 077 871 9936 (Ms. Lưu Thị Ngọc Bích) | Hotline An toàn: 088 6464 988 (Mr. Phan Công Thành) | Ban Giám đốc: 0943 46 46 46 (Mr. Nguyễn Tất Thắng)
   </div>
+
+  <script>
+    const fallbackSources = [
+      (fn) => "00_BO_BANNER_VA_LOGO_CARGOLINK/" + fn,
+      (fn) => "CTPAT_QR_FORMS/" + fn,
+      (fn) => "../00_BO_BANNER_VA_LOGO_CARGOLINK/" + fn,
+      (fn) => "https://thangcargolink.github.io/cargolink-ctpat-portal/" + fn
+    ];
+
+    function handleImageFallback(img) {
+      let step = parseInt(img.getAttribute('data-step') || '0', 10);
+      const fn = img.getAttribute('data-filename') || img.src.split('/').pop().split('?')[0];
+      if (step < fallbackSources.length) {
+        img.setAttribute('data-step', step + 1);
+        img.src = fallbackSources[step](fn);
+      }
+    }
+
+    function openModal(src, title, id) {
+      const modal = document.getElementById('imgModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBadge = document.getElementById('modalBadge');
+      
+      const cardImgs = document.querySelectorAll(`img[data-filename="${src}"]`);
+      if (cardImgs.length > 0 && cardImgs[0].currentSrc) {
+        modalImg.src = cardImgs[0].currentSrc;
+      } else {
+        modalImg.src = src;
+      }
+      modalImg.setAttribute('data-filename', src);
+      modalImg.onerror = function() { handleImageFallback(this); };
+      modalTitle.innerText = title;
+      modalBadge.innerText = id;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imgModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
 
 </body>
 </html>
