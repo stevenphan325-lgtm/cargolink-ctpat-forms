@@ -43,7 +43,7 @@ findings_data = {
     1: {
         "evidence": "HS01-02: Quy chế văn phòng xanh và Hướng dẫn thực hành tiết kiệm điện tắt máy lạnh trước 10 phút (Ban hành ngày 06/11/2026 có chữ ký & đóng dấu GĐ Thắng).\nẢnh chụp: Biển nhắc nhở dán cạnh công tắc điều hòa (tắt lúc 11:50 và 16:50), thùng rác phân loại 3 ngăn (Tái chế - Hữu cơ - Vô cơ).",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành (An toàn) & HCNS",
+        "person": "Mr. Phan Công Thành (An toàn) & HCNS",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     2: {
@@ -55,17 +55,17 @@ findings_data = {
     3: {
         "evidence": "HS01-05: Báo cáo khảo sát thực địa hệ thống bãi xe Cargolink chi tiết: Bãi xe 2,500m² tại 12/8 QL1A, Bình Hưng Hòa B, Bình Tân; tường rào kiên cố cao 2.6m; 14 camera CCTV hồng ngoại; trạm gác bảo vệ 24/7; hệ thống PCCC thẩm duyệt.",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành (Quản lý bãi xe)",
+        "person": "Mr. Phan Công Thành (Quản lý bãi xe)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     4: {
-        "evidence": "HS02-05: Quyết định phân công Kế toán trưởng (Bà Trần Thị Mai Phương) quản lý hồ sơ bảo mật người lao động & Quy trình bàn giao lưu trữ hồ sơ bằng văn bản ký duyệt ngày 06/11/2026.\nẢnh chụp: Tủ sắt khóa chống cháy chuyên dụng và Sổ nhật ký bàn giao hồ sơ.",
+        "evidence": "HS02-05: Quyết định phân công Giám đốc (Mr. Nguyễn Tất Thắng) và Kế toán trưởng (Ms. Lê Thị Tú) đồng quản lý tủ sắt bảo mật hồ sơ người lao động, sổ bàn giao, phiếu lý lịch tư pháp và sao kê ngân hàng chi trả lương & Quy trình bàn giao lưu trữ hồ sơ bằng văn bản ký duyệt ngày 06/11/2026.\nẢnh chụp: Tủ sắt khóa chống cháy chuyên dụng 2 lớp khóa (Dual Control) và Sổ nhật ký bàn giao hồ sơ.",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Bà Trần Thị Mai Phương (Kế toán trưởng)",
+        "person": "Ms. Lê Thị Tú (Kế toán trưởng) & Mr. Nguyễn Tất Thắng (Giám đốc)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     5: {
-        "evidence": "HS03-07: Quy chế quản lý Phiếu lý lịch tư pháp lái xe & Bảng tổng hợp theo dõi tư pháp đội ngũ 7 lái xe năm 2026 (Thành, Hùng, Tùng, Bảo, Dũng, Công, Nhân). 100% lái xe có Phiếu lý lịch tư pháp số 2 hoặc Giấy xác nhận hạnh kiểm không tiền án tiền sự của Công an.",
+        "evidence": "HS03-07: Quy chế quản lý Phiếu lý lịch tư pháp lái xe & Bảng tổng hợp theo dõi tư pháp đội ngũ 7 lái xe năm 2026 (Thành, Hùng, Tùng, Bảo, Dũng, Công, Nhân). 100% lái xe có Phiếu lý lịch tư pháp số 2 hoặc Giấy xác nhận hạnh kiểm không tiền án tiền sự của Công an được lưu bảo mật trong tủ sắt do GĐ Thắng & KTT Tú quản trị.",
         "status": "Hoàn thành 100% (Fully Completed)",
         "person": "Bộ phận Nhân sự & Đội xe CGL",
         "date": "06/11/2026 (Trước hạn 23/11)"
@@ -91,13 +91,13 @@ findings_data = {
     9: {
         "evidence": "HS09-06: Kế hoạch đào tạo bồi dưỡng định kỳ về Pháp luật lao động, Giao thông đường bộ, Chính sách công ty và Bộ tiêu chuẩn C-TPAT năm 2026 kèm Danh sách điểm danh và Bài kiểm tra sát hạch.\nBiểu mẫu QR kiểm tra kiến thức C-TPAT (form2_knowledge.html) lưu kết quả trực tuyến.",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành (An toàn)",
+        "person": "Mr. Phan Công Thành (An toàn)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     10: {
-        "evidence": "HS10-04: Bảng tổng hợp sao kê ngân hàng và Bằng chứng chi trả tiền lương đội ngũ lái xe năm 2026 (Ủy nhiệm chi ngân hàng Vietcombank, Phiếu lương có ký nhận của tài xế từng tháng).",
+        "evidence": "HS10-04: Bảng tổng hợp sao kê ngân hàng và Bằng chứng chi trả tiền lương đội ngũ lái xe năm 2026 (Ủy nhiệm chi ngân hàng Vietcombank do KTT Lê Thị Tú lập & GĐ Thắng phê duyệt, Phiếu lương có chữ ký nhận của từng lái xe, lưu trữ bảo mật trong tủ sắt 2 lớp khóa).\nẢnh minh chứng: HS10-04_ANH_MAU_SAO_KE_LUONG_NGAN_HANG.png.",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Bà Trần Thị Mai Phương (Kế toán trưởng)",
+        "person": "Ms. Lê Thị Tú (Kế toán trưởng) & Mr. Nguyễn Tất Thắng (Giám đốc)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     11: {
@@ -109,13 +109,13 @@ findings_data = {
     12: {
         "evidence": "HS14-08: Quy định hệ thống biển báo an toàn PCCC, Điểm tập kết sơ tán và Lối thoát hiểm song ngữ theo yêu cầu NV Apparel.\nFile thiết kế & Ảnh chụp thực tế: HS14-08_EXIT_SIGN_ENGLISH_THAI.png (Biển EXIT / ทางออก kèm mũi tên phản quang dạ quang lắp tại tất cả các cửa ra vào).",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành (PCCC & An toàn)",
+        "person": "Mr. Phan Công Thành (PCCC & An toàn)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     13: {
         "evidence": "HS14-08: Thiết lập Điểm tập kết sơ tán bên ngoài tòa nhà tại khoảng sân rộng phía trước bãi xe 12/8 QL1A Bình Tân (không cản trở xe cứu hỏa).\nFile thiết kế & Ảnh chụp thực tế: HS14-08_ASSEMBLY_POINT_SIGN_ENGLISH_THAI.png (Biển ASSEMBLY POINT / จุดรวมพล sơn tĩnh điện phản quang).",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành (Quản lý bãi xe)",
+        "person": "Mr. Phan Công Thành (Quản lý bãi xe)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     14: {
@@ -151,13 +151,13 @@ findings_data = {
     19: {
         "evidence": "HS20-06: Quy trình vận hành hệ thống camera giám sát CCTV và Quyết định kéo dài thời gian lưu trữ dữ liệu tối thiểu 6 tháng.\nSơ đồ bố trí 14 mắt camera bao quát toàn bộ cổng ra vào, tường rào chu vi, bãi đỗ xe tải và văn phòng làm việc.",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành (Trưởng ban An toàn)",
+        "person": "Mr. Phan Công Thành (Trưởng ban An toàn)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     20: {
         "evidence": "HS18-06: Lắp đặt bảng thông tin Hotline trực quan tại Cổng bãi xe, phòng trực bảo vệ và dán decal trên kính chắn gió tất cả các đầu kéo vận tải.",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành & Đội bảo vệ",
+        "person": "Mr. Phan Công Thành & Đội bảo vệ",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     21: {
@@ -167,15 +167,15 @@ findings_data = {
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     22: {
-        "evidence": "HS15-07: Kế hoạch và Lịch trình bảo dưỡng định kỳ đội xe tải năm 2026 có phân công nhân sự chịu trách nhiệm (Mr. Thành phụ trách kỹ thuật, Mr. Dũng điều phối).\nFile Excel: HS15-07 - Lịch và Nhật ký bảo dưỡng định kỳ xe tải Cargolink 2026 theo dõi chi tiết từng xe từ Quý 1 đến Quý 4.",
+        "evidence": "HS15-07: Kế hoạch và Lịch trình bảo dưỡng định kỳ đội xe tải năm 2026 có phân công nhân sự chịu trách nhiệm (Mr. Phan Công Thành phụ trách kỹ thuật, Mr. Bùi Minh Dũng điều phối).\nFile Excel: HS15-07 - Lịch và Nhật ký bảo dưỡng định kỳ xe tải Cargolink 2026 theo dõi chi tiết từng xe từ Quý 1 đến Quý 4.",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành (Quản lý kỹ thuật xe)",
+        "person": "Mr. Phan Công Thành (Quản lý kỹ thuật xe)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     23: {
         "evidence": "HS03-08: Quy định tần suất kiểm tra nồng độ cồn, ma túy định kỳ và Quy trình xử lý vi phạm kết quả dương tính (Đo cồn 100% trước chuyến, kiểm tra đột xuất 2 lần/tháng, xét nghiệm ma túy 6 tháng/lần, xử lý sa thải nếu dương tính).",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành (Cán bộ An toàn)",
+        "person": "Mr. Phan Công Thành (Cán bộ An toàn)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     24: {
@@ -211,7 +211,7 @@ findings_data = {
     29: {
         "evidence": "HS18-06: Quy trình phản ứng sự cố khẩn cấp SOP chi tiết hóa 3 kịch bản: Sự cố nhẹ (< 30 phút tự xử lý), Sự cố trung bình (> 30 phút báo điều độ cứu hộ), Sự cố an ninh khẩn cấp (gọi 113, báo Hotline GĐ 0943 46 46 46, giữ nguyên seal container).",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành & Ms. Bích",
+        "person": "Mr. Phan Công Thành & Ms. Bích",
         "date": "06/11/2026 (Trước hạn 23/11)"
     },
     30: {
@@ -223,7 +223,7 @@ findings_data = {
     31: {
         "evidence": "HS09-06: Kế hoạch đào tạo C-TPAT định kỳ 2 lần/năm, Sổ theo dõi đào tạo, Danh sách điểm danh có chữ ký 100% tài xế và Bài kiểm tra trắc nghiệm nhận thức an ninh chuỗi cung ứng năm 2026.",
         "status": "Hoàn thành 100% (Fully Completed)",
-        "person": "Mr. Nguyễn Duy Thành (Trưởng ban An toàn)",
+        "person": "Mr. Phan Công Thành (Trưởng ban An toàn)",
         "date": "06/11/2026 (Trước hạn 23/11)"
     }
 }

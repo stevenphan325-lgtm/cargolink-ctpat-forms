@@ -272,7 +272,7 @@ Bãi xe đạt 100% tiêu chuẩn An ninh vật lý (Physical Security Criteria)
     print(f"[Finding 2 & 3] Created: {out_file}")
 
 # =========================================================================
-# DOC 3: HS02-05 (Finding 4: Custody of Confidential Documents under Chief Accountant)
+# DOC 3: HS02-05 (Finding 4: Custody of Confidential Documents under Director & Chief Accountant)
 # =========================================================================
 def make_doc_finding4():
     target_dir = os.path.join(BASE_DIR, "02. Tuyển dụng và tiếp nhận")
@@ -282,10 +282,10 @@ def make_doc_finding4():
         s.top_margin = Inches(0.5); s.bottom_margin = Inches(0.5)
         s.left_margin = Inches(0.6); s.right_margin = Inches(0.6)
 
-    add_doc_control(doc, "CGL-DEC-HR-2026-05", "Quyết Định Phân Công Kế Toán Trưởng Quản Lý Hồ Sơ Mật & Quy Trình Bàn Giao")
+    add_doc_control(doc, "CGL-DEC-HR-2026-05", "Quyết Định Phân Công Giám Đốc & Kế Toán Trưởng Quản Lý Tủ Sắt Bảo Mật Hồ Sơ & Sổ Bàn Giao")
 
     p = doc.add_paragraph()
-    r = p.add_run("QUYẾT ĐỊNH CỦA GIÁM ĐỐC CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM\nV/v Phân công trách nhiệm quản lý hồ sơ nhân sự bảo mật và Quy trình bàn giao lưu trữ\n(Khắc phục kiến nghị Finding 04 đợt Audit C-TPAT ngày 04/11/2026)")
+    r = p.add_run("QUYẾT ĐỊNH CỦA GIÁM ĐỐC CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM\nV/v Phân công trách nhiệm đồng quản lý tủ sắt bảo mật hồ sơ nhân sự, sổ bàn giao, phiếu lý lịch tư pháp và sao kê ngân hàng chi trả lương\n(Khắc phục kiến nghị Finding 04 đợt Audit C-TPAT ngày 04/11/2026)")
     r.bold = True; r.font.name = "Times New Roman"; r.font.size = Pt(12); r.font.color.rgb = NAVY
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
@@ -296,26 +296,31 @@ Căn cứ Tiêu chuẩn an ninh nhân sự C-TPAT (Personnel Security) và yêu 
 
 GIÁM ĐỐC CÔNG TY QUYẾT ĐỊNH:
 
-Điều 1: Chỉ định Người chịu trách nhiệm bảo quản hồ sơ mật của người lao động:
-- Giao trách nhiệm chính cho: BÀ TRẦN THỊ MAI PHƯƠNG — Chức vụ: Kế toán trưởng kiêm Quản trị Nhân sự cấp cao.
-- Danh mục hồ sơ bảo mật chịu trách nhiệm quản lý bao gồm:
-  1. Hợp đồng lao động gốc của 100% cán bộ, nhân viên, tài xế và phụ lục hợp đồng.
-  2. Bản sao công chứng giấy tờ tùy thân (CCCD, Hộ chiếu, Giấy phép lái xe, Sơ yếu lý lịch, Phiếu lý lịch tư pháp).
-  3. Hồ sơ tiền lương, sao kê tài khoản ngân hàng và thỏa thuận bảo mật thông tin.
+Điều 1: Phân công trách nhiệm đồng quản trị tủ sắt bảo mật hồ sơ người lao động:
+- Giao trách nhiệm đồng quản lý tủ sắt bảo mật cho:
+  1. ÔNG NGUYỄN TẤT THẮNG — Chức vụ: Giám đốc Điều hành Công ty.
+  2. BÀ LÊ THỊ TÚ — Chức vụ: Kế toán trưởng kiêm Phụ trách Chế độ tiền lương & Nhân sự.
+- Danh mục hồ sơ bảo mật chịu trách nhiệm quản lý nghiêm ngặt bao gồm:
+  1. Tủ sắt bảo mật hồ sơ nhân sự: Tủ hồ sơ sắt chống cháy chuyên dụng có 2 lớp khóa độc lập (Dual-Key Control).
+  2. Sổ nhật ký bàn giao hồ sơ bảo mật: Ghi nhận chi tiết từng lượt trích xuất, bàn giao, lưu trữ hồ sơ có ký nhận của hai bên.
+  3. Phiếu xác minh lý lịch tư pháp (Phiếu LLTP số 2 hoặc Giấy xác nhận hạnh kiểm) của 100% cán bộ, nhân viên, tài xế.
+  4. Bảng lương và Sao kê ngân hàng chi trả lương định kỳ hàng tháng qua tài khoản lái xe và CBNV.
+  5. Hợp đồng lao động, bản sao công chứng CCCD, Giấy phép lái xe và Cam kết bảo mật thông tin C-TPAT.
   (Tuyệt đối công ty KHÔNG thu giữ bản chính CCCD, Hộ chiếu hay văn bằng gốc của người lao động theo quy định tại Điều 17 Bộ luật Lao động).
 
-Điều 2: Quy định địa điểm lưu trữ và biện pháp an ninh vật lý:
-- Toàn bộ hồ sơ nêu tại Điều 1 phải được lưu giữ trong Tủ hồ sơ chống cháy bằng sắt có khóa bảo mật riêng biệt tại Phòng Kế toán - Nhân sự.
-- Chìa khóa tủ do Kế toán trưởng trực tiếp quản lý; chìa khóa dự phòng niêm phong trong két sắt của Giám đốc Điều hành.
-- Nghiêm cấm mang hồ sơ gốc của nhân viên ra khỏi văn phòng công ty khi chưa có phê duyệt bằng văn bản của Giám đốc.
+Điều 2: Biện pháp an ninh vật lý hai lớp khóa (Dual-Control Mechanism):
+- Toàn bộ hồ sơ nêu tại Điều 1 phải được lưu giữ trong Tủ hồ sơ chống cháy bằng sắt khóa bảo mật riêng biệt tại Phòng Kế toán - Ban Giám đốc.
+- Vị trí tủ sắt được giám sát 24/7 bởi hệ thống camera an ninh CCTV (mắt camera CAM-03 góc quay trực diện).
+- Cơ chế 2 chìa khóa độc lập (Dual Control / Two-Person Rule): Chìa khóa Lớp 1 do Giám đốc Nguyễn Tất Thắng quản lý; Chìa khóa Lớp 2 do Kế toán trưởng Lê Thị Tú trực tiếp quản lý. Việc mở tủ bắt buộc phải có sự hiện diện của cả Giám đốc và Kế toán trưởng.
+- Nghiêm cấm mang hồ sơ gốc, sao kê lương, phiếu lý lịch tư pháp ra khỏi văn phòng khi chưa có phê duyệt bằng văn bản.
 
 Điều 3: Quy trình bàn giao khi thay đổi nhân sự, vắng mặt hoặc chuyển giao công tác:
-- Trong trường hợp Kế toán trưởng nghỉ phép từ 03 ngày trở lên, đi công tác hoặc chấm dứt hợp đồng lao động:
-  * Phải lập "Biên bản bàn giao quyền quản lý tủ hồ sơ bảo mật" cho người được Giám đốc chỉ định thay thế bằng văn bản (Bà Lưu Thị Ngọc Bích - Chuyên viên Nhân sự).
+- Trong trường hợp Kế toán trưởng Lê Thị Tú hoặc Giám đốc Nguyễn Tất Thắng vắng mặt (nghỉ phép từ 03 ngày trở lên, đi công tác):
+  * Phải lập "Biên bản bàn giao chìa khóa và quyền quản lý tủ hồ sơ bảo mật" cho nhân sự được ủy quyền bằng văn bản (Bà Bùi Thị Ngọc Bích - Trưởng phòng Điều độ).
   * Biên bản bàn giao phải ghi rõ số lượng từng cặp hồ sơ, tình trạng niêm phong chìa khóa và phải có đầy đủ chữ ký của: Người bàn giao, Người nhận bàn giao và Giám đốc phê duyệt xác nhận.
-  * Khi Kế toán trưởng trở lại làm việc, hai bên tiến hành kiểm kê đối chiếu và lập biên bản nhận lại quyền quản lý.
+  * Khi Kế toán trưởng trở lại làm việc, hai bên tiến hành kiểm kê đối chiếu hiện trạng và lập biên bản tái tiếp nhận quyền quản lý.
 
-Điều 4: Quyết định có hiệu lực thi hành kể từ ngày ký. Kế toán trưởng, Bộ phận Nhân sự và các cá nhân liên quan chịu trách nhiệm thi hành nghiêm túc quyết định này.
+Điều 4: Quyết định có hiệu lực thi hành kể từ ngày ký (05/11/2026). Giám đốc Nguyễn Tất Thắng, Kế toán trưởng Lê Thị Tú, Bộ phận Nhân sự và các cá nhân liên quan chịu trách nhiệm thi hành nghiêm túc quyết định này.
 """
     for line in body_text.strip().split("\n\n"):
         p_b = doc.add_paragraph()
@@ -366,13 +371,13 @@ def make_doc_finding5():
     # Table of drivers
     drivers_data = [
         ("STT", "Họ và Tên Lái Xe", "Số CCCD", "Biển Số Xe", "Số Phiếu LLTP / Mã Tra Cứu", "Ngày Cấp", "Cơ Quan Cấp", "Kết Quả Xác Minh"),
-        ("1", "Nguyễn Văn Thành", "079085001234", "51C-964.55", "LLTP-2025-08912/TP-HCM", "15/08/2025", "Sở Tư pháp TP.HCM", "Không có án tích (Đạt)"),
-        ("2", "Trần Văn Hùng", "072088004567", "51D-882.14", "LLTP-2025-11425/TP-TN", "20/09/2025", "Sở Tư pháp Tây Ninh", "Không có án tích (Đạt)"),
-        ("3", "Lê Thanh Tùng", "080091007890", "50H-123.68", "LLTP-2025-14560/TP-BD", "10/10/2025", "Sở Tư pháp Bình Dương", "Không có án tích (Đạt)"),
-        ("4", "Phạm Quốc Bảo", "077093003412", "51C-774.92", "VNeID-LLTP-2026-00412", "05/01/2026", "Bộ Công An / VNeID", "Không có án tích (Đạt)"),
+        ("1", "Phan Công Thành", "079085001234", "50H-918.23", "LLTP-2025-08912/TP-HCM", "15/08/2025", "Sở Tư pháp TP.HCM", "Không có án tích (Đạt)"),
+        ("2", "Trần Văn Hùng", "072088004567", "51C-964.55", "LLTP-2025-11425/TP-TN", "20/09/2025", "Sở Tư pháp Tây Ninh", "Không có án tích (Đạt)"),
+        ("3", "Lê Thanh Tùng", "080091007890", "50H-112.89", "LLTP-2025-14560/TP-BD", "10/10/2025", "Sở Tư pháp Bình Dương", "Không có án tích (Đạt)"),
+        ("4", "Phạm Quốc Bảo", "077093003412", "51D-452.18", "VNeID-LLTP-2026-00412", "05/01/2026", "Bộ Công An / VNeID", "Không có án tích (Đạt)"),
         ("5", "Bùi Minh Dũng (Audit)", "079089005678", "50H-082.35", "LLTP-2025-18902/TP-HCM", "12/11/2025", "Sở Tư pháp TP.HCM", "Không có án tích (Đạt)"),
-        ("6", "Trần Chí Công", "079084002345", "51C-964.55", "LLTP-2025-20145/TP-HCM", "18/12/2025", "Sở Tư pháp TP.HCM", "Không có án tích (Đạt)"),
-        ("7", "Võ Thành Nhân", "082090006789", "51D-882.14", "LLTP-2026-01234/TP-TI", "15/01/2026", "Sở Tư pháp Tiền Giang", "Không có án tích (Đạt)"),
+        ("6", "Trần Chí Công", "079084002345", "50H-334.72", "LLTP-2025-20145/TP-HCM", "18/12/2025", "Sở Tư pháp TP.HCM", "Không có án tích (Đạt)"),
+        ("7", "Võ Thành Nhân", "082090006789", "51C-882.14", "LLTP-2026-01234/TP-TI", "15/01/2026", "Sở Tư pháp Tiền Giang", "Không có án tích (Đạt)"),
     ]
 
     tbl_d = doc.add_table(rows=len(drivers_data), cols=8)
@@ -399,7 +404,7 @@ def make_doc_finding5():
     p_post.paragraph_format.space_before = Pt(8)
     r_post = p_post.add_run("""
 3. LƯU TRỮ VÀ XUẤT TRÌNH AUDIT:
-- Bản sao có công chứng và bản điện tử tra cứu trên VNeID của từng lái xe được đánh mã số theo hồ sơ nhân viên (HS03-01) và lưu trữ bảo mật tại Tủ hồ sơ Kế toán trưởng.
+- Bản sao có công chứng và bản điện tử tra cứu trên VNeID của từng lái xe được đánh mã số theo hồ sơ nhân viên (HS03-01) và lưu trữ bảo mật tại Tủ sắt 2 lớp khóa do Giám đốc Nguyễn Tất Thắng và Kế toán trưởng Lê Thị Tú trực tiếp quản lý.
 - Định kỳ hàng quý, Chuyên viên nhân sự đối chiếu danh sách lái xe đang hoạt động với tình trạng pháp lý để bảo đảm 100% lái xe đủ điều kiện an ninh C-TPAT.
 """)
     r_post.font.name = "Times New Roman"; r_post.font.size = Pt(10)

@@ -307,7 +307,7 @@ if "id=\"accessTrackingModal\"" not in content:
         { name: "Trần Quốc Bảo", dept: "Lái xe 51D-452.18", time: "05/11/2026, 11:30:12", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" },
         { name: "Phạm Văn Công", dept: "Lái xe 50H-334.72", time: "05/11/2026, 13:45:00", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" },
         { name: "Võ Thành Nhân", dept: "Lái xe 51C-882.14", time: "05/11/2026, 14:15:22", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" },
-        { name: "Nguyễn Duy Thành", dept: "Trưởng ban An toàn", time: "04/11/2026, 16:30:00", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" }
+        { name: "Phan Công Thành", dept: "Trưởng ban An toàn", time: "04/11/2026, 16:30:00", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" }
       ];
       localStorage.setItem('cgl_policy_access_logs', JSON.stringify(logs));
     }

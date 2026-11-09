@@ -191,7 +191,7 @@ def create_next_steps_docx():
         
         if i == 0:
             p_sig.paragraph_format.space_before = Pt(36)
-            r2 = p_sig.add_run("Nguyễn Duy Thành\n(Trưởng ban An toàn)")
+            r2 = p_sig.add_run("Phan Công Thành\n(Trưởng ban An toàn)")
             r2.font.size = Pt(9.5)
         elif i == 1:
             p_sig.paragraph_format.space_before = Pt(36)

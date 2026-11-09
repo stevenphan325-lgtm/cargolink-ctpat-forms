@@ -124,7 +124,7 @@ def add_sign_block(doc):
             r2.font.size = Pt(9.5)
         elif i == 1:
             p_sig.paragraph_format.space_before = Pt(36)
-            r2 = p_sig.add_run("Nguyễn Duy Thành\n(Trưởng ban An toàn)")
+            r2 = p_sig.add_run("Phan Công Thành\n(Trưởng ban An toàn)")
             r2.font.size = Pt(9.5)
         elif i == 2:
             p_sig.paragraph_format.space_before = Pt(4)
@@ -528,7 +528,7 @@ def create_hs18_06():
         
     data = [
         ["ĐIỀU ĐỘ TRỰC CA\n(Tiếp nhận cấp 1)", "Ms. Bùi Thị Ngọc Bích\n(Trưởng phòng Điều độ)", "077 871 9936\n(Hotline Điều độ 24/7)", "Tiếp nhận thông tin hỏng xe, kẹt xe, chậm tiến độ < 30 phút. Điều xe cứu hộ hoặc xe thay thế."],
-        ["TRƯỞNG BAN AN TOÀN\n(Tiếp nhận sự cố an ninh)", "Mr. Nguyễn Duy Thành\n(Cán bộ An toàn)", "088 6464 988\n(Hotline An toàn)", "Tiếp nhận sự cố đứt niêm phong Seal, va chạm giao thông, nghi vấn hàng hóa bất thường."],
+        ["TRƯỞNG BAN AN TOÀN\n(Tiếp nhận sự cố an ninh)", "Mr. Phan Công Thành\n(Trưởng ban An toàn)", "088 6464 988\n(Hotline An toàn)", "Tiếp nhận sự cố đứt niêm phong Seal, va chạm giao thông, nghi vấn hàng hóa bất thường."],
         ["GIÁM ĐỐC ĐIỀU HÀNH\n(Chỉ đạo tối cao)", "Mr. Nguyễn Tất Thắng\n(Giám đốc)", "0943 46 46 46\n(Khẩn cấp 24/7/365)", "Quyết định xử lý tai nạn nghiêm trọng, thông báo khẩn cho Ban lãnh đạo NV Apparel và cơ quan điều tra."],
         ["CẢNH SÁT KHẨN CẤP", "Công an P. Bình Hưng Hòa B\nCảnh sát Phản ứng nhanh", "113\n(028. 3750 5935)", "Hỗ trợ trấn áp tội phạm, bảo vệ hiện trường tai nạn, xử lý hành vi phá hoại hoặc cướp hàng."],
         ["CỨU HỎA & CỨU HỘ", "Cảnh sát PCCC & CNCH", "114", "Xử lý sự cố cháy nổ phương tiện hoặc tai nạn giao thông kẹt người."],
@@ -766,7 +766,7 @@ def create_hs15_07():
         r.font.color.rgb = NAVY
         
     data = [
-        ["Trưởng bộ phận Kỹ thuật & Quản lý đội xe", "Mr. Nguyễn Duy Thành", "Chịu trách nhiệm lập kế hoạch, theo dõi hạn đăng kiểm, duyệt lệnh bảo dưỡng và nghiệm thu chất lượng sửa chữa trước khi đưa xe vào vận hành.", "Ban Giám đốc CGL"],
+        ["Trưởng bộ phận Kỹ thuật & Quản lý đội xe", "Mr. Phan Công Thành", "Chịu trách nhiệm lập kế hoạch, theo dõi hạn đăng kiểm, duyệt lệnh bảo dưỡng và nghiệm thu chất lượng sửa chữa trước khi đưa xe vào vận hành.", "Ban Giám đốc CGL"],
         ["Đội trưởng Lái xe", "Mr. Bùi Minh Dũng", "Đôn đốc tài xế theo dõi số km vận hành hàng ngày, báo cáo ngay dấu hiệu bất thường của phương tiện và đưa xe vào xưởng đúng lịch hẹn.", "Garage đối tác chính hãng"],
         ["Tài xế theo xe (7 lái xe)", "Thành, Hùng, Tùng, Bảo, Dũng, Công, Nhân", "Thực hiện bảo dưỡng Cấp 1 hàng tuần, giữ gìn vệ sinh xe, cùng tham gia giám sát khi xe bảo dưỡng tại xưởng.", "Đội xe Cargolink"],
         ["Xưởng dịch vụ bảo dưỡng đối tác", "Garage Ô tô Tải Chuyên dụng Tân Tạo\n(Ký Hợp đồng dịch vụ số CGL-GRG-2026)", "Cung cấp phụ tùng chính hãng, thực hiện bảo dưỡng Cấp 2, Cấp 3 và cấp Giấy chứng nhận hoàn thành bảo dưỡng kỹ thuật.", "Trung tâm Đăng kiểm 50-02S"]
@@ -824,7 +824,7 @@ def create_hs15_07():
         [4, "51D-452.18", "Xe tải thùng 5 tấn", "Trần Quốc Bảo", "82,300", "25/02/2026 (Hoàn thành)", "25/05/2026 (Hoàn thành)", "25/08/2026 (Hoàn thành)", "25/11/2026 (Kế hoạch)"],
         [5, "50H-334.72", "Đầu kéo Daewoo 440HP", "Phạm Văn Công", "110,600", "05/03/2026 (Hoàn thành)", "05/06/2026 (Hoàn thành)", "05/09/2026 (Hoàn thành)", "05/12/2026 (Kế hoạch)"],
         [6, "51C-882.14", "Xe tải thùng 15 tấn", "Võ Thành Nhân", "131,400", "15/03/2026 (Hoàn thành)", "15/06/2026 (Hoàn thành)", "15/09/2026 (Hoàn thành)", "15/12/2026 (Kế hoạch)"],
-        [7, "50H-918.23", "Đầu kéo Shacman 400HP", "Nguyễn Duy Thành", "88,900", "25/03/2026 (Hoàn thành)", "25/06/2026 (Hoàn thành)", "25/09/2026 (Hoàn thành)", "20/12/2026 (Kế hoạch)"]
+        [7, "50H-918.23", "Đầu kéo Shacman 400HP", "Phan Công Thành", "88,900", "25/03/2026 (Hoàn thành)", "25/06/2026 (Hoàn thành)", "25/09/2026 (Hoàn thành)", "20/12/2026 (Kế hoạch)"]
     ]
     
     for r_idx, r_data in enumerate(rows_data, start=5):

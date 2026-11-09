@@ -81,7 +81,7 @@ def make_garage_board():
     draw.text((640, 152), "BẢNG PHÂN CÔNG NHÂN SỰ & QUY CHUẨN XƯỞNG", fill="white", font=get_font(20, bold=True))
     
     right_items = [
-        ("1. Cán bộ Kỹ thuật CGL (Mr. Nguyễn Duy Thành)", "Chịu trách nhiệm lập kế hoạch, duyệt phiếu sửa chữa, nghiệm thu chất lượng trước khi xe lăn bánh."),
+        ("1. Trưởng BP An toàn & Kỹ thuật (Mr. Phan Công Thành)", "Chịu trách nhiệm lập kế hoạch, duyệt phiếu sửa chữa, nghiệm thu chất lượng trước khi xe lăn bánh."),
         ("2. Đội trưởng Lái xe (Mr. Bùi Minh Dũng)", "Theo dõi số km vận hành hàng ngày, đưa xe vào xưởng đúng lịch hẹn, bàn giao và nhận lại xe."),
         ("3. Quy chuẩn An toàn Môi trường tại Xưởng", "• Có khay hứng dầu nhớt chống tràn đổ bảo vệ môi trường.\n• Dầu thải và giẻ lau dính dầu được thu gom riêng biệt.\n• Trang bị bình chữa cháy CO2 và bột ABC tại khu vực sửa xe."),
         ("4. Lưu trữ Chứng từ", "Toàn bộ hóa đơn, phiếu xuất phụ tùng và biên bản nghiệm thu được lưu trong cặp file HS15-07 tối thiểu 02 năm.")
@@ -156,7 +156,7 @@ def make_payroll_board():
         ("Trần Quốc Bảo", "51D-452.18", "15.900.000", "Bảo (Đã ký)"),
         ("Phạm Văn Công", "50H-334.72", "16.400.000", "Công (Đã ký)"),
         ("Võ Thành Nhân", "51C-882.14", "16.100.000", "Nhân (Đã ký)"),
-        ("Nguyễn Duy Thành", "50H-918.23", "16.900.000", "Thành (Đã ký)")
+        ("Phan Công Thành", "50H-918.23", "16.900.000", "Thành (Đã ký)")
     ]
     y_d = 250
     for name, plate, salary, sig in drivers:
@@ -168,7 +168,7 @@ def make_payroll_board():
         y_d += 38
         
     draw.rectangle([640, y_d+10, w-60, h-60], fill="#EFF6FF", outline="#93C5FD", width=1)
-    draw.text((650, y_d+20), "Kế toán trưởng: Trần Thị Mai Phương | Giám đốc: Nguyễn Tất Thắng", fill="#1E40AF", font=get_font(13, bold=True))
+    draw.text((650, y_d+20), "Kế toán trưởng: Lê Thị Tú | Giám đốc: Nguyễn Tất Thắng (Đồng quản trị bảo mật)", fill="#1E40AF", font=get_font(13, bold=True))
     draw.text((650, y_d+45), "Chứng từ lưu trữ: Cặp còng HS10-04 | Đạt chuẩn Trách nhiệm xã hội ISO/CSR", fill="#475569", font=get_font(12))
 
     save_to_all(img, "HS10-04_ANH_MAU_SAO_KE_LUONG_NGAN_HANG.png", "10. Tiền lương và làm thêm")
