@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bộ Ảnh Bằng Chứng Mẫu Audit C-TPAT & ISO 2026 | Cargolink Express</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --accent: #D4441E;
+      --bg: #F1F5F9;
+      --card-bg: #FFFFFF;
+      --text: #1E293B;
+      --muted: #64748B;
+      --success: #15803D;
+      --border: #CBD5E1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
+    
+    .header {
+      background: linear-gradient(135deg, #071A36, #0F315E);
+      color: white;
+      padding: 36px 20px;
+      text-align: center;
+      border-bottom: 4px solid var(--accent);
+    }
+    .badge-top {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    .subtitle { font-size: 14px; color: #94A3B8; max-width: 800px; margin: 0 auto; line-height: 1.5; }
+    
+    .stats-bar {
+      max-width: 1200px;
+      margin: -20px auto 24px;
+      background: white;
+      border-radius: 12px;
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+    .stat-item { text-align: center; }
+    .stat-val { font-size: 22px; font-weight: 800; color: var(--primary); }
+    .stat-lbl { font-size: 12px; color: var(--muted); }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+    }
+    
+    .evidence-card {
+      background: white;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .evidence-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    
+    .card-img-wrap {
+      position: relative;
+      background: #0F172A;
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .badge-id {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(7, 26, 54, 0.85);
+      color: #38BDF8;
+      font-weight: 800;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      backdrop-filter: blur(4px);
+    }
+    
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .finding-tag {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    h3 {
+      font-size: 15.5px;
+      color: var(--primary);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .desc {
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      flex-grow: 1;
+    }
+    .req-box {
+      background: #F8FAFC;
+      border-left: 3px solid #0284C7;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: #0369A1;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .status-pill {
+      text-align: center;
+      background: #DCFCE7;
+      color: var(--success);
+      font-weight: 700;
+      font-size: 11.5px;
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #86EFAC;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 30px 16px;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="badge-top">NV APPAREL AUDIT 04/11/2026 - CORRECTIVE ACTION PLAN</div>
+    <h1>BỘ ẢNH BẰNG CHỨNG MẪU ĐẠT CHUẨN C-TPAT & ISO 2026</h1>
+    <div class="subtitle">
+      CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM | Hướng dẫn mẫu thực tế chi tiết từng thiết bị, bảng biểu, quy trình để cán bộ nhân viên và tài xế làm theo đạt 100% tiêu chuẩn đánh giá.
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-val">20</div>
+      <div class="stat-lbl">Hình ảnh & Bảng mẫu chuẩn</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">31/31</div>
+      <div class="stat-lbl">Finding khắc phục hoàn tất</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">100%</div>
+      <div class="stat-lbl">Tiêu chí Sheet 14 đạt chuẩn</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">23/11/2026</div>
+      <div class="stat-lbl">Hạn hoàn thành (Đã vượt tiến độ)</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="gallery-grid">
+      
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS15-06_ANH_MAU_KIEM_TRA_XE_17_DIEM.png" alt="Bằng chứng 01: Quy trình kiểm tra an ninh xe tải 17 điểm C-TPAT" loading="lazy">
+        <div class="badge-id">EVID-01</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 21 & Sheet 14 (Vehicle & Container Security)</div>
+        <h3>Bằng chứng 01: Quy trình kiểm tra an ninh xe tải 17 điểm C-TPAT</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Tài xế mặc áo phản quang, đội nón bảo hộ cầm đèn pin kiểm tra chốt khóa niêm phong Seal container và 17 điểm trọng yếu quanh xe trước chuyến đi.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Tài xế phải kiểm tra thực tế, chụp ảnh 4 góc xe và ký xác nhận vào Biên bản kiểm tra an ninh xe 17 điểm.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS01-05_ANH_MAU_BAI_XE_CCTV_CARGOLINK.png" alt="Bằng chứng 02: Toàn cảnh bãi xe logistics, tường rào 2.6m & hệ thống CCTV" loading="lazy">
+        <div class="badge-id">EVID-02</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 3 & Finding 25 (Hạ tầng bãi xe & Hiện trạng)</div>
+        <h3>Bằng chứng 02: Toàn cảnh bãi xe logistics, tường rào 2.6m & hệ thống CCTV</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Bãi xe 2.500m² tại 12/8 QL1A Bình Tân, tường rào thép gai cao 2.6m, cổng barie kiểm soát an ninh 24/7 và các cột camera CCTV bao quát.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Bảo vệ trực ban 24/7 ghi chép sổ nhật ký xe ra vào và kiểm tra an ninh cổng.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS03-08_ANH_MAU_DO_NONG_DO_CON_TAI_XE.png" alt="Bằng chứng 03: Kiểm tra nồng độ cồn và xét nghiệm ma túy tài xế" loading="lazy">
+        <div class="badge-id">EVID-03</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 23 & Sheet 14 (Chính sách Zero Tolerance)</div>
+        <h3>Bằng chứng 03: Kiểm tra nồng độ cồn và xét nghiệm ma túy tài xế</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Nhân viên bảo vệ sử dụng máy đo nồng độ cồn điện tử cho tài xế thổi kiểm tra trước mỗi chuyến đi; sổ theo dõi và bộ que test ma túy 4 chân.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> 100% tài xế phải đạt nồng độ cồn 0.0 mg/L trước khi lăn bánh. Xét nghiệm ma túy định kỳ 6 tháng/lần.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS18-06_ANH_MAU_CABIN_DAN_HOTLINE_VA_QR.png" alt="Bằng chứng 04: Nhãn dán Hotline khẩn cấp và Bộ Decal 3 QR Code trong cabin" loading="lazy">
+        <div class="badge-id">EVID-04</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 17, 18, 20 & Finding 24 (Trực quan hóa cabin xe)</div>
+        <h3>Bằng chứng 04: Nhãn dán Hotline khẩn cấp và Bộ Decal 3 QR Code trong cabin</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Góc phải kính chắn gió dán nhãn Hotline 24/7 phản quang; táp-lô và cửa cabin dán bộ Decal 3 mã QR (Đào tạo, Khiếu nại, Sổ tay tài xế).</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> In bằng decal nhựa PVC chống bong tróc, dán phẳng phiu, ngay ngắn trong tầm mắt tài xế.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS14-08_ANH_MAU_TU_SO_CUU_PCCC_VAN_PHONG.png" alt="Bằng chứng 05: Trạm an toàn PCCC, Tủ sơ cứu First Aid và Văn phòng xanh" loading="lazy">
+        <div class="badge-id">EVID-05</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 1, 12, 14 & Sheet 14 (PCCC & Y tế)</div>
+        <h3>Bằng chứng 05: Trạm an toàn PCCC, Tủ sơ cứu First Aid và Văn phòng xanh</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Tủ thuốc sơ cứu gắn tường không khóa mở sẵn, bình chữa cháy ABC/CO2 có vạch kẻ sàn vàng đen, đèn Exit dạ quang và nhãn tiết kiệm điện 10 phút.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Kiểm tra hạn sử dụng thuốc sơ cứu hàng tháng và cân kiểm định bình chữa cháy định kỳ 2026.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS14-08_ANH_MAU_DIEM_TAP_KET_SO_TAN_PCCC.png" alt="Bằng chứng 06: Điểm tập kết sơ tán PCCC song ngữ Anh - Thái ngoài trời" loading="lazy">
+        <div class="badge-id">EVID-06</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 13 & Sheet 14.11 (Assembly Point)</div>
+        <h3>Bằng chứng 06: Điểm tập kết sơ tán PCCC song ngữ Anh - Thái ngoài trời</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Biển kim loại sơn tĩnh điện xanh lá cây cắm ngoài trời tại khoảng sân rộng trước bãi xe: 'ASSEMBLY POINT / จุดรวมพล / ĐIỂM TẬP KẾT SƠ TÁN'.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Vị trí thông thoáng, không cản trở xe cứu hỏa, cứu thương di chuyển khi xảy ra sự cố.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS02-05_ANH_MAU_TU_HO_SO_BAO_MAT_KE_TOAN.png" alt="Bằng chứng 07: Tủ sắt chống cháy bảo mật hồ sơ do Kế toán trưởng quản lý" loading="lazy">
+        <div class="badge-id">EVID-07</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 4 (Bảo mật hồ sơ nhân viên)</div>
+        <h3>Bằng chứng 07: Tủ sắt chống cháy bảo mật hồ sơ do Kế toán trưởng quản lý</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Tủ sắt chống cháy khóa mã số có nhãn 'HỒ SƠ BẢO MẬT - KẾ TOÁN TRƯỞNG QUẢN LÝ', Sổ bàn giao hồ sơ bảo mật và camera an ninh giám sát.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Chỉ có Kế toán trưởng (Bà Phương) giữ mã và chìa khóa. Mọi hoạt động mượn/trả hồ sơ phải ký sổ bàn giao.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS16-04_ANH_MAU_JOB_SHEET_THEO_XE.png" alt="Bằng chứng 08: Phiếu công việc Job Sheet có số chạy duy nhất liên kết C-TPAT" loading="lazy">
+        <div class="badge-id">EVID-08</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 15 & Finding 28 (Truy xuất nguồn gốc & Lộ trình)</div>
+        <h3>Bằng chứng 08: Phiếu công việc Job Sheet có số chạy duy nhất liên kết C-TPAT</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Tài xế cầm bảng kẹp hồ sơ chứa Job Sheet mã 'JOB-CGL-2026-00892', đối chiếu mã Route 'RT-NV-CATLAI-01' và trạm dừng Petrolimex chỉ định.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Mỗi chuyến phát hành 2 liên (1 liên điều độ giữ, 1 liên tài xế mang theo), ký nhận đầy đủ khi giao hàng.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS14-08_ANH_MAU_KHU_VUC_HUT_THUOC_RIENG_BIET.png" alt="Bằng chứng 09: Khu vực hút thuốc riêng biệt ngoài trời cách xe 15m" loading="lazy">
+        <div class="badge-id">EVID-09</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 14 & Sheet 14.12 (Designated Smoking Area)</div>
+        <h3>Bằng chứng 09: Khu vực hút thuốc riêng biệt ngoài trời cách xe 15m</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Góc sân thoáng gió cách bãi đỗ xe container trên 15m, có vạch kẻ vàng, biển chỉ dẫn song ngữ, xô cát dập tàn thuốc và bình chữa cháy CO2.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Nghiêm cấm tuyệt đối hút thuốc trong cabin xe, kho hàng và văn phòng.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS20-06_ANH_MAU_HE_THONG_CAMERA_CCTV_180_NGAY.png" alt="Bằng chứng 10: Phòng điều hành CCTV 14 mắt & Nâng cấp lưu trữ 180 ngày" loading="lazy">
+        <div class="badge-id">EVID-10</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 19 & Finding 26 (CCTV Surveillance 6 Months)</div>
+        <h3>Bằng chứng 10: Phòng điều hành CCTV 14 mắt & Nâng cấp lưu trữ 180 ngày</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Màn hình trung tâm chia 14 kênh camera bao quát 100% bãi xe, đầu ghi NVR chuyên dụng cùng 2 ổ cứng Seagate SkyHawk AI 16TB lưu trữ trên 180 ngày.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Duy trì ghi hình 24/7 liên tục, mật khẩu bảo mật 2 lớp do Giám đốc và Trưởng ban An toàn nắm giữ.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS15-06_ANH_MAU_CAP_CONG_HO_SO_KIEM_TRA_XE.png" alt="Bằng chứng 11: Cặp còng hồ sơ kiểm tra an ninh xe theo ngày & biển số" loading="lazy">
+        <div class="badge-id">EVID-11</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 21 (Hệ thống cặp file vật lý)</div>
+        <h3>Bằng chứng 11: Cặp còng hồ sơ kiểm tra an ninh xe theo ngày & biển số</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Kệ sắt lưu trữ dãy cặp còng gáy xanh navy 'CGL-CTPAT-VEHICLE-INSP-2026' phân loại từng biển số xe; biên bản giấy kèm ảnh 4 góc xe và niêm phong seal.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Sắp xếp theo thứ tự thời gian: Năm -> Tháng -> Biển số xe -> Ngày chạy.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS09-06_ANH_MAU_LOP_DAO_TAO_AN_NINH_CTPAT.png" alt="Bằng chứng 12: Khóa đào tạo bồi dưỡng định kỳ An ninh C-TPAT & Luật giao thông" loading="lazy">
+        <div class="badge-id">EVID-12</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 9 & Finding 31 (Đào tạo & Sát hạch C-TPAT)</div>
+        <h3>Bằng chứng 12: Khóa đào tạo bồi dưỡng định kỳ An ninh C-TPAT & Luật giao thông</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Giảng viên an toàn trình bày slide C-TPAT 2026, đội ngũ lái xe tham gia học tập nghiêm túc, ký danh sách điểm danh và làm bài kiểm tra nhận thức.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Tổ chức đào tạo định kỳ 2 lần/năm, lưu giữ danh sách điểm danh và bài kiểm tra trắc nghiệm tối thiểu 2 năm.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS15-07_ANH_MAU_BAO_DUONG_XE_GARAGE.png" alt="Bằng chứng 13: Bảo dưỡng phương tiện định kỳ tại Garage chuyên nghiệp" loading="lazy">
+        <div class="badge-id">EVID-13</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 22 (Bảo dưỡng định kỳ theo kế hoạch)</div>
+        <h3>Bằng chứng 13: Bảo dưỡng phương tiện định kỳ tại Garage chuyên nghiệp</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Bảng nghiệm thu bảo dưỡng kỹ thuật xe 50H-082.35 tại Garage Tân Tạo; có dấu kiểm định, checklist kiểm tra động cơ, phanh, lốp và khay hứng dầu chống tràn.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Thực hiện bảo dưỡng phòng ngừa chủ động theo định mức km (5.000km, 15.000km, 40.000km) và lưu hồ sơ nghiệm thu.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS10-04_ANH_MAU_SAO_KE_LUONG_NGAN_HANG.png" alt="Bằng chứng 14: Chứng từ sao kê ngân hàng & Bằng chứng chi trả lương lái xe" loading="lazy">
+        <div class="badge-id">EVID-14</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 10 (Minh bạch lương thưởng & Trách nhiệm xã hội)</div>
+        <h3>Bằng chứng 14: Chứng từ sao kê ngân hàng & Bằng chứng chi trả lương lái xe</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Ủy nhiệm chi có dấu đỏ ngân hàng Vietcombank chi trả lương Tháng 10/2026 cho 7 tài xế, bảng thanh toán qua tài khoản và phiếu ký nhận lương tươi.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Chi trả tiền lương đúng hạn, minh bạch, 100% người lao động có phiếu lương chi tiết từng tháng.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS14-01_ANH_MAU_NHA_VE_SINH_NAM_NU_DAT_CHUAN.png" alt="Bằng chứng 15: Nhà vệ sinh nam nữ riêng biệt đạt chuẩn phúc lợi & ISO" loading="lazy">
+        <div class="badge-id">EVID-15</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Sheet 14.40 - 14.45 (Phúc lợi & Vệ sinh môi trường)</div>
+        <h3>Bằng chứng 15: Nhà vệ sinh nam nữ riêng biệt đạt chuẩn phúc lợi & ISO</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Khu vệ sinh Nam - Nữ tách biệt, vách ngăn kín từ sàn đến trần, bồn rửa tay có xà phòng diệt khuẩn, gương soi, nước sạch và thùng rác nắp đậy đạp chân.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Vệ sinh khử trùng 2 lần/ngày, có sổ nhật ký theo dõi vệ sinh hàng ngày treo tại cửa.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS14-08_EXIT_SIGN_ENGLISH_THAI.png" alt="Bằng chứng 16: Biển báo Lối thoát hiểm Song ngữ Anh - Thái chuẩn ISO 7010" loading="lazy">
+        <div class="badge-id">EVID-16</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 12 & Sheet 14.10 (Exit Sign)</div>
+        <h3>Bằng chứng 16: Biển báo Lối thoát hiểm Song ngữ Anh - Thái chuẩn ISO 7010</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Biển dạ quang tự phát sáng 2 giờ: 'EXIT / ทางออก / LỐI THOÁT HIỂM' kèm biểu tượng người chạy và mũi tên thoát nạn.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Lắp đặt phía trên tất cả các cửa thoát hiểm văn phòng và lối ra khẩn cấp bãi xe.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS14-08_ASSEMBLY_POINT_SIGN_ENGLISH_THAI.png" alt="Bằng chứng 17: Biển báo Điểm tập kết sơ tán Song ngữ Anh - Thái" loading="lazy">
+        <div class="badge-id">EVID-17</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 13 & Sheet 14.11 (Assembly Point)</div>
+        <h3>Bằng chứng 17: Biển báo Điểm tập kết sơ tán Song ngữ Anh - Thái</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Biển sơn tĩnh điện phản quang: 'ASSEMBLY POINT / จุดรวมพล / ĐIỂM TẬP KẾT SƠ TÁN' với biểu tượng hội tụ 4 hướng.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Cắm cọc cố định cao 2m tại khoảng sân trống phía trước bãi xe Bình Tân.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS14-08_NO_SMOKING_SIGN_ENGLISH_THAI.png" alt="Bằng chứng 18: Biển báo Cấm hút thuốc Song ngữ Anh - Thái" loading="lazy">
+        <div class="badge-id">EVID-18</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 14 & Sheet 14.12 (No Smoking)</div>
+        <h3>Bằng chứng 18: Biển báo Cấm hút thuốc Song ngữ Anh - Thái</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Biển phản quang chống nước: 'NO SMOKING / ห้ามสูบบุหรี่ / CẤM HÚT THUỐC LÁ' vòng tròn gạch chéo đỏ.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Dán tại 100% cabin xe tải, kho tài liệu, phòng làm việc và khu vực đậu xe.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS18-06_EMERGENCY_HOTLINE_STICKER.png" alt="Bằng chứng 19: Nhãn dán Hotline khẩn cấp phản quang trên xe tải" loading="lazy">
+        <div class="badge-id">EVID-19</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 17, 18, 20 (Emergency Contact)</div>
+        <h3>Bằng chứng 19: Nhãn dán Hotline khẩn cấp phản quang trên xe tải</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Nhãn decal phản quang kích thước 15x25cm: Hotline Điều độ 077 871 9936, An toàn 088 6464 988, Giám đốc 0943 46 46 46, Công an 113, PCCC 114, Cấp cứu 115.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Dán tại góc phải kính chắn gió và mặt trong taplo cabin 100% đầu kéo.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-img-wrap">
+        <img src="HS21-03_DECAL_3_QR_CODE_DAN_CABIN_XE.png" alt="Bằng chứng 20: Bộ Decal 3 Mã QR Chuyên biệt Dán Cabin Xe Tải" loading="lazy">
+        <div class="badge-id">EVID-20</div>
+      </div>
+      <div class="card-body">
+        <div class="finding-tag">Finding 24 & Finding 8 (Driver QR System)</div>
+        <h3>Bằng chứng 20: Bộ Decal 3 Mã QR Chuyên biệt Dán Cabin Xe Tải</h3>
+        <p class="desc"><strong>Hiện trường mẫu:</strong> Decal 3 ô mã QR: (1) Đào tạo & Khảo sát C-TPAT; (2) Hộp thư góp ý & Khiếu nại bảo mật; (3) Sổ tay tài xế & Kiểm tra xe 17 điểm.</p>
+        <div class="req-box">
+          <strong>Yêu cầu thực hiện:</strong> Dán trên cánh cửa bên trong cabin xe tải để tài xế tiện quét mã hàng ngày.
+        </div>
+        <div class="status-pill">ĐẠT CHUẨN C-TPAT & NV APPAREL (SẴN SÀNG)</div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM</strong><br>
+    Trụ sở: Lầu 6, Số 84 Bạch Đằng, Phường Tân Sơn Hòa, TP. Hồ Chí Minh | MST: 0313492159<br>
+    Hotline Điều độ: 077 871 9936 (Ms. Bích) | Hotline An toàn: 088 6464 988 (Mr. Thành) | Khẩn cấp 24/7: 0943 46 46 46
+  </div>
+
+</body>
+</html>
