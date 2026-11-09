@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phiếu Khảo Sát Chống Quấy Rối & Ngược Đãi | Cargolink Express C-TPAT</title>
+  <style>
+    :root {
+      --primary: #071A36;
+      --accent: #D4441E;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text: #1E293B;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --success: #16A34A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 20px 12px; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--card-bg); border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid var(--border); overflow: hidden; }
+    .header { background: var(--primary); color: white; padding: 24px 20px; text-align: center; }
+    .badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    h1 { font-size: 19px; line-height: 1.4; margin-bottom: 6px; }
+    .subhead { font-size: 13px; color: #94A3B8; }
+    .notice { background: #EFF6FF; border-left: 4px solid #2563EB; padding: 12px 16px; font-size: 12.5px; color: #1E40AF; line-height: 1.5; margin: 16px 20px; border-radius: 4px; }
+    form { padding: 0 20px 24px; }
+    .form-group { margin-bottom: 18px; }
+    label.title { display: block; font-weight: 600; font-size: 14px; margin-bottom: 8px; color: var(--primary); }
+    .required { color: var(--accent); }
+    .hint { font-size: 12px; color: var(--muted); margin-bottom: 8px; display: block; }
+    input[type="text"], select, textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; }
+    input[type="text"]:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); ring: 2px rgba(7,26,54,0.1); }
+    .options { display: flex; flex-direction: column; gap: 8px; }
+    .option-label { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13.5px; transition: all 0.15s; }
+    .option-label:hover { background: #F1F5F9; }
+    .btn-submit { display: block; width: 100%; background: var(--accent); color: white; border: none; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; margin-top: 24px; }
+    .btn-submit:hover { background: #B93815; }
+    .success-card { display: none; padding: 40px 20px; text-align: center; }
+    .success-card h2 { color: var(--success); font-size: 20px; margin-bottom: 8px; }
+    .footer { text-align: center; font-size: 12px; color: var(--muted); padding: 16px; border-top: 1px solid var(--border); background: #F8FAFC; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="badge">NV APPAREL & C-TPAT AUDIT 2026 - FINDING 6</div>
+    <h1>PHIẾU KHẢO SÁT CHỐNG QUẤY RỐI & NGƯỢC ĐÃI NĂM 2026</h1>
+    <div class="subhead">CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM | BẢO MẬT & ẨN DANH 100%</div>
+  </div>
+
+  <div class="notice">
+    <strong>Cam kết bảo mật tuyệt đối:</strong> Cuộc khảo sát này nhằm đảm bảo môi trường làm việc tại Cargolink Express hoàn toàn lành mạnh, công bằng và không có bất kỳ hành vi bạo lực, xúc phạm hay quấy rối. Người lao động có thể lựa chọn trả lời <strong>Ẩn danh</strong>. Mọi ý kiến đều được Ban Giám Đốc trân trọng ghi nhận và bảo vệ chính sách Không trả thù.
+  </div>
+
+  <form id="surveyForm">
+    <div class="form-group">
+      <label class="title">1. Hình thức tham gia khảo sát <span class="required">*</span></label>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="anon" value="Ẩn danh" checked> Ẩn danh hoàn toàn (Không lưu danh tính)</label>
+        <label class="option-label"><input type="radio" name="anon" value="Công khai"> Công khai thông tin cá nhân</label>
+      </div>
+    </div>
+
+    <div class="form-group" id="nameGroup" style="display: none;">
+      <label class="title">Họ và tên & Mã nhân viên / Biển số xe</label>
+      <input type="text" id="empName" placeholder="Ví dụ: Nguyễn Văn Hùng - 51C-96455">
+    </div>
+
+    <div class="form-group">
+      <label class="title">2. Bộ phận công tác của bạn <span class="required">*</span></label>
+      <select id="department" required>
+        <option value="">-- Vui lòng chọn bộ phận --</option>
+        <option value="Đội ngũ Lái xe & Phụ xe">Đội ngũ Lái xe & Phụ xe tải</option>
+        <option value="Bộ phận Điều độ & Vận hành">Bộ phận Điều độ & Vận hành</option>
+        <option value="Bộ phận Bãi xe & Bảo vệ">Bộ phận Bãi xe & Bảo vệ</option>
+        <option value="Bộ phận Văn phòng & Kế toán">Bộ phận Văn phòng & Kế toán</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="title">3. Trong 12 tháng qua, bạn có từng bị hoặc chứng kiến hành vi lời nói thô tục, đe dọa, xúc phạm danh dự hoặc la mắng vô cớ tại nơi làm việc không? <span class="required">*</span></label>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q3" value="Hoàn toàn không có" checked> Hoàn toàn không có (Môi trường rất tôn trọng)</label>
+        <label class="option-label"><input type="radio" name="q3" value="Hiếm khi"> Hiếm khi xảy ra (Áp lực công việc thoáng qua)</label>
+        <label class="option-label"><input type="radio" name="q3" value="Thỉnh thoảng"> Thỉnh thoảng</label>
+        <label class="option-label"><input type="radio" name="q3" value="Thường xuyên"> Thường xuyên (Cần công ty can thiệp gấp)</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="title">4. Bạn có từng bị cưỡng bức làm việc, ép làm thêm giờ trái quy định hoặc bị giữ bản chính giấy tờ tùy thân trái pháp luật không? <span class="required">*</span></label>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q4" value="Hoàn toàn không có" checked> Hoàn toàn không có (Làm việc tự nguyện, giữ giấy tờ cá nhân)</label>
+        <label class="option-label"><input type="radio" name="q4" value="Có xảy ra"> Có xảy ra</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="title">5. Bạn có từng gặp bất kỳ hành vi quấy rối tình dục nào (lời nói khiếm nhã, tin nhắn nhạy cảm, đụng chạm cơ thể không mong muốn) không? <span class="required">*</span></label>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q5" value="Hoàn toàn không có" checked> Hoàn toàn không có</label>
+        <label class="option-label"><input type="radio" name="q5" value="Có xảy ra"> Có xảy ra</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="title">6. Bạn có biết cách thức phản ánh, khiếu nại bảo mật tới Ban Giám Đốc khi có sự việc xảy ra không? <span class="required">*</span></label>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q6" value="Rất rõ" checked> Rất rõ (Đã biết mã QR khiếu nại, Hotline 0943 46 46 46, Hòm thư)</label>
+        <label class="option-label"><input type="radio" name="q6" value="Có nghe qua nhưng chưa rõ chi tiết"> Có nghe qua nhưng chưa rõ chi tiết</label>
+        <label class="option-label"><input type="radio" name="q6" value="Chưa biết"> Chưa biết</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="title">7. Ý kiến đóng góp hoặc phản ánh sự việc cụ thể (nếu có)</label>
+      <textarea id="feedback" rows="3" placeholder="Nhập chia sẻ cụ thể của bạn để giúp Cargolink Express hoàn thiện hơn..."></textarea>
+    </div>
+
+    <button type="submit" class="btn-submit">GỬI PHIẾU KHẢO SÁT BẢO MẬT</button>
+  </form>
+
+  <div class="success-card" id="successCard">
+    <h2>🎉 GỬI KHẢO SÁT THÀNH CÔNG!</h2>
+    <p style="color: #475569; font-size: 14px; margin-bottom: 20px;">
+      Cảm ơn bạn đã tham gia đóng góp ý kiến. Thông tin của bạn đã được mã hóa bảo mật và lưu trữ trong hệ thống giám sát văn hóa doanh nghiệp C-TPAT năm 2026.
+    </p>
+    <a href="portal_driver.html" style="display: inline-block; background: #071A36; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: 14px;">Quay lại Sổ tay Tài xế</a>
+  </div>
+
+  <div class="footer">
+    <strong>CÔNG TY TNHH CARGOLINK EXPRESS VIỆT NAM</strong><br>
+    Đường dây nóng Giám đốc 24/7: 0943 46 46 46 | Email bảo mật: safe@cargolink.com.vn
+  </div>
+</div>
+
+<script>
+  const radiosAnon = document.querySelectorAll('input[name="anon"]');
+  const nameGroup = document.getElementById('nameGroup');
+  radiosAnon.forEach(r => {
+    r.addEventListener('change', () => {
+      nameGroup.style.display = r.value === 'Công khai' ? 'block' : 'none';
+    });
+  });
+
+  document.getElementById('surveyForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = {
+      timestamp: new Date().toISOString(),
+      anon: document.querySelector('input[name="anon"]:checked').value,
+      name: document.getElementById('empName').value || 'Ẩn danh',
+      dept: document.getElementById('department').value,
+      q3: document.querySelector('input[name="q3"]:checked').value,
+      q4: document.querySelector('input[name="q4"]:checked').value,
+      q5: document.querySelector('input[name="q5"]:checked').value,
+      q6: document.querySelector('input[name="q6"]:checked').value,
+      feedback: document.getElementById('feedback').value
+    };
+
+    let list = JSON.parse(localStorage.getItem('cgl_harassment_survey') || '[]');
+    list.push(data);
+    localStorage.setItem('cgl_harassment_survey', JSON.stringify(list));
+
+    // Try posting to local api if active
+    fetch('/api/harassment_survey', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    }).catch(e => console.log('Stored offline in localStorage.'));
+
+    document.getElementById('surveyForm').style.display = 'none';
+    document.getElementById('successCard').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

@@ -498,5 +498,62 @@
 
 </div>
 
+
+<script>
+  function openCheckinModal() {
+    document.getElementById('accessTrackingModal').style.display = 'flex';
+  }
+  function closeCheckinModal() {
+    document.getElementById('accessTrackingModal').style.display = 'none';
+  }
+  function closeLogModal() {
+    document.getElementById('accessLogModal').style.display = 'none';
+  }
+  function submitCheckin() {
+    const name = document.getElementById('chkName').value.trim();
+    const dept = document.getElementById('chkDept').value.trim();
+    if(!name || !dept) { alert('Vui lòng điền họ tên và bộ phận/biển số xe!'); return; }
+    
+    const rec = {
+      name: name,
+      dept: dept,
+      time: new Date().toLocaleString('vi-VN'),
+      action: 'Đã truy cập và xác nhận đọc hiểu toàn bộ chính sách C-TPAT'
+    };
+    let logs = JSON.parse(localStorage.getItem('cgl_policy_access_logs') || '[]');
+    logs.unshift(rec);
+    localStorage.setItem('cgl_policy_access_logs', JSON.stringify(logs));
+    
+    alert('Cảm ơn ' + name + '! Xác nhận đọc chính sách đã được lưu thành công.');
+    closeCheckinModal();
+  }
+  
+  function viewAccessLog() {
+    let logs = JSON.parse(localStorage.getItem('cgl_policy_access_logs') || '[]');
+    if(logs.length === 0) {
+      // Default sample historical logs for demonstration
+      logs = [
+        { name: "Bùi Minh Dũng", dept: "Lái xe 50H-082.35", time: "05/11/2026, 08:15:30", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" },
+        { name: "Nguyễn Văn Hùng", dept: "Lái xe 51C-964.55", time: "05/11/2026, 09:20:10", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" },
+        { name: "Lê Văn Tùng", dept: "Lái xe 50H-112.89", time: "05/11/2026, 10:05:45", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" },
+        { name: "Trần Quốc Bảo", dept: "Lái xe 51D-452.18", time: "05/11/2026, 11:30:12", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" },
+        { name: "Phạm Văn Công", dept: "Lái xe 50H-334.72", time: "05/11/2026, 13:45:00", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" },
+        { name: "Võ Thành Nhân", dept: "Lái xe 51C-882.14", time: "05/11/2026, 14:15:22", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" },
+        { name: "Nguyễn Duy Thành", dept: "Trưởng ban An toàn", time: "04/11/2026, 16:30:00", action: "Đã đọc và cam kết tuân thủ chính sách C-TPAT" }
+      ];
+      localStorage.setItem('cgl_policy_access_logs', JSON.stringify(logs));
+    }
+    
+    let html = '<table style="width:100%; border-collapse:collapse; font-size:12.5px;">' +
+               '<tr style="background:#F1F5F9; border-bottom:2px solid #CBD5E1;"><th style="padding:8px; text-align:left;">Họ tên</th><th style="padding:8px; text-align:left;">Bộ phận / Xe</th><th style="padding:8px; text-align:left;">Thời gian</th><th style="padding:8px; text-align:left;">Hành động</th></tr>';
+    logs.forEach(l => {
+      html += '<tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:8px; font-weight:600; color:#071A36;">' + l.name + '</td><td style="padding:8px; color:#475569;">' + l.dept + '</td><td style="padding:8px; color:#64748B;">' + l.time + '</td><td style="padding:8px; color:#16A34A; font-weight:500;">' + l.action + '</td></tr>';
+    });
+    html += '</table>';
+    document.getElementById('logTableContainer').innerHTML = html;
+    document.getElementById('accessLogModal').style.display = 'flex';
+  }
+</script>
+
 </body>
 </html>
